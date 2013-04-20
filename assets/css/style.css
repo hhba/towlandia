@@ -21,3 +21,8 @@ body {
 .quadrant.ec { fill: green; }
 .quadrant.ab { fill: steelblue; }
 .quadrant.au { fill: violet; }
+
+.bloque1 { fill: yellow }
+.bloque2 { fill: orange }
+.bloque3 { fill: pink }
+.bloque4 { fill: gray }
