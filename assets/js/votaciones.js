@@ -57,7 +57,7 @@
             blocks = bloques;
             d3.tsv("/assets/data/votaciones.tsv", function(error, votaciones) {
                 data = votaciones;
-                update(69);
+                update(120);
             });
         });
     }
@@ -72,22 +72,26 @@
             .data(votes)
             .enter()
 
-        var circle = dot.append("circle")
+        dot.append("circle")
             .attr("class", function(d) { return "dot bloque"+ d.bloqueId })
-            .attr("r", dotRadius)
+            .attr("r", 0)
             .tooltip(function(d,i) {
                 return {
                     type: "fixed",
                     gravity: "bottom",
+                    cssClass: "tooltip",
                     content: "<p>" + getBlock(d.bloqueId).bloque + "</p>"
                 }
             })
 
-
         svg.selectAll("circle")
             .transition()
             .duration(1000)
-            .attr("fill", function(d) { return getBlock(d.bloqueId).color })
+            .attr("r", dotRadius)
+            .attr("fill", function(d) {
+                console.log(getBlock(d.bloqueId));        //TODO(gb): Remove trace!!!
+                return getBlock(d.bloqueId).color
+            })
             .attr("cx", function(d, i) {
                 var quadrant = getQuadrant(d.voto);
                 var index = i % quadrant.count;

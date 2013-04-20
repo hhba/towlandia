@@ -14,3 +14,9 @@ body {
     stroke: #333;
     fill: #CCC;
 }
+
+.tooltip {
+    background: #333;
+    color: #ffffff;
+    padding: 5px;
+}
