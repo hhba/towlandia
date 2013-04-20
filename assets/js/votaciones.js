@@ -35,7 +35,7 @@
 
         var color = d3.scale.category10();
 
-        svg = d3.select("#plot").append("svg")
+        svg = d3.select("#cuadrantes").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")

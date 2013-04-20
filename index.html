@@ -1,23 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Votaciones Nominales</title>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:700' rel='stylesheet' type='text/css'>
     <script src="/assets/js/d3.v3.min.js"></script>
     <script src="/assets/js/jquery-1.9.1.min.js"></script>
+    <script src="/assets/js/jquery.slideControl.js"></script>
     <script src="/assets/js/votaciones.js"></script>
     <script src="/assets/js/d3tooltip.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            votaciones.init();
+
+            $("#ausntoId").change(function() {
+                var asuntoId = $(this).val();
+                votaciones.showVote(asuntoId);
+            })
+        });
+    </script>
+    <style>
+
+
+    </style>
 </head>
 <body>
 <div id="main">
-    <div id="plot"></div>
+    <img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" alt="HacksHackers Buenos Aires" style="float: left; margin-right: 2em;">
+    <h1>Disciplina de bloques</h1>
+    <p class="tagline">en votaciones legislativas argentinas</p>
+    <p>Elegir votación</p>
+    <div id="selector">
+        <input type="text" value="1" id="ausntoId">
+    </div>
+    <div id="cuadrantes">
+    </div>
+    <footer>
+        Design: Martín Szyszlican<br>
+        Data: Andy Tow<br>
+        Code: Luciano Amor<br>
+        Code: Gonzalo Bellver<br>
+        Y otros héroes anónimos .
+    </footer>
 </div>
-
-<script>
-    $(function() {
-        votaciones.init();
-    })
-</script>
 </body>
 </html>
