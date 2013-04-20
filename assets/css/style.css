@@ -2,6 +2,11 @@ body {
     font: 10px sans-serif;
 }
 
+#main {
+    width: 700px;
+    margin: 0 auto;
+}
+
 .axis path,
 .axis line {
     fill: none;
