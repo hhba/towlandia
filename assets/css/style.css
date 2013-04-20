@@ -9,10 +9,6 @@ body {
     shape-rendering: crispEdges;
 }
 
-.dot {
-    stroke: #000;
-}
-
 .quadrant {
     opacity: 0.7;
     stroke: #333;

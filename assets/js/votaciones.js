@@ -2,13 +2,15 @@
 
     votaciones = {};
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+    var margin = {top: 20, right: 20, bottom: 20, left: 20},
+        width = 700 - margin.left - margin.right,
+        height = 700 - margin.top - margin.bottom;
 
     var options = {
 
     };
+
+    var data, svg, blocks;
 
     var quadrants = [
         { index: 0, name: "AF", bounds: {x0: 0, y0:0 }},
@@ -33,7 +35,7 @@
 
         var color = d3.scale.category10();
 
-        var svg = d3.select("#plot").append("svg")
+        svg = d3.select("#plot").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
@@ -52,50 +54,65 @@
         }
 
         d3.tsv("/assets/data/bloques.tsv", function(error, bloques) {
-
-            function getBlock(blockId) {
-                return bloques.filter(function(bloque) { return bloque.id_bloque == blockId })[0];
-            }
-
-            d3.tsv("/assets/data/votaciones.tsv", function(error, data) {
-
-                var votes = getSortedData(data, 210);
-                console.log(bloques);        //TODO(gb): Remove trace!!!
-                svg.selectAll(".dot")
-                    .data(votes)
-                    .enter().append("circle")
-                    .attr("class", function(d) { return "bloque"+ d.bloqueId })
-                    .attr("r", dotRadius)
-                    .attr("cx", function(d, i) {
-                        var quadrant = getQuadrant(d.voto);
-                        var index = i % quadrant.count;
-                        return quadrant.bounds.x0 + 2*dotRadius * (index % dotsPerRow) + dotRadius;
-                    })
-                    .attr("cy", function(d, i) {
-                        var quadrant = getQuadrant(d.voto);
-                        var index = i % quadrant.count;
-                        var row = Math.floor(index / dotsPerRow);
-                        return getQuadrant(d.voto).bounds.y0 + row * 2*dotRadius + dotRadius;
-                    })
-                    .attr("fill", function(d) { return getBlock(d.bloqueId).color })
-                    .tooltip(function(d,i) {
-                        return {
-                            type: "fixed",
-                            gravity: "bottom",
-                            content: "<p>" + getBlock(d.bloqueId).bloque + "</p>"
-                        }
-                    })
+            blocks = bloques;
+            d3.tsv("/assets/data/votaciones.tsv", function(error, votaciones) {
+                data = votaciones;
+                update(69);
             });
         });
+    }
+
+    votaciones.showVote = function(asuntoId) {
+        update(asuntoId);
+    }
+
+    function update(asuntoId) {
+        var votes = getSortedData(data, asuntoId);
+        var dot = svg.selectAll(".dot")
+            .data(votes)
+            .enter()
+
+        var circle = dot.append("circle")
+            .attr("class", function(d) { return "dot bloque"+ d.bloqueId })
+            .attr("r", dotRadius)
+            .tooltip(function(d,i) {
+                return {
+                    type: "fixed",
+                    gravity: "bottom",
+                    content: "<p>" + getBlock(d.bloqueId).bloque + "</p>"
+                }
+            })
+
+
+        svg.selectAll("circle")
+            .transition()
+            .duration(1000)
+            .attr("fill", function(d) { return getBlock(d.bloqueId).color })
+            .attr("cx", function(d, i) {
+                var quadrant = getQuadrant(d.voto);
+                var index = i % quadrant.count;
+                return quadrant.bounds.x0 + 2*dotRadius * (index % dotsPerRow) + dotRadius;
+            })
+            .attr("cy", function(d, i) {
+                var quadrant = getQuadrant(d.voto);
+                var index = i % quadrant.count;
+                var row = Math.floor(index / dotsPerRow);
+                return getQuadrant(d.voto).bounds.y0 + row * 2*dotRadius + dotRadius;
+            })
+
+    }
+
+    function getBlock(blockId) {
+        return blocks.filter(function(bloque) { return bloque.id_bloque == blockId })[0];
     }
 
     function getQuadrant(name) {
         return quadrants.filter(function(quadrant) { return quadrant.name == name })[0];
     }
 
-    function getSortedData(data, asuntoId) {
+    function getSortedData(thedata, asuntoId) {
         var sortedData = [];
-        var fitleredData = data.filter(function(datum) { return datum.asuntoId == asuntoId })
+        var fitleredData = thedata.filter(function(datum) { return datum.asuntoId == asuntoId })
 
         var nest = d3.nest()
             .key(function(d) { return d.voto })
@@ -116,6 +133,7 @@
             }
         }
 
+        console.log("sortedData.length()= " + sortedData.length);     //TODO(gb): Remove trace!!!
         return sortedData;
     }
 
