@@ -17,12 +17,7 @@ body {
     opacity: 0.7;
 }
 
-.quadrant.af { fill: red; }
-.quadrant.ec { fill: green; }
-.quadrant.ab { fill: steelblue; }
-.quadrant.au { fill: violet; }
-
-.bloque1 { fill: yellow }
-.bloque2 { fill: orange }
-.bloque3 { fill: pink }
-.bloque4 { fill: gray }
+.quadrant.AF { fill: red; }
+.quadrant.NE { fill: green; }
+.quadrant.AB { fill: steelblue; }
+.quadrant.AU { fill: violet; }

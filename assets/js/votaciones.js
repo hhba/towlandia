@@ -11,13 +11,13 @@
     };
 
     var quadrants = [
-        { index: 0, name: "af", bounds: {x0: 0, y0:0 }},
-        { index: 1, name: "ec", bounds: {x0: width/2, y0:0 }},
-        { index: 2, name: "ab", bounds: {x0: 0, y0:height/2 }},
-        { index: 3, name: "au", bounds: {x0: width/2, y0:height/2 }},
+        { index: 0, name: "AF", bounds: {x0: 0, y0:0 }},
+        { index: 1, name: "NE", bounds: {x0: width/2, y0:0 }},
+        { index: 2, name: "AB", bounds: {x0: 0, y0:height/2 }},
+        { index: 3, name: "AU", bounds: {x0: width/2, y0:height/2 }},
     ];
 
-    var dotRadius = 30;
+    var dotRadius = 10;
     var dotsPerRow = Math.floor(width/2/dotRadius/2);
 
     votaciones.init = function(settings) {
@@ -51,13 +51,10 @@
                 .classed(quadrant.name, true);
         }
 
-        d3.csv("/assets/data/data.csv", function(error, data) {
+        d3.tsv("/assets/data/votaciones.tsv", function(error, data) {
 
-            var votes = getSortedData(data);
-//            console.log(quadrants);        //TODO(gb): Remove trace!!!
+            var votes = getSortedData(data, 210);
 
-//            x.domain(d3.extent(data, function(d) { return d.sepalWidth; })).nice();
-//            y.domain(d3.extent(data, function(d) { return d.sepalLength; })).nice();
 
             svg.selectAll(".dot")
                 .data(votes)
@@ -82,13 +79,14 @@
         return quadrants.filter(function(quadrant) { return quadrant.name == name })[0];
     }
 
-    function getSortedData(data) {
+    function getSortedData(data, asuntoId) {
         var sortedData = [];
+        var fitleredData = data.filter(function(datum) { return datum.asuntoId == asuntoId })
+
         var nest = d3.nest()
             .key(function(d) { return d.voto })
-//            .key(function(d) { return d.bloqueId }).sortKeys(d3.ascending)
             .key(function(d) { return d.bloqueId }).sortKeys(function(a,b) { return parseInt(b) - parseInt(a)  })
-            .entries(data);
+            .entries(fitleredData);
 
         for (var i=0; i<quadrants.length; i++) {
             quadrants[i].count = 0;
