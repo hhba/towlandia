@@ -10,7 +10,7 @@
 
     };
 
-    var data, svg, blocks;
+    var data, svg, blocks, congressmen;
 
     var quadrants = [
         { index: 0, name: "AF", bounds: {x0: 0, y0:0 }},
@@ -52,12 +52,14 @@
                 .classed("quadrant", true)
                 .classed(quadrant.name, true);
         }
-
-        d3.tsv("/assets/data/bloques.tsv", function(error, bloques) {
-            blocks = bloques;
-            d3.tsv("/assets/data/votaciones.tsv", function(error, votaciones) {
-                data = votaciones;
-                update(120);
+        d3.tsv("/assets/data/diputados.tsv", function(error, diputados) {
+            congressmen = diputados;
+            d3.tsv("/assets/data/bloques.tsv", function(error, bloques) {
+                blocks = bloques;
+                d3.tsv("/assets/data/votaciones.tsv", function(error, votaciones) {
+                    data = votaciones;
+                    update(1);
+                });
             });
         });
     }
@@ -76,11 +78,14 @@
             .attr("class", function(d) { return "dot bloque"+ d.bloqueId })
             .attr("r", 0)
             .tooltip(function(d,i) {
+                var content = "<h4>" + getCongressman(d.diputadoId).nombre +"</h4>" +
+                    "<p>" + getBlock(d.bloqueId).bloque + "</p>";
+
                 return {
                     type: "fixed",
                     gravity: "bottom",
                     cssClass: "tooltip",
-                    content: "<p>" + getBlock(d.bloqueId).bloque + "</p>"
+                    content: content
                 }
             })
 
@@ -89,7 +94,6 @@
             .duration(1000)
             .attr("r", dotRadius)
             .attr("fill", function(d) {
-                console.log(getBlock(d.bloqueId));        //TODO(gb): Remove trace!!!
                 return getBlock(d.bloqueId).color
             })
             .attr("cx", function(d, i) {
@@ -108,6 +112,10 @@
 
     function getBlock(blockId) {
         return blocks.filter(function(bloque) { return bloque.id_bloque == blockId })[0];
+    }
+
+    function getCongressman(congressmanId) {
+        return congressmen.filter(function(diputado) { return diputado.diputadoID == congressmanId })[0];
     }
 
     function getQuadrant(name) {
@@ -137,10 +145,6 @@
             }
         }
 
-        console.log("sortedData.length()= " + sortedData.length);     //TODO(gb): Remove trace!!!
         return sortedData;
     }
-
-
-
 })()
