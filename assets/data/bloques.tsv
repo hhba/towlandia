@@ -1,57 +1,57 @@
-bloqueId	bloque
-1	A.R.I Autónomo 8 +
-2	Bloque GEN
-3	Bloque por la Verdad
-4	Bs. As. para Todos en Proyecto Sur
-5	Buenos Aires por el Cambio
-6	Coalición Cívica - ARI - GEN - UPT
-7	Concertación Entrerriana
-8	Consenso Federal
-9	Convergencia Federal
-10	Corriente Peronista Federal
-11	De la Concertación
-12	Demócrata de Mendoza
-13	Diálogo por Buenos Aires
-14	Dignidad Peronista
-15	Encuentro Popular y Social
-16	Frente Cívico por Santiago
-17	Frente Cívico y Social
-18	Frente Cívico y Social de Catamarca
-19	Frente de Todos
-20	Frente Justicia Unión y Libertad
-21	Frente para la Victoria - Partido Bloqui
-22	Frente para la Victoria - PJ
-23	Frente por los Derechos Ciudadanos
-24	Frente Producción y Trabajo
-25	Guardia Peronista
-26	Justicialismo Republicano
-27	Justicialista Nacional
-28	Memoria y Democracia
-29	Movimiento Independiente
-30	Movimiento Popular Neuquino
-31	Nacional Sindical
-32	No Integra Bloque
-33	Partido de la Concertación - FORJA
-34	Partido Liberal de Corrientes
-35	Partido Nuevo Contra la Corrupción
-36	Partido Socialista
-37	Partido Unidad Federalista
-38	Peronismo Federal
-39	Peronismo Jujeño
-40	Peronista Federal
-41	Peronista Salteño
-42	Propuesta Republicana
-43	Proyecto Progresista
-44	Proyecto Sur
-45	Recrear para el Crecimiento
-46	Renovador de Salta
-47	Santa Fe Federal
-48	Solidaridad e Igualdad (SI)
-49	Solidaridad e Igualdad (SI) - ARI (T.D.F)
-50	Solidaridad e Igualdad (SI) - Proyecto P
-51	Trabajo y Dignidad
-52	Unión Celeste y Blanca
-53	Unión Celeste y Blanco
-54	Union Cívica Radical
-55	Unión Peronista
-56	Valores para mi País
+id_bloque	bloque	color	
+1	A.R.I Autónomo 8 +	#F7662D
+2	Bloque GEN	#EBEB49
+3	Bloque por la Verdad	#5D9CF5
+4	Bs. As. para Todos en Proyecto Sur	#943E22
+5	Buenos Aires por el Cambio	#5E4B45
+6	Coalición Cívica - ARI - GEN - UPT	#8A8A37
+7	Concertación Entrerriana	#C25B4F
+8	Consenso Federal	#B3819A
+9	Convergencia Federal	#5BD473
+10	Corriente Peronista Federal	#475F94
+11	De la Concertación	#4E535E
+12	Demócrata de Mendoza	#06D1BD
+13	Diálogo por Buenos Aires	#B1B5B5
+14	Dignidad Peronista	#7016DE
+15	Encuentro Popular y Social	#3B8A4A
+16	Frente Cívico por Santiago	#C9006B
+17	Frente Cívico y Social	#010F03
+18	Frente Cívico y Social de Catamarca	#3D5C42
+19	Frente de Todos	#05F2D7
+20	Frente Justicia Unión y Libertad	#569C93
+21	Frente para la Victoria - Partido Bloqui	#004EBA
+22	Frente para la Victoria - PJ	#0858C7
+23	Frente por los Derechos Ciudadanos	#CDCFD1
+24	Frente Producción y Trabajo	#65676B
+25	Guardia Peronista	#3D6EB3
+26	Justicialismo Republicano	#5F7594
+27	Justicialista Nacional	#3B74C4
+28	Memoria y Democracia	#A358A3
+29	Movimiento Independiente	#ACE655
+30	Movimiento Popular Neuquino	#6AB0D4
+31	Nacional Sindical	#D1B121
+32	No Integra Bloque	#0F0F0F
+33	Partido de la Concertación - FORJA	#EDC200
+34	Partido Liberal de Corrientes	#ABD1C6
+35	Partido Nuevo Contra la Corrupción	#C29191
+36	Partido Socialista	#44CFC8
+37	Partido Unidad Federalista	#7367A6
+38	Peronismo Federal	#00B545
+39	Peronismo Jujeño	#709C81
+40	Peronista Federal	#0FAB4B
+41	Peronista Salteño	#3ED678
+42	Propuesta Republicana	#91D0D9
+43	Proyecto Progresista	#809400
+44	Proyecto Sur	#40BD48
+45	Recrear para el Crecimiento	#D43FCA
+46	Renovador de Salta	#877300
+47	Santa Fe Federal	#488582
+48	Solidaridad e Igualdad (SI)	#BD6340
+49	Solidaridad e Igualdad (SI) - ARI (T.D.F)	#CF9680
+50	Solidaridad e Igualdad (SI) - Proyecto P	#D4BBB2
+51	Trabajo y Dignidad	#C8B2D4
+52	Unión Celeste y Blanca	#008FBF
+53	Unión Celeste y Blanco	#86ADBA
+54	Union Cívica Radical	#D60000
+55	Unión Peronista	#00D639
+56	Valores para mi País	#487866
