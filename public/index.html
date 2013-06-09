@@ -21,22 +21,45 @@
     <div class="row">
         <div class="span12">
             <h5>Elegir votación:</h5>
-            <div class="well">
-                {{ selection | json }}
-            </div>
         </div>
     </div>
     <div class="row">
-        <div class="span4">
-            <div class="btn-group" ng-controller="YearController">
+        <div class="span12">
+            <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info">Año<span ng-show="selection.year">: {{ selection.year }}</span> </button>
-                <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                <button class="btn btn-info" ng-class="{ disabled: !years }"><strong>Año</strong><span ng-show="selection.year">: {{ selection.year }}</span> </button>
+                <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !years }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-inverse">
                     <li ng-repeat="year in years" ng-class="{ 'selected' : selection.year == year }">
-                        <a href="#" ng-click="select(year)">{{ year }}</a>
+                        <a href="#" ng-click="selectYear(year)">{{ year }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <i class="dropdown-arrow dropdown-arrow-inverse"></i>
+                <button class="btn btn-info" ng-class="{ disabled: !dates }"><strong>Fecha</strong><span ng-show="selection.date">: {{ selection.date }}</span> </button>
+                <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !dates }" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-inverse">
+                    <li ng-repeat="date in dates" ng-class="{ 'selected' : selection.date == date }">
+                        <a href="#" ng-click="selectDate(date)">{{ date }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <i class="dropdown-arrow dropdown-arrow-inverse"></i>
+                <button class="btn btn-info" ng-class="{ disabled: !files }"><strong>Expendiente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
+                <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-inverse">
+                    <li ng-repeat="file in files" ng-class="{ 'selected' : selection.file.id == file.id }">
+                        <a href="#" ng-click="selectFile(file)">{{ file.name }}</a>
                     </li>
                 </ul>
             </div>
@@ -44,10 +67,6 @@
     </div>
     <div class="row">
         <div class="span12">
-            <p>Elegir votación</p>
-            <div id="selector">
-                <input type="text" value="1" id="ausntoId">
-            </div>
             <div id="cuadrantes">
             </div>
         </div>
@@ -82,16 +101,6 @@
 <script src="assets/js/FTClient.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/votaciones.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        votaciones.init();
-
-        $("#ausntoId").change(function() {
-            var asuntoId = $(this).val();
-            votaciones.showVote(asuntoId);
-        })
-    });
-</script>
 
 </body>
 </html>
