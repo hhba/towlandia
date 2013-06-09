@@ -9,7 +9,7 @@ var services = angular.module('votaciones.services', []);
 
 services.factory('Selection', function() {
     return {
-       year: null
+        year: null
     }
 })
 
@@ -20,9 +20,18 @@ controllers.controller('SelectionController', ['$scope', 'Selection', function($
     $scope.selection = Selection;
 }])
 
-controllers.controller('YearController', ['$scope', 'Selection', function($scope, Selection) {
-    //TODO(gb): unwire this
-    $scope.years = [2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013];
+controllers.controller('YearController', ['$scope', 'Selection', '$http', function($scope, Selection, $http) {
+    var ftClient = new FTClient("AIzaSyDICo1qGOtGnd0DD3QEY_rQ2_xcFGLNYto");
+    var query = {
+        fields:["ano"],
+        table: "1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4",
+        tail: "GROUP BY ano ORDER BY ano"
+    };
+
+    ftClient.query(query, function(rows) {
+        $scope.years = rows.map(function(row) { return row[0] });
+        $scope.$apply();
+    })
 
     $scope.select = function(year) {
         Selection.year = year;
