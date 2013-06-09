@@ -68,12 +68,6 @@
     fill: #CCC;
 }
 
-.tooltip {
-    background: #333;
-    color: #ffffff;
-    padding: 5px;
-}
-
 .dropdown-menu {
     max-height: 330px;
     overflow-y: scroll;

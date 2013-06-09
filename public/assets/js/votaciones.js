@@ -108,14 +108,16 @@ var Votaciones = function(settings) {
             .attr("class", function(d) { return "dot bloque"+ d.bloqueId })
             .attr("r", 0)
             .tooltip(function(d,i) {
-                var content = "<h4>" + getCongressman(d.diputadoId).nombre +"</h4>" +
-                    "<p>" + getBlock(d.bloqueId).bloque + "</p>";
-
                 return {
                     type: "fixed",
                     gravity: "bottom",
-                    cssClass: "tooltip",
-                    content: content
+                    cssClass: "tooltip fade bottom in tooltip-light",
+                    updateContent: function() {
+                        var content =
+                            "<p><strong>" + getCongressman(d.diputadoId).nombre +"</strong></p>" +
+                            "<p>" + getBlock(d.bloqueId).bloque + "</p>";
+                        $(".tooltip-inner").html(content);
+                    }
                 }
             })
 
@@ -124,7 +126,7 @@ var Votaciones = function(settings) {
             .duration(1000)
             .attr("r", dotRadius)
             .attr("fill", function(d) {
-                return getBlock(d.bloqueId).color
+                return color(d.bloqueId);
             })
             .attr("cx", function(d, i) {
                 var quadrant = getQuadrant(d.voto);

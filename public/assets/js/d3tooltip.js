@@ -69,7 +69,7 @@
 
         element.on("mouseout", function() {
             if (options.show()) {
-                var tip = d3.selectAll("." + options.cssClass);
+                var tip = d3.selectAll("." + options.cssClass.split(" ")[0]);
                 tip.remove();
             }
         });
@@ -107,8 +107,7 @@
 
                 tip.append("div")
                     .html(options.content)
-                    .attr("class", "inner");
-
+                    .attr("class", "tooltip-inner");
                 return tip;
             }
 
