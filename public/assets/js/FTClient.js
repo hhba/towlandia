@@ -20,13 +20,11 @@ var FTClient = function(apiKey) {
     }
 
     ftClient.getUrl = function(query) {
-        console.log(this);        //TODO(gb): Remove trace!!!
         var queryStr =
             'SELECT ' + query.fields.join(',') + ' ' +
                 'FROM ' + query.table +
                 (query.tail ? ' ' + query.tail : '');
 
-        console.log("query= " + queryStr);     //TODO(gb): Remove trace!!!
 
         var url = ['https://www.googleapis.com/fusiontables/v1/query'];
         url.push('?sql=' + encodeURIComponent(queryStr));

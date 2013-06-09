@@ -21,7 +21,8 @@ var controllers = angular.module('votaciones.controllers', ['votaciones.services
 controllers.controller('SelectionController', ['$scope', 'Selection', function($scope, Selection) {
     $scope.selection = Selection;
 
-    votaciones.init();
+    $scope.viz = new Votaciones();
+    $scope.vizShown = false;
 
     var ftClient = new FTClient('AIzaSyDICo1qGOtGnd0DD3QEY_rQ2_xcFGLNYto');
     var yearsQuery = {
@@ -71,7 +72,36 @@ controllers.controller('SelectionController', ['$scope', 'Selection', function($
 
     $scope.selectFile = function(file) {
         $scope.selection.file = file;
-        votaciones.showVote(file.id);
+        var fileQuery = {
+            fields:['*'],
+            table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
+            tail: "WHERE asuntoId = '" + file.id + "'"
+        }
+
+        ftClient.query(fileQuery, function(rows) {
+            var vote = rows.map(function(row) {
+                return {
+                    asunto: row[2],
+                    presidente: row[9],
+                    resultado: row[8],
+                    base: row[6],
+                    mayoria: row[7],
+                    presentes: row[10],
+                    ausentes: row[12],
+                    asistencia: (parseInt(row[10]) / (parseInt(row[10]) + parseInt(row[12])) * 100).toFixed(0),
+                    abstenciones: row[14],
+                    afirmativos: row[16],
+                    negativos: row[18]
+                }
+            })[0];
+            $scope.vizShown = true;
+            $scope.viz.showVote(file.id);
+
+            $scope.vote = vote;
+            $scope.$apply();
+
+        });
+
     }
 }])
 

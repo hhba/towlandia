@@ -1,12 +1,7 @@
 #cuadrantes {
     background: #eee;
-    width: 700px;
-    height: 700px;
-    float: left;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    margin: 2em;
 }
+
 .circulo {
     width: 20px;
     height: 20px;
@@ -82,4 +77,15 @@
 .dropdown-menu {
     max-height: 330px;
     overflow-y: scroll;
+}
+
+.resultItem {
+    font-weight: 700;
+    margin-left: -13px;
+    margin-right: -13px;
+    padding: 6px 13px 8px;
+    text-shadow: none;
+    border-radius: 0;
+    color: #526476;
+    font-size: 14px;
 }
