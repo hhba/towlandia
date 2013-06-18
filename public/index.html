@@ -53,7 +53,7 @@
 
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" ng-class="{ disabled: !files }"><strong>Expendiente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
+                <button class="btn btn-info" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
@@ -79,7 +79,7 @@
             <div class="results" ng-show="vizShown">
                 <h6>{{ vote.asunto }}</h6>
                 <ul class="unstyled">
-                    <li><strong>Resutlado: </strong> <span class="label label-large" ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
+                    <li><strong>Resultado: </strong> <span class="label label-large" ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
                     <li><strong>Presidente: </strong> {{ vote.presidente }}</li>
                     <li><strong>Base: </strong> {{ vote.base }}</li>
                     <li><strong>Mayoría: </strong> {{ vote.mayoria }}</li>
