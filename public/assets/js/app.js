@@ -46,7 +46,7 @@ controllers.controller('SelectionController', ['$scope', 'Selection', function($
         var datesQuery = {
             fields:['fecha'],
             table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
-            tail: 'WHERE ano="' + year + '" GROUP BY fecha ORDER BY fecha'
+            tail: 'WHERE ano="' + year + '" GROUP BY fecha ORDER BY asuntoId'
         }
         ftClient.query(datesQuery, function(rows) {
             $scope.dates = rows.map(function(row) { return row[0] });
