@@ -86,16 +86,17 @@
                 </ul>
 
                 <ul class="nav nav-list nav-list-vivid">
-                    <li class="nav-header">Asistencia ({{ vote.asistencia }}%)</li>
                     <li>
                         <div class="resultItem">
                             Presentes
+    						<span class="nav-counter">({{ vote.presentes_p }} %)</span>
                             <span class="nav-counter">{{ vote.presentes }}</span>
                         </div>
                     </li>
                     <li>
                         <div class="resultItem">
                             Ausentes
+							<span class="nav-counter">({{ vote.ausentes_p }} %)</span>
                             <span class="nav-counter">{{ vote.ausentes }}</span>
                         </div>
                     </li>
@@ -104,18 +105,21 @@
                     <li>
                         <div class="resultItem">
                             Afirmativos
+							<span class="nav-counter">({{ vote.afirmativos_p }} %)</span>
                             <span class="nav-counter">{{ vote.afirmativos }}</span>
                         </div>
                     </li>
                     <li>
                         <div class="resultItem">
                             Negativos
+							<span class="nav-counter">({{ vote.negativos_p }} %)</span>
                             <span class="nav-counter">{{ vote.negativos }}</span>
                         </div>
                     </li>
                     <li>
                         <div class="resultItem">
                             Abstenciones
+							<span class="nav-counter">({{ vote.abstenciones_p }} %)</span>
                             <span class="nav-counter">{{ vote.abstenciones }}</span>
                         </div>
                     </li>
