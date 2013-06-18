@@ -1,6 +1,5 @@
 'use strict'
 
-
 // The app
 var app = angular.module('votaciones', ['votaciones.services', 'votaciones.controllers']);
 
@@ -87,11 +86,15 @@ controllers.controller('SelectionController', ['$scope', 'Selection', function($
                     base: row[6],
                     mayoria: row[7],
                     presentes: row[10],
+    				presentes_p: (parseInt(row[10]) / (parseInt(row[10]) + parseInt(row[12])) * 100).toFixed(1),
                     ausentes: row[12],
-                    asistencia: (parseInt(row[10]) / (parseInt(row[10]) + parseInt(row[12])) * 100).toFixed(0),
+					ausentes_p: (parseInt(row[12]) / (parseInt(row[10]) + parseInt(row[12])) * 100).toFixed(1),
                     abstenciones: row[14],
+					abstenciones_p: (parseInt(row[14]) / (parseInt(row[10])) * 100).toFixed(1),
                     afirmativos: row[16],
-                    negativos: row[18]
+					afirmativos_p: (parseInt(row[16]) / (parseInt(row[16]) + parseInt(row[18])) * 100).toFixed(1),
+                    negativos: row[18],
+					negativos_p: (parseInt(row[18]) / (parseInt(row[16]) + parseInt(row[18])) * 100).toFixed(1)
                 }
             })[0];
             $scope.vizShown = true;
