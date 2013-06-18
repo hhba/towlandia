@@ -106,20 +106,7 @@ var Votaciones = function(settings) {
 
         dot.append("circle")
             .attr("class", function(d) { return "dot bloque"+ d.bloqueId })
-            .attr("r", 0)
-            .tooltip(function(d,i) {
-                return {
-                    type: "fixed",
-                    gravity: "bottom",
-                    cssClass: "tooltip fade bottom in tooltip-light",
-                    updateContent: function() {
-                        var content =
-                            "<p><strong>" + getCongressman(d.diputadoId).nombre +"</strong></p>" +
-                            "<p>" + getBlock(d.bloqueId).bloque + "</p>";
-                        $(".tooltip-inner").html(content);
-                    }
-                }
-            })
+            .attr("r", 0);
 
         svg.selectAll("circle")
             .transition()
@@ -139,9 +126,25 @@ var Votaciones = function(settings) {
                 var row = Math.floor(index / dotsPerRow);
                 return getQuadrant(d.voto).bounds.y0 + row * 2*dotRadius + dotRadius;
             })
+    		
+			svg.selectAll("circle")
+            .tooltip(function(d,i) {
+                return {
+                    type: "fixed",
+                    gravity: "bottom",
+                    cssClass: "tooltip fade bottom in tooltip-light",
+                    updateContent: function() {
+                        var content =
+                            "<p><strong>" + getCongressman(d.diputadoId).nombre +"</strong></p>" +
+                            "<p>" + getBlock(d.bloqueId).bloque + "</p>" +
+							"<p><strong>" + getCongressman(d.diputadoId).distrito + "</strong></p>";
+							;
+                        $(".tooltip-inner").html(content);
+                    }
+                }
+            })
 
     }
-
     function getBlock(blockId) {
         return blocks.filter(function(bloque) { return bloque.bloqueId == blockId })[0];
     }
