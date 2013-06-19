@@ -86,15 +86,15 @@ controllers.controller('SelectionController', ['$scope', 'Selection', function($
                     base: row[6],
                     mayoria: row[7],
                     presentes: row[10],
-    				presentes_p: (parseInt(row[10]) / (parseInt(row[10]) + parseInt(row[12])) * 100).toFixed(1),
-                    ausentes: row[12],
-					ausentes_p: (parseInt(row[12]) / (parseInt(row[10]) + parseInt(row[12])) * 100).toFixed(1),
-                    abstenciones: row[14],
-					abstenciones_p: (parseInt(row[14]) / (parseInt(row[10])) * 100).toFixed(1),
-                    afirmativos: row[16],
-					afirmativos_p: (parseInt(row[16]) / (parseInt(row[16]) + parseInt(row[18])) * 100).toFixed(1),
-                    negativos: row[18],
-					negativos_p: (parseInt(row[18]) / (parseInt(row[16]) + parseInt(row[18])) * 100).toFixed(1)
+    				presentes_p: (parseInt(row[10]) / (parseInt(row[10]) + parseInt(row[11])) * 100).toFixed(1),
+                    ausentes: row[11],
+					ausentes_p: (parseInt(row[11]) / (parseInt(row[10]) + parseInt(row[11])) * 100).toFixed(1),
+                    abstenciones: row[12],
+					abstenciones_p: (parseInt(row[12]) / (parseInt(row[10])) * 100).toFixed(1),
+                    afirmativos: row[13],
+					afirmativos_p: (parseInt(row[13]) / (parseInt(row[10])) * 100).toFixed(1),
+                    negativos: row[14],
+					negativos_p: (parseInt(row[14]) / (parseInt(row[10])) * 100).toFixed(1)
                 }
             })[0];
             $scope.vizShown = true;
