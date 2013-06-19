@@ -82,7 +82,7 @@ var Votaciones = function(settings) {
         // Votaciones
         ftClient.query({
             fields: ["*"],
-            table: "1KxXAg9YuF_r-1N_LAleR4QqKl4QZMHIeJh0EUf8",
+            table: "1GNJAVHF_7xPZFhTc_w4RLxcyiD_lAiYTgVlA0D8",
             tail: "WHERE asuntoId = '" + asuntoId + "'"
         }, function(rows) {
             data = rows.map(function(row) {
