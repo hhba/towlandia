@@ -40,20 +40,20 @@
 
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" ng-class="{ disabled: !dates }"><strong>Fecha</strong><span ng-show="selection.date">: {{ selection.date }}</span> </button>
+                <button class="btn btn-info" ng-class="{ disabled: !dates }"><strong>Fecha</strong><span ng-show="selection.date">: {{ selection.date | date:'dd/MM/yyyy' }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !dates }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-inverse">
                     <li ng-repeat="date in dates" ng-class="{ 'selected' : selection.date == date }">
-                        <a href="#" ng-click="selectDate(date)">{{ date }}</a>
+                        <a href="#" ng-click="selectDate(date)">{{ date | date:'dd/MM/yyyy' }}</a>
                     </li>
                 </ul>
             </div>
 
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
+                <button class="btn btn-info" style="width: 100%" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
@@ -179,7 +179,6 @@
 <script src="assets/js/FTClient.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/votaciones.js"></script>
-<script src="assets/js/moment.js"></script>
 
 </body>
 </html>
