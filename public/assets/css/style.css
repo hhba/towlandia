@@ -61,9 +61,8 @@
 }
 
 .quadrant {
-    opacity: 0.7;
+    opacity: 0.2;
     stroke: #333;
-    fill: #CCC;
 }
 
 .dropdown-menu {
@@ -82,6 +81,9 @@
     font-size: 14px;
 }
 
+.row-selects {
+    margin-bottom: 10px;
+}
 .btn-group {
     margin-bottom: 3px;
     margin-left: 0;
@@ -95,9 +97,19 @@
 .ul-select-exp {
     width: 700px;
 }
+.results h6 {
+    margin-top: 0;
+    padding-left: 10px;
+}
+.ul-resultados {
+    padding-left: 10px;
+}
 .ul-resultados li {
     line-height: normal;
     padding: 7px 0;
+}
+.nav-list-vivid {
+    padding: 5px 10px;
 }
 .nav-header {
     color: #3498DB;
@@ -114,6 +126,10 @@
     width: 50px;
     background: none;
 }
+.nav-counter-presentes {
+    background-color: #000;
+    color: #fff;
+}
 .nav-counter-afirmativos {
     background-color: #468847;
     color: #fff;
@@ -125,4 +141,19 @@
 .nav-counter-abstenciones {
     background-color: #CCCC00;
     color: #fff;
+}
+.logo {
+    padding-top: 26px;
+}
+.quadrant0 {
+    fill: #468847;
+}
+.quadrant1 {
+    fill: #B94A48;
+}
+.quadrant2 {
+    fill: #CCCC00;
+}
+.quadrant3 {
+    fill: #999;
 }

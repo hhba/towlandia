@@ -46,7 +46,7 @@ var Votaciones = function(settings) {
             .attr("width", width/2)
             .attr("height", height/2)
             .classed("quadrant", true)
-            .classed(quadrant.name, true);
+            .classed("quadrant" + quadrant.name, true);
     }
 
     // Diputados

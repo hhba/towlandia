@@ -10,12 +10,12 @@
 
 <div class="container">
     <div class="row">
-        <div class="span2">
-            <img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" alt="HacksHackers Buenos Aires">
-        </div>
         <div class="span10">
             <h1 style="margin-bottom: 0px">Disciplina de bloques</h1>
             <p class="lead">en votaciones legislativas argentinas</p>
+        </div>
+        <div class="span2 logo">
+            <img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" alt="HacksHackers Buenos Aires">
         </div>
     </div>
     <div class="row">
@@ -23,7 +23,7 @@
             <h5>Elegir votación:</h5>
         </div>
     </div>
-    <div class="row">
+    <div class="row row-selects">
         <div class="span12">
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
@@ -65,11 +65,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="span12">
-            &nbsp;
-        </div>
-    </div>
     <div class="row mbl">
         <div class="span9">
             <div id="cuadrantes">
@@ -90,7 +85,7 @@
                         <div class="resultItem">
                             Presentes
     						<span class="nav-counter nav-counter-porcentaje">{{ vote.presentes_p }} %</span>
-                            <span class="nav-counter nav-counter-num">{{ vote.presentes }}</span>
+                            <span class="nav-counter nav-counter-num nav-counter-presentes">{{ vote.presentes }}</span>
                         </div>
                     </li>
                     <li>
