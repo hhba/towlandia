@@ -2,3 +2,5 @@
 *.ipr
 *.iws
 .DS_Store
+towlandia.sublime-project
+towlandia.sublime-workspace
