@@ -19,11 +19,11 @@ var controllers = angular.module('votaciones.controllers', ['votaciones.services
 
 controllers.controller('SelectionController', ['$scope', '$filter', 'Selection', function($scope, $filter, Selection) {
     $scope.selection = Selection;
+    var ftClient = new FTClient('AIzaSyDICo1qGOtGnd0DD3QEY_rQ2_xcFGLNYto');
 
     $scope.viz = new Votaciones();
     $scope.vizShown = false;
 
-    var ftClient = new FTClient('AIzaSyDICo1qGOtGnd0DD3QEY_rQ2_xcFGLNYto');
     var yearsQuery = {
         fields:['ano'],
         table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
@@ -88,15 +88,15 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     base: row[6],
                     mayoria: row[7],
                     presentes: row[10],
-    				presentes_p: (parseInt(row[10]) / (parseInt(row[10]) + parseInt(row[11])) * 100).toFixed(1),
+                    presentes_p: (parseInt(row[10]) / (parseInt(row[10]) + parseInt(row[11])) * 100).toFixed(1),
                     ausentes: row[11],
-					ausentes_p: (parseInt(row[11]) / (parseInt(row[10]) + parseInt(row[11])) * 100).toFixed(1),
+                    ausentes_p: (parseInt(row[11]) / (parseInt(row[10]) + parseInt(row[11])) * 100).toFixed(1),
                     abstenciones: row[12],
-					abstenciones_p: (parseInt(row[12]) / (parseInt(row[10])) * 100).toFixed(1),
+                    abstenciones_p: (parseInt(row[12]) / (parseInt(row[10])) * 100).toFixed(1),
                     afirmativos: row[13],
-					afirmativos_p: (parseInt(row[13]) / (parseInt(row[10])) * 100).toFixed(1),
+                    afirmativos_p: (parseInt(row[13]) / (parseInt(row[10])) * 100).toFixed(1),
                     negativos: row[14],
-					negativos_p: (parseInt(row[14]) / (parseInt(row[10])) * 100).toFixed(1)
+                    negativos_p: (parseInt(row[14]) / (parseInt(row[10])) * 100).toFixed(1)
                 }
             })[0];
             $scope.vizShown = true;
@@ -107,6 +107,36 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
 
         });
 
+        // Blocks
+        ftClient.query({
+            fields: ['bloqueId', 'COUNT()'],
+            table: '1GNJAVHF_7xPZFhTc_w4RLxcyiD_lAiYTgVlA0D8',
+            tail: "WHERE asuntoId = '" + file.id + "' GROUP BY bloqueId ORDER BY COUNT() DESC"
+        }, function(rows) {
+            var blockOrder = rows.map(function(row) { return row[0] });
+            ftClient.query({
+                fields: ['*'],
+                table: '1gUTqf8A-nuvBGygRnVDcSftngYZ-z9OvxBs59M0'
+            }, function(rows) {
+                $scope.blocks = rows
+                    .map(function(row) {
+                        return {
+                            id: row[0],
+                            name: row[1],
+                            color: row[2] ? row[2] : $scope.viz.color(row[0]),
+                            order: blockOrder.indexOf(row[0])
+                        }
+                    })
+                    .filter(function(block) {
+                        return block.order >= 0;
+                    })
+                    .sort(function(a,b) {
+                        return a.order - b.order;
+                    })
+
+                $scope.$apply();
+            })
+        })
+
     }
 }])
-

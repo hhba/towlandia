@@ -126,3 +126,14 @@
     background-color: #CCCC00;
     color: #fff;
 }
+
+.block-list {
+    max-height: 250px;
+    overflow-y: scroll;
+}
+
+.key {
+    width: 18px;
+    height: 18px;
+    margin-right: 3px;
+}
