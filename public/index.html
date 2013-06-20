@@ -57,7 +57,7 @@
                 <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu dropdown-inverse">
+                <ul class="dropdown-menu dropdown-inverse ul-select-exp">
                     <li ng-repeat="file in files" ng-class="{ 'selected' : selection.file.id == file.id }">
                         <a href="#" ng-click="selectFile(file)">{{ file.name }}</a>
                     </li>
@@ -78,7 +78,7 @@
         <div class="span3">
             <div class="results" ng-show="vizShown">
                 <h6>{{ vote.asunto }}</h6>
-                <ul class="unstyled">
+                <ul class="unstyled ul-resultados">
                     <li><strong>Resultado: </strong> <span class="label label-large" ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
                     <li><strong>Presidente: </strong> {{ vote.presidente }}</li>
                     <li><strong>Base: </strong> {{ vote.base }}</li>
@@ -89,15 +89,15 @@
                     <li>
                         <div class="resultItem">
                             Presentes
-    						<span class="nav-counter">({{ vote.presentes_p }} %)</span>
-                            <span class="nav-counter">{{ vote.presentes }}</span>
+    						<span class="nav-counter nav-counter-porcentaje">{{ vote.presentes_p }} %</span>
+                            <span class="nav-counter nav-counter-num">{{ vote.presentes }}</span>
                         </div>
                     </li>
                     <li>
                         <div class="resultItem">
                             Ausentes
-							<span class="nav-counter">({{ vote.ausentes_p }} %)</span>
-                            <span class="nav-counter">{{ vote.ausentes }}</span>
+							<span class="nav-counter nav-counter-porcentaje">{{ vote.ausentes_p }} %</span>
+                            <span class="nav-counter nav-counter-num">{{ vote.ausentes }}</span>
                         </div>
                     </li>
                     <li class="divider"></li>
@@ -105,22 +105,22 @@
                     <li>
                         <div class="resultItem">
                             Afirmativos
-							<span class="nav-counter">({{ vote.afirmativos_p }} %)</span>
-                            <span class="nav-counter">{{ vote.afirmativos }}</span>
+							<span class="nav-counter nav-counter-porcentaje">{{ vote.afirmativos_p }} %</span>
+                            <span class="nav-counter nav-counter-num nav-counter-afirmativos">{{ vote.afirmativos }}</span>
                         </div>
                     </li>
                     <li>
                         <div class="resultItem">
                             Negativos
-							<span class="nav-counter">({{ vote.negativos_p }} %)</span>
-                            <span class="nav-counter">{{ vote.negativos }}</span>
+							<span class="nav-counter nav-counter-porcentaje">{{ vote.negativos_p }} %</span>
+                            <span class="nav-counter nav-counter-num nav-counter-negativos">{{ vote.negativos }}</span>
                         </div>
                     </li>
                     <li>
                         <div class="resultItem">
                             Abstenciones
-							<span class="nav-counter">({{ vote.abstenciones_p }} %)</span>
-                            <span class="nav-counter">{{ vote.abstenciones }}</span>
+							<span class="nav-counter nav-counter-porcentaje">{{ vote.abstenciones_p }} %</span>
+                            <span class="nav-counter nav-counter-num nav-counter-abstenciones">{{ vote.abstenciones }}</span>
                         </div>
                     </li>
                 </ul>
