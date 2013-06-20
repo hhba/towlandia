@@ -1,7 +1,5 @@
 #cuadrantes {
-    background: #eee;
 }
-
 .circulo {
     width: 20px;
     height: 20px;
@@ -82,4 +80,49 @@
     border-radius: 0;
     color: #526476;
     font-size: 14px;
+}
+
+.btn-group {
+    margin-bottom: 3px;
+    margin-left: 0;
+}
+.btn-group + .btn-group {
+    margin-left: 0;
+}
+.dropdown-menu {
+    overflow: auto;
+}
+.ul-select-exp {
+    width: 700px;
+}
+.ul-resultados li {
+    line-height: normal;
+    padding: 7px 0;
+}
+.nav-header {
+    color: #3498DB;
+}
+.nav-counter {
+    color: #000;
+    text-align: right;
+}
+.nav-counter-num {
+    width: 25px;
+    font-weight: bold;
+}
+.nav-counter-porcentaje {
+    width: 50px;
+    background: none;
+}
+.nav-counter-afirmativos {
+    background-color: #468847;
+    color: #fff;
+}
+.nav-counter-negativos {
+    background-color: #B94A48;
+    color: #fff;
+}
+.nav-counter-abstenciones {
+    background-color: #CCCC00;
+    color: #fff;
 }

@@ -2,8 +2,8 @@ var Votaciones = function(settings) {
     var votaciones = {};
 
     var margin = {top: 0, right: 0, bottom: 0, left: 0},
-        width = 696 - margin.left - margin.right,
-        height = 696 - margin.top - margin.bottom;
+        width = 680 - margin.left - margin.right,
+        height = 680 - margin.top - margin.bottom;
 
     var svg, data, blocks, congressmen;
 
@@ -111,7 +111,7 @@ var Votaciones = function(settings) {
         svg.selectAll("circle")
             .transition()
             .duration(1000)
-            .attr("r", dotRadius)
+            .attr("r", dotRadius-1)
             .attr("fill", function(d) {
                 return color(d.bloqueId);
             })
@@ -126,7 +126,7 @@ var Votaciones = function(settings) {
                 var row = Math.floor(index / dotsPerRow);
                 return getQuadrant(d.voto).bounds.y0 + row * 2*dotRadius + dotRadius;
             })
-    		
+
 			svg.selectAll("circle")
             .tooltip(function(d,i) {
                 return {
