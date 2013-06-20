@@ -54,7 +54,7 @@ controllers.controller('SelectionController', ['$scope', 'Selection', function($
     }
 
     $scope.selectDate = function(date) {
-        $scope.selection.date = moment(date).format('DD/MM/YYYY');
+        $scope.selection.date = date;
         $scope.selection.file = null;
         $scope.files = null;
 
