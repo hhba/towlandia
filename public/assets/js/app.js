@@ -45,16 +45,16 @@ controllers.controller('SelectionController', ['$scope', 'Selection', function($
         var datesQuery = {
             fields:['fecha'],
             table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
-            tail: 'WHERE ano="' + year + '" GROUP BY fecha ORDER BY asuntoId'
+            tail: 'WHERE ano="' + year + '" GROUP BY fecha ORDER BY fecha'
         }
         ftClient.query(datesQuery, function(rows) {
-            $scope.dates = rows.map(function(row) { return row[0] });
+            $scope.dates = rows.map(function(row) { return moment(row[0]).format('DD/MM/YYYY') });
             $scope.$apply();
         })
     }
 
     $scope.selectDate = function(date) {
-        $scope.selection.date = date;
+        $scope.selection.date = moment(date).format('DD/MM/YYYY');
         $scope.selection.file = null;
         $scope.files = null;
 
