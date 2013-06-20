@@ -153,3 +153,12 @@
 .quadrant3 {
     fill: #999;
 }
+.block-list {
+    max-height: 250px;
+    overflow-y: scroll;
+}
+.key {
+    width: 18px;
+    height: 18px;
+    margin-right: 3px;
+}

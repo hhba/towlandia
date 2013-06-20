@@ -27,7 +27,8 @@ var Votaciones = function(settings) {
         .domain([0,1])
         .range([height, 0]);
 
-    var color = d3.scale.category10();
+    var color = d3.scale.linear()
+        .range(["white", "black"])
 
     var ftClient = new FTClient('AIzaSyDICo1qGOtGnd0DD3QEY_rQ2_xcFGLNYto');
 
@@ -68,13 +69,15 @@ var Votaciones = function(settings) {
         fields: ["*"],
         table: "1gUTqf8A-nuvBGygRnVDcSftngYZ-z9OvxBs59M0"
     }, function(rows) {
+        color.domain([1, rows.filter(function(row) { return !row[2]}).length]);
         blocks = rows.map(function(row) {
             return {
                 bloqueId: row[0],
                 bloque: row[1],
-                color: row[2]
+                color: row[2] ? row[2] : color(row[0])
             }
         })
+
     });
 
 
@@ -95,8 +98,9 @@ var Votaciones = function(settings) {
             })
             update(asuntoId);
         });
-
     }
+
+    votaciones.color = color;
 
     function update(asuntoId) {
         var votes = getSortedData(data, asuntoId);
@@ -113,7 +117,7 @@ var Votaciones = function(settings) {
             .duration(1000)
             .attr("r", dotRadius-1)
             .attr("fill", function(d) {
-                return color(d.bloqueId);
+                return blocks.filter(function(block) { return block.bloqueId == d.bloqueId})[0].color;
             })
             .attr("cx", function(d, i) {
                 var quadrant = getQuadrant(d.voto);
@@ -127,7 +131,7 @@ var Votaciones = function(settings) {
                 return getQuadrant(d.voto).bounds.y0 + row * 2*dotRadius + dotRadius;
             })
 
-			svg.selectAll("circle")
+        svg.selectAll("circle")
             .tooltip(function(d,i) {
                 return {
                     type: "fixed",
@@ -136,9 +140,9 @@ var Votaciones = function(settings) {
                     updateContent: function() {
                         var content =
                             "<p><strong>" + getCongressman(d.diputadoId).nombre +"</strong></p>" +
-                            "<p>" + getBlock(d.bloqueId).bloque + "</p>" +
-							"<p><strong>" + getCongressman(d.diputadoId).distrito + "</strong></p>";
-							;
+                                "<p>" + getBlock(d.bloqueId).bloque + "</p>" +
+                                "<p><strong>" + getCongressman(d.diputadoId).distrito + "</strong></p>";
+                        ;
                         $(".tooltip-inner").html(content);
                     }
                 }

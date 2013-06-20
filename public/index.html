@@ -72,7 +72,6 @@
         </div>
         <div class="span3">
             <div class="results" ng-show="vizShown">
-                <h6>{{ vote.asunto }}</h6>
                 <ul class="unstyled ul-resultados">
                     <li><strong>Resultado: </strong> <span class="label label-large" ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
                     <li><strong>Presidente: </strong> {{ vote.presidente }}</li>
@@ -117,6 +116,14 @@
 							<span class="nav-counter nav-counter-porcentaje">{{ vote.abstenciones_p }} %</span>
                             <span class="nav-counter nav-counter-num nav-counter-abstenciones">{{ vote.abstenciones }}</span>
                         </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="bloques">
+                <h6 ng-show="blocks">Bloques</h6>
+                <ul class="unstyled block-list">
+                    <li ng-repeat="block in blocks">
+                        <div class="key pull-left" style="background-color: {{ block.color }}"></div> {{ block.name }}
                     </li>
                 </ul>
             </div>
