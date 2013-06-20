@@ -61,7 +61,7 @@ controllers.controller('SelectionController', ['$scope', 'Selection', function($
         var filesQuery = {
             fields:['asunto', 'asuntoId'],
             table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
-            tail: "WHERE fecha = '" + date + "'"
+            tail: "WHERE fecha = '" + moment(date).format('D/M/YYYY') + "'"
         }
         ftClient.query(filesQuery, function(rows) {
             $scope.files = rows.map(function(row) { return { name: row[0], id: row[1] } });
