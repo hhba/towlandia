@@ -63,7 +63,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         var filesQuery = {
             fields:['asunto', 'asuntoId'],
             table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
-            tail: "WHERE fecha = '" + $date(date, 'MM/dd/yyyy') + "'"
+            tail: "WHERE fecha = '" + $date(date, 'MM/dd/yyyy') + "' ORDER BY hora"
         }
         ftClient.query(filesQuery, function(rows) {
             $scope.files = rows.map(function(row) { return { name: row[0], id: row[1] } });
