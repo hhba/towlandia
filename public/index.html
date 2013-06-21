@@ -79,7 +79,7 @@
             <div class="results" ng-show="vizShown">
                 <ul class="unstyled ul-resultados">
                     <li><strong>Resultado: </strong> <span class="label label-large" ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
-                    <li><strong>Presidente: </strong> {{ vote.presidente }}</li>
+                    <li><strong>Presidente: </strong><span class="label label-large" ng-class="{'label-success': vote.votopresidente == '0', 'label-important': vote.votopresidente == '1'}">{{ vote.presidente }}</span></li>
                     <li><strong>Base: </strong> {{ vote.base }}</li>
                     <li><strong>Mayoría: </strong> {{ vote.mayoria }}</li>
                 </ul>
