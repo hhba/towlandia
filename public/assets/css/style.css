@@ -174,7 +174,10 @@
 .bloques .chk-bloque,
 .bloques .key {
     display: inline-block;
+    margin: 0;
+    vertical-align: top;
 }
 .bloques .chk-bloque {
-
+    margin: 0 0 5px;
+    vertical-align: middle;
 }
