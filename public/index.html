@@ -123,7 +123,11 @@
                 <h6 ng-show="blocks">Bloques</h6>
                 <ul class="unstyled block-list">
                     <li ng-repeat="block in blocks">
-                        <div class="key pull-left" style="background-color: {{ block.color }}"></div> {{ block.name }}
+                        <div>
+                            <input type="checkbox" class="chk-bloque" value="{{ block.id }}"/>
+                            <div class="key" style="background-color: {{ block.color }}"></div>
+                            {{ block.name }}
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -181,6 +185,9 @@
 <script src="assets/js/FTClient.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/votaciones.js"></script>
+<script src="assets/jquerysvg/js/jquery.svg.min.js"></script>
+<script src="assets/jquerysvg/js/jquery.svgdom.min.js"></script>
+<script src="assets/js/bloques.js"></script>
 
 </body>
 </html>

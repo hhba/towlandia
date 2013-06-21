@@ -105,7 +105,9 @@ var Votaciones = function(settings) {
     function update(asuntoId) {
         var votes = getSortedData(data, asuntoId);
         var dot = svg.selectAll(".dot")
-            .data(votes)
+            .data(votes/*, function(d) {
+                return d.diputadoId;
+            }*/)
             .enter()
 
         dot.append("circle")

@@ -155,10 +155,26 @@
 }
 .block-list {
     max-height: 250px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .key {
     width: 18px;
     height: 18px;
     margin-right: 3px;
+}
+.bloque-blur {
+    opacity: 0.3;
+    stroke-width: 0;
+}
+.bloque-focus {
+    opacity: 1;
+    stroke-width: 1;
+    stroke: #000;
+}
+.bloques .chk-bloque,
+.bloques .key {
+    display: inline-block;
+}
+.bloques .chk-bloque {
+
 }
