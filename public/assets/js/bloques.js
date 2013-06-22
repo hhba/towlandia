@@ -13,3 +13,15 @@ $(document).ready(function() {
         }
     });
 });
+
+var blocksChecked;
+function getCheckedBlocks() {
+    blocksChecked = [];
+    $('.chk-bloque:checked').each(function() {
+        blocksChecked.push($(this).val());
+    });
+}
+function setCheckedBlocks() {
+    for(var v in blocksChecked)
+        $('.chk-bloque[value="' + blocksChecked[v] + '"]').attr('checked', 'checked');
+}

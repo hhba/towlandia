@@ -131,7 +131,7 @@ var Votaciones = function(settings) {
                 var index = i % quadrant.count;
                 var row = Math.floor(index / dotsPerRow);
                 return getQuadrant(d.voto).bounds.y0 + row * 2*dotRadius + dotRadius;
-            })
+            });
 
         svg.selectAll("circle")
             .tooltip(function(d,i) {
@@ -148,8 +148,7 @@ var Votaciones = function(settings) {
                         $(".tooltip-inner").html(content);
                     }
                 }
-            })
-
+            });
     }
     function getBlock(blockId) {
         return blocks.filter(function(bloque) { return bloque.bloqueId == blockId })[0];
@@ -188,6 +187,5 @@ var Votaciones = function(settings) {
 
         return sortedData;
     }
-
     return votaciones;
 }
