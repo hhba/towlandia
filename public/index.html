@@ -15,14 +15,10 @@
         </div>
         <div class="span10">
             <h1 style="margin-bottom: 0px">Disciplina de bloques</h1>
-            <p class="lead">en votaciones legislativas argentinas</p>
+            <p class="lead">en votaciones nominales de la Cámara de Diputados</p>
         </div>
     </div>
-    <div class="row">
-        <div class="span12">
-            <h5>Elegir votación:</h5>
-        </div>
-    </div>
+
     <div class="row">
         <div class="span12">
             <div class="btn-group">
@@ -53,12 +49,12 @@
 
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" style="width: 100%" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
-                <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
+                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
+                <button class="btn btn-info dropdown-toggle"  title = "{{ selection.file.titulo }}"ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-inverse ul-select-exp">
-                    <li ng-repeat="file in files" ng-class="{ 'selected' : selection.file.id == file.id }">
+                    <li ng-repeat="file in files"  title = "{{ file.titulo }}" ng-class="{ 'selected' : selection.file.id == file.id }">
                         <a href="#" ng-click="selectFile(file)">{{ file.name }}</a>
                     </li>
                 </ul>
