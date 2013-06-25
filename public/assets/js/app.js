@@ -82,7 +82,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         ftClient.query(fileQuery, function(rows) {
             var vote = rows.map(function(row) {
                 return {
-    				sesion: row[1],
+					sesion: row[1],
                     asunto: row[2],
                     presidente: row[9],
                     resultado: row[8],
