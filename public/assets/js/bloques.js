@@ -1,8 +1,13 @@
 $(document).ready(function() {
+    $('.chk-bloque-ninguno').hide();
+
     $('.bloques').on('click', '.chk-bloque', function() {
-        if($('.chk-bloque:checked').length == 0)
+        if($('.chk-bloque:checked').length == 0) {
             $('circle').removeClass('bloque-blur bloque-focus');
+            $('.chk-bloque-ninguno').hide();
+        }
         else {
+            $('.chk-bloque-ninguno').show();
             var bloque = $(this).val();
             if($(this).is(':checked')) {
                 $('.bloque' + bloque).addClass('bloque-focus');
@@ -11,6 +16,12 @@ $(document).ready(function() {
             else
                 $('.bloque' + bloque).addClass('bloque-blur').removeClass('bloque-focus');
         }
+    });
+
+    $('.bloques').on('click', '.chk-bloque-ninguno', function() {
+        $('circle').removeClass('bloque-blur bloque-focus');
+        $('.chk-bloque:checked').removeAttr('checked');
+        $(this).hide();
     });
 });
 
