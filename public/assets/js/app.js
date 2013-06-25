@@ -98,7 +98,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     afirmativos_p: (parseInt(row[13]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
                     negativos: row[14],
                     negativos_p: (parseInt(row[14]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
-					votopresidente: row[15]
+		    votopresidente: row[15]
                 }
             })[0];
             $scope.vizShown = true;
