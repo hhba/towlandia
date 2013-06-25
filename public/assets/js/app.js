@@ -48,7 +48,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             tail: 'WHERE ano="' + year + '" GROUP BY fecha ORDER BY fecha'
         }
         ftClient.query(datesQuery, function(rows) {
-            $scope.dates = rows.map(function(row) { return Date.parse(row[0]) });
+            $scope.dates = rows.map(function(row) { return Date.parse(row[0])});
             $scope.$apply();
         })
     }
@@ -82,6 +82,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         ftClient.query(fileQuery, function(rows) {
             var vote = rows.map(function(row) {
                 return {
+    				sesion: row[1],
                     asunto: row[2],
                     presidente: row[9],
                     resultado: row[8],
@@ -97,7 +98,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     afirmativos_p: (parseInt(row[13]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
                     negativos: row[14],
                     negativos_p: (parseInt(row[14]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
-    				votopresidente: row[15]
+					votopresidente: row[15]
                 }
             })[0];
             $scope.vizShown = true;
