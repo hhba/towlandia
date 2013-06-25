@@ -15,10 +15,8 @@
         </div>
         <div class="span10">
             <h1 style="margin-bottom: 0px">Disciplina de bloques</h1>
-            <p class="lead">en votaciones nominales de la Cámara de Diputados</p>
         </div>
     </div>
-
     <div class="row">
         <div class="span12">
             <div class="btn-group">
@@ -50,7 +48,7 @@
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
-                <button class="btn btn-info dropdown-toggle"  title = "{{ selection.file.titulo }}"ng-class="{ disabled: !files }" data-toggle="dropdown">
+                <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-inverse ul-select-exp">
@@ -61,11 +59,11 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="span12">
+	<div class="row">
+		 <div class="span12">
             &nbsp;
-        </div>
-    </div>
+		 </div>
+     </div>
     <div class="row mbl">
         <div class="span9">
             <div id="cuadrantes">
@@ -130,6 +128,7 @@
             </div>
         </div>
     </div>
+	<table><tr><td><strong>{{ vote.sesion }}</strong></td><td>{{ selection.file.titulo }}</td></tr></table>
 </div>
 
 <div class="bottom-menu bottom-menu-large">
