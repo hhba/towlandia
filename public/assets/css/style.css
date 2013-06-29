@@ -164,47 +164,27 @@
     width: 155px;
     margin: 0;
 }
-.key {
+.block-list .key {
     width: 18px;
     height: 18px;
-    margin-right: 3px;
 }
-.bloque-blur {
-    opacity: 0.3;
-    stroke-width: 0;
-}
-.bloque-focus {
-    opacity: 1;
-    stroke-width: 1;
-    stroke: #000;
-}
-.bloques .chk-bloque,
-.bloques .key {
+.block-list .chk-bloque,
+.block-list .key {
     display: inline-block;
     margin: 0;
     vertical-align: top;
 }
-.bloques .chk-bloque {
+.block-list .chk-bloque {
     margin-top: 1px;
 }
-.diputado-blur {
+.circle-blur {
     opacity: 0.3;
     stroke-width: 0;
 }
-.diputado-focus {
+.circle-focus {
     opacity: 1;
     stroke-width: 1;
     stroke: #000;
-}
-.diputados .chk-diputado,
-.diputados .key {
-    display: inline-block;
-    margin: 0;
-    vertical-align: top;
-}
-.diputados .chk-diputado {
-    margin: 0 0 5px;
-    vertical-align: middle;
 }
 #referencetable {
     float: right;

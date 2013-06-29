@@ -126,16 +126,16 @@
                 <button class="chk-bloque-ninguno btn-link">Ninguno</button>
             </div>
 			<div class="diputados">
-                <h6 ng-show="dips">Diputados</h6>
+                <h6 ng-show="cmen">Diputados</h6>
                 <ul class="unstyled block-list">
-                    <li ng-repeat="congressman in dips">
+                    <li ng-repeat="congressman in cmen">
                         <div>
                             <input type="checkbox" class="chk-diputado" value="{{ congressman.id }}"/>
-                            {{ congressman.name }}
+                            <p>{{ congressman.name }}</p>
                         </div>
 					</li>
                 </ul>
-                <button class="chk-bloque-ninguno btn-link">Ninguno</button>
+                <button class="chk-diputado-ninguno btn-link">Ninguno</button>
             </div>
         </div>
     </div>
@@ -173,9 +173,7 @@
                 </ul>
             </div>
             <div class="span2">
-                <div class="span2">
-                    <img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" alt="HacksHackers Buenos Aires">
-                </div>
+                <img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" width="140" alt="HacksHackers Buenos Aires">
             </div>
         </div>
     </div>
@@ -225,8 +223,7 @@
 <script src="assets/js/votaciones.js"></script>
 <script src="assets/jquerysvg/js/jquery.svg.min.js"></script>
 <script src="assets/jquerysvg/js/jquery.svgdom.min.js"></script>
-<script src="assets/js/bloques.js"></script>
-<script src="assets/js/diputados.js"></script>
+<script src="assets/js/index.js"></script>
 
 </body>
 </html>
