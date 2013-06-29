@@ -153,15 +153,16 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                 fields: ['*'],
                 table: '1OAvsKOSuQE3NzXNKGLwQpBDj9iK3mLweHb8Lcfg'
             }, function(rows) {
-                $scope.dips = rows
+                $scope.cmen = rows
                     .map(function(row) {
                         return {
 							id: row[0],
-							name: row[1]
+							name: row[1].
+                            order: congressmenOrder.indexOf(row[0])
                         }
                     })
-                    .filter(function(dips) {
-                        return dips.order >= 0;
+                    .filter(function(cmen) {
+                        return cmen.order >= 0;
                     })
                     .sort(function(a,b) {
                         return a.order - b.order;
@@ -169,7 +170,6 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
 
                 $scope.$apply();
                 setCheckedCongressmen();
-
             })
         })
     }
