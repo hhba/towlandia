@@ -96,6 +96,7 @@ var Votaciones = function(settings) {
                     voto: row[3]
                 }
             })
+            showTabs();
             update(asuntoId);
         });
     }
@@ -162,6 +163,7 @@ var Votaciones = function(settings) {
                     }
                 }
             });
+
     }
     function getBlock(blockId) {
         return blocks.filter(function(bloque) { return bloque.bloqueId == blockId })[0];

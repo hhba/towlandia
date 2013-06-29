@@ -112,30 +112,34 @@
                     </li>
                 </ul>
             </div>
-            <div class="bloques">
-                <h6 ng-show="blocks">Bloques</h6>
-                <ul class="unstyled block-list">
-                    <li ng-repeat="block in blocks">
-                        <div>
-                            <input type="checkbox" class="chk-bloque" value="{{ block.id }}"/>
-                            <div class="key" style="background-color: {{ block.color }}"></div>
-                            <p>{{ block.name }}</p>
-                        </div>
-					</li>
-                </ul>
-                <button class="chk-bloque-ninguno btn-link">Ninguno</button>
-            </div>
-			<div class="diputados">
-                <h6 ng-show="cmen">Diputados</h6>
-                <ul class="unstyled block-list">
-                    <li ng-repeat="congressman in cmen">
-                        <div>
-                            <input type="checkbox" class="chk-diputado" value="{{ congressman.id }}"/>
-                            <p>{{ congressman.name }}</p>
-                        </div>
-					</li>
-                </ul>
-                <button class="chk-diputado-ninguno btn-link">Ninguno</button>
+            <ul class="nav nav-tabs hide">
+                <li class="active"><a href="#tab-bloques" data-toggle="tab" class="tab-btn">Bloques</a></li>
+                <li><a href="#tab-diputados" data-toggle="tab" class="tab-btn">Diputados</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="bloques tab-pane active" id="tab-bloques" ng-show="blocks">
+                    <ul class="unstyled block-list">
+                        <li ng-repeat="block in blocks">
+                            <div>
+                                <input type="checkbox" class="chk-bloque" value="{{ block.id }}"/>
+                                <div class="key" style="background-color: {{ block.color }}"></div>
+                                <p>{{ block.name }}</p>
+                            </div>
+    					</li>
+                    </ul>
+                    <button class="chk-bloque-ninguno btn-link">Ninguno</button>
+                </div>
+    			<div class="diputados tab-pane" id="tab-diputados" ng-show="cmen">
+                    <ul class="unstyled block-list">
+                        <li ng-repeat="congressman in cmen">
+                            <div>
+                                <input type="checkbox" class="chk-diputado" value="{{ congressman.id }}"/>
+                                <p>{{ congressman.name }}</p>
+                            </div>
+    					</li>
+                    </ul>
+                    <button class="chk-diputado-ninguno btn-link">Ninguno</button>
+                </div>
             </div>
         </div>
     </div>

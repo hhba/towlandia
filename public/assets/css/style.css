@@ -154,7 +154,7 @@
     fill: #999;
 }
 .block-list {
-    max-height: 255px;
+    max-height: 240px;
     overflow-y: auto;
 }
 .block-list li div p {
@@ -168,13 +168,13 @@
     width: 18px;
     height: 18px;
 }
-.block-list .chk-bloque,
+.block-list input,
 .block-list .key {
     display: inline-block;
     margin: 0;
     vertical-align: top;
 }
-.block-list .chk-bloque {
+.block-list input {
     margin-top: 1px;
 }
 .circle-blur {
@@ -219,4 +219,20 @@
 }
 .doc-img {
     padding-bottom: 10px;
+}
+.nav-tabs {
+    padding-top: 10px;
+}
+.nav-tabs li {
+    font-size: 20px;
+}
+.nav-tabs li a {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.tab-content {
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
 }

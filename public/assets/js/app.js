@@ -66,7 +66,13 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             tail: "WHERE fecha = '" + $date(date, 'MM/dd/yyyy') + "' ORDER BY hora"
         }
         ftClient.query(filesQuery, function(rows) {
-            $scope.files = rows.map(function(row) { return { name: row[0], id: row[1], titulo: row[2]} });
+            $scope.files = rows.map(function(row) {
+                return {
+                    name: row[0],
+                    id: row[1],
+                    titulo: row[2]
+                }
+            });
             $scope.$apply();
         })
     }
@@ -151,21 +157,19 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             var congressmenOrder = rows.map(function(row) { return row[0] });
             ftClient.query({
                 fields: ['*'],
-                table: '1OAvsKOSuQE3NzXNKGLwQpBDj9iK3mLweHb8Lcfg'
+                table: '1OAvsKOSuQE3NzXNKGLwQpBDj9iK3mLweHb8Lcfg',
+                tail: "ORDER BY nombre ASC"
             }, function(rows) {
                 $scope.cmen = rows
                     .map(function(row) {
                         return {
 							id: row[0],
-							name: row[1].
+							name: row[1],
                             order: congressmenOrder.indexOf(row[0])
                         }
                     })
                     .filter(function(cmen) {
                         return cmen.order >= 0;
-                    })
-                    .sort(function(a,b) {
-                        return a.order - b.order;
                     })
 
                 $scope.$apply();
