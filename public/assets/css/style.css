@@ -154,8 +154,15 @@
     fill: #999;
 }
 .block-list {
-    max-height: 250px;
+    max-height: 255px;
     overflow-y: auto;
+}
+.block-list li div p {
+    line-height: normal;
+    font-size: 13px;
+    display: inline-block;
+    width: 155px;
+    margin: 0;
 }
 .key {
     width: 18px;
@@ -178,8 +185,7 @@
     vertical-align: top;
 }
 .bloques .chk-bloque {
-    margin: 0 0 5px;
-    vertical-align: middle;
+    margin-top: 1px;
 }
 .diputado-blur {
     opacity: 0.3;
@@ -202,31 +208,35 @@
 }
 #referencetable {
     float: right;
+    margin: 0 0 0 10px;
+    font-size: 13px;
 }
-
 #referencetable td {
-    border: 1px solid black;
-    color: white;
+    border: 1px solid #333;
+    color: #fff;
     text-align: center;
+    width: 85px;
+    height: 85px;
 }
-
 #referencetable .quadrant0 {
     background: #468847;
-    width: 80px;
-    height: 80px;
 }
 #referencetable .quadrant1 {
     background: #B94A48;
-    width: 80px;
-    height: 80px;
 }
 #referencetable .quadrant2 {
     background: #CCCC00;
-    width: 80px;
-    height: 80px;
 }
 #referencetable .quadrant3 {
     background: #999;
-    width: 80px;
-    height: 80px;
+}
+.modal-body p {
+    font-size: 15px;
+    line-height: normal;
+}
+.bottom-menu {
+    padding: 20px 0;
+}
+.doc-img {
+    padding-bottom: 10px;
 }

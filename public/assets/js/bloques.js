@@ -28,14 +28,18 @@ $(document).ready(function() {
 
 	$('.quadrant0, .quadrant2').tooltip({
 		container: 'body',
-		placement: "left",
+		placement: 'left',
 		delay: {show: 500}
 	});
 	$('.quadrant1, .quadrant3').tooltip({
 		container: 'body',
-		placement: "right",
+		placement: 'right',
 		delay: {show: 500}
 	});
+
+    $('#intromodal').modal();
+
+    // ---------------
 
 });
 

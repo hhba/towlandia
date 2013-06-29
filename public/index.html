@@ -1,42 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="votaciones">
 <head>
+    <title>Votaciones legislativas</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="assets/flat-ui/css/flat-ui.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet"/>
 </head>
 <body ng-controller="SelectionController">
-
-
-<div class="modal hide fade" id="intromodal">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Votaciones legislativas</h3>
-  </div>
-  <div class="modal-body">
-    <table id="referencetable">
-        <tr>
-            <td class="quadrant0">Votos afirmativos</td>
-            <td class="quadrant1">Votos negativos</td>
-        </tr>
-        <tr>
-            <td class="quadrant2">Abstenciones</td>
-            <td class="quadrant3">Ausentes</td>
-        </tr>
-    </table>
-	    <p>Esta aplicación de datos abiernos muestra bla bla bla askjdhasdkas dlajs dkasdhalskd aslkd asdalisdj asjdlkas dalsdj ajsdlkasj dlaksjd alsk dalsdalksjd alskjd alsd asdad asds dasd asd ads asd ads asd ada a dasd asd ad asda da d da sdad </p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn btn-primary" data-dismiss="modal">Iniciar</a>
-  </div>
-</div>
-      <a href="https://github.com/hhba/towlandia" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-
 <div class="container">
     <div class="row">
         <div class="span10">
-            <h1 style="margin-bottom: 0px">Votaciones legislativas</h1>
+            <h1>Votaciones legislativas</h1>
         </div>
     </div>
     <div class="row row-selects">
@@ -53,7 +28,6 @@
                     </li>
                 </ul>
             </div>
-
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" ng-class="{ disabled: !dates }"><strong>Fecha</strong><span ng-show="selection.date">: {{ selection.date | date:'dd/MM/yyyy' }}</span> </button>
@@ -66,7 +40,6 @@
                     </li>
                 </ul>
             </div>
-
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
@@ -81,13 +54,9 @@
             </div>
         </div>
     </div>
-	<div class="row">
-		 <div class="span3">
-			<strong>{{ vote.sesion }}</strong>
-		 </div>
-		 <div class="span9">
-			{{ selection.file.titulo }}
-		 </div>
+	<div class="row row-selects">
+		 <div class="span3"><strong>{{ vote.sesion }}</strong></div>
+		 <div class="span9">{{ selection.file.titulo }}</div>
     </div>
     <div class="row mbl">
         <div class="span9">
@@ -150,7 +119,7 @@
                         <div>
                             <input type="checkbox" class="chk-bloque" value="{{ block.id }}"/>
                             <div class="key" style="background-color: {{ block.color }}"></div>
-                            {{ block.name }}
+                            <p>{{ block.name }}</p>
                         </div>
 					</li>
                 </ul>
@@ -171,13 +140,17 @@
         </div>
     </div>
 </div>
-<div class="bottom-menu bottom-menu-large">
+<div class="bottom-menu">
     <div class="container">
-        <div class="row" style="">
-            <div class="span2 brand">
-                Disciplina de bloques
+        <div class="row">
+            <div class="span4 brand">Votaciones legislativas</div>
+            <div class="span2">
+                <h5 class="title">Secciones</h5>
+                <ul class="bottom-links">
+                    <li><a href="doc.html" target="_blank">Documentación</a>
+                    <li><a href="#intromodal" data-toggle="modal">Acerca de</a>
+                </ul>
             </div>
-
             <div class="span2">
                 <h5 class="title">Desarrollo</h5>
                 <ul class="bottom-links">
@@ -185,26 +158,52 @@
                     <li><a href="http://twitter.com/belbosays">Gonzalo Bellver</a></li>
                     <li><a href="http://twitter.com/luchotuitea">Luciano Amor</a></li>
                     <li><a href="http://twitter.com/martinszy">Martín Szyszlican</a></li>
-                    <li>y otros...</li>
                 </ul>
             </div>
-
             <div class="span2">
-                <h5 class="title">Secciones</h5>
+                <h5 class="title">Colaboradores</h5>
                 <ul class="bottom-links">
-                    <li><a href="doc.html">Documentación</a>
-                    <li><a href="#intromodal" data-toggle="modal">Acerca de...</a>
+                    <li><a href="#">Teresa Alberto</a></li>
+                    <li><a href="#">Mariela Duarte</a></li>
+                    <li><a href="#">Sonia Jalfin</a></li>
+                    <li><a href="#">Amalín Ramos</a></li>
+                    <li><a href="#">Olivia Sohr</a></li>
+                    <li><a href="#">Agustín Telado</a></li>
+                    <li><a href="#">Alfredo ???</a></li>
                 </ul>
             </div>
-
             <div class="span2">
-                <h5 class="title">HHBA</h5>
                 <div class="span2">
                     <img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" alt="HacksHackers Buenos Aires">
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="modal hide fade" id="intromodal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Votaciones legislativas</h3>
+    </div>
+    <div class="modal-body">
+        <table id="referencetable">
+            <tr>
+                <td class="quadrant0">Afirmativos</td>
+                <td class="quadrant1">Negativos</td>
+            </tr>
+            <tr>
+                <td class="quadrant2">Abstenciones</td>
+                <td class="quadrant3">Ausentes</td>
+            </tr>
+        </table>
+        <p>Texto explicativo...</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-info" data-dismiss="modal">Iniciar</a>
+    </div>
+</div>
+<div>
+    <a href="https://github.com/hhba/towlandia" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 </div>
 
 <script src="assets/js/d3.v3.min.js"></script>
@@ -228,8 +227,6 @@
 <script src="assets/jquerysvg/js/jquery.svgdom.min.js"></script>
 <script src="assets/js/bloques.js"></script>
 <script src="assets/js/diputados.js"></script>
-<script>
-    $('#intromodal').modal()
-</script>
+
 </body>
 </html>
