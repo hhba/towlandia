@@ -36,3 +36,4 @@ function setCheckedCongressmen() {
     for(var v in congressmenChecked)
         $('.chk-diputado[value="' + congressmenChecked[v] + '"]').attr('checked', 'checked');
 }
+
