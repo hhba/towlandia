@@ -116,6 +116,9 @@ var Votaciones = function(settings) {
                 .attr("class", function(d) {
                     return "dot bloque"+ d.bloqueId;
                 })
+    			.attr("id", function(d) {
+					return "d" + d.diputadoId;
+				})
                 .attr("r", 0);
             dot.exit()
                 .attr('r', 0)
