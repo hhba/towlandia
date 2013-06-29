@@ -181,3 +181,52 @@
     margin: 0 0 5px;
     vertical-align: middle;
 }
+.diputado-blur {
+    opacity: 0.3;
+    stroke-width: 0;
+}
+.diputado-focus {
+    opacity: 1;
+    stroke-width: 1;
+    stroke: #000;
+}
+.diputados .chk-diputado,
+.diputados .key {
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+}
+.diputados .chk-diputado {
+    margin: 0 0 5px;
+    vertical-align: middle;
+}
+#referencetable {
+    float: right;
+}
+
+#referencetable td {
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+}
+
+#referencetable .quadrant0 {
+    background: #468847;
+    width: 80px;
+    height: 80px;
+}
+#referencetable .quadrant1 {
+    background: #B94A48;
+    width: 80px;
+    height: 80px;
+}
+#referencetable .quadrant2 {
+    background: #CCCC00;
+    width: 80px;
+    height: 80px;
+}
+#referencetable .quadrant3 {
+    background: #999;
+    width: 80px;
+    height: 80px;
+}

@@ -23,6 +23,20 @@ $(document).ready(function() {
         $('.chk-bloque:checked').removeAttr('checked');
         $(this).hide();
     });
+
+    // pasar a home.js
+
+	$('.quadrant0, .quadrant2').tooltip({
+		container: 'body',
+		placement: "left",
+		delay: {show: 500}
+	});
+	$('.quadrant1, .quadrant3').tooltip({
+		container: 'body',
+		placement: "right",
+		delay: {show: 500}
+	});
+
 });
 
 var blocksChecked;

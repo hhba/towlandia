@@ -48,7 +48,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             tail: 'WHERE ano="' + year + '" GROUP BY fecha ORDER BY fecha'
         }
         ftClient.query(datesQuery, function(rows) {
-            $scope.dates = rows.map(function(row) { return Date.parse(row[0]) });
+            $scope.dates = rows.map(function(row) { return Date.parse(row[0])});
             $scope.$apply();
         })
     }
@@ -61,19 +61,20 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         var $date = $filter('date');
 
         var filesQuery = {
-            fields:['asunto', 'asuntoId'],
+            fields:['asunto', 'asuntoId', 'titulo'],
             table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
-            tail: "WHERE fecha = '" + $date(date, 'MM/dd/yyyy') + "'"
+            tail: "WHERE fecha = '" + $date(date, 'MM/dd/yyyy') + "' ORDER BY hora"
         }
         ftClient.query(filesQuery, function(rows) {
-            $scope.files = rows.map(function(row) { return { name: row[0], id: row[1] } });
+            $scope.files = rows.map(function(row) { return { name: row[0], id: row[1], titulo: row[2]} });
             $scope.$apply();
         })
     }
 
     $scope.selectFile = function(file) {
-        getCheckedBlocks();
-        $scope.selection.file = file;
+	    getCheckedBlocks();
+        getCheckedCongressmen();
+		$scope.selection.file = file;
         var fileQuery = {
             fields:['*'],
             table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
@@ -83,6 +84,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         ftClient.query(fileQuery, function(rows) {
             var vote = rows.map(function(row) {
                 return {
+					sesion: row[1],
                     asunto: row[2],
                     presidente: row[9],
                     resultado: row[8],
@@ -93,11 +95,12 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     ausentes: row[11],
                     ausentes_p: (parseInt(row[11]) / (parseInt(row[10]) + parseInt(row[11])) * 100).toFixed(1),
                     abstenciones: row[12],
-                    abstenciones_p: (parseInt(row[12]) / (parseInt(row[10])) * 100).toFixed(1),
+                    abstenciones_p: (parseInt(row[12]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
                     afirmativos: row[13],
-                    afirmativos_p: (parseInt(row[13]) / (parseInt(row[10])) * 100).toFixed(1),
+                    afirmativos_p: (parseInt(row[13]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
                     negativos: row[14],
-                    negativos_p: (parseInt(row[14]) / (parseInt(row[10])) * 100).toFixed(1)
+                    negativos_p: (parseInt(row[14]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
+					votopresidente: row[15]
                 }
             })[0];
             $scope.vizShown = true;
@@ -139,6 +142,35 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                 setCheckedBlocks();
             })
         })
+        // congressmen
+        ftClient.query({
+            fields: ['diputadoId'],
+            table: '1GNJAVHF_7xPZFhTc_w4RLxcyiD_lAiYTgVlA0D8',
+            tail: "WHERE asuntoId = '" + file.id + "'"
+        }, function(rows) {
+            var congressmenOrder = rows.map(function(row) { return row[0] });
+            ftClient.query({
+                fields: ['*'],
+                table: '1OAvsKOSuQE3NzXNKGLwQpBDj9iK3mLweHb8Lcfg'
+            }, function(rows) {
+                $scope.dips = rows
+                    .map(function(row) {
+                        return {
+							id: row[0],
+							name: row[1]
+                        }
+                    })
+                    .filter(function(dips) {
+                        return dips.order >= 0;
+                    })
+                    .sort(function(a,b) {
+                        return a.order - b.order;
+                    })
 
+                $scope.$apply();
+                setCheckedCongressmen();
+
+            })
+        })
     }
 }])

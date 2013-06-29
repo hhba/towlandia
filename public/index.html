@@ -8,19 +8,35 @@
 </head>
 <body ng-controller="SelectionController">
 
+
+<div class="modal hide fade" id="intromodal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Votaciones legislativas</h3>
+  </div>
+  <div class="modal-body">
+    <table id="referencetable">
+        <tr>
+            <td class="quadrant0">Votos afirmativos</td>
+            <td class="quadrant1">Votos negativos</td>
+        </tr>
+        <tr>
+            <td class="quadrant2">Abstenciones</td>
+            <td class="quadrant3">Ausentes</td>
+        </tr>
+    </table>
+	    <p>Esta aplicación de datos abiernos muestra bla bla bla askjdhasdkas dlajs dkasdhalskd aslkd asdalisdj asjdlkas dalsdj ajsdlkasj dlaksjd alsk dalsdalksjd alskjd alsd asdad asds dasd asd ads asd ads asd ada a dasd asd ad asda da d da sdad </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary" data-dismiss="modal">Iniciar</a>
+  </div>
+</div>
+      <a href="https://github.com/hhba/towlandia" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+
 <div class="container">
     <div class="row">
         <div class="span10">
-            <h1 style="margin-bottom: 0px">Disciplina de bloques</h1>
-            <p class="lead">en votaciones legislativas argentinas</p>
-        </div>
-        <div class="span2 logo">
-            <img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" alt="HacksHackers Buenos Aires">
-        </div>
-    </div>
-    <div class="row">
-        <div class="span12">
-            <h5>Elegir votación:</h5>
+            <h1 style="margin-bottom: 0px">Votaciones legislativas</h1>
         </div>
     </div>
     <div class="row row-selects">
@@ -53,17 +69,25 @@
 
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" style="width: 100%" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
+                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-inverse ul-select-exp">
-                    <li ng-repeat="file in files" ng-class="{ 'selected' : selection.file.id == file.id }">
+                    <li ng-repeat="file in files"  title = "{{ file.titulo }}" ng-class="{ 'selected' : selection.file.id == file.id }">
                         <a href="#" ng-click="selectFile(file)">{{ file.name }}</a>
                     </li>
                 </ul>
             </div>
         </div>
+    </div>
+	<div class="row">
+		 <div class="span3">
+			<strong>{{ vote.sesion }}</strong>
+		 </div>
+		 <div class="span9">
+			{{ selection.file.titulo }}
+		 </div>
     </div>
     <div class="row mbl">
         <div class="span9">
@@ -74,7 +98,7 @@
             <div class="results" ng-show="vizShown">
                 <ul class="unstyled ul-resultados">
                     <li><strong>Resultado: </strong> <span class="label label-large" ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
-                    <li><strong>Presidente: </strong> {{ vote.presidente }}</li>
+                    <li><strong>Presidente: </strong><span class="label label-large" ng-class="{'label-success': vote.votopresidente == '0', 'label-important': vote.votopresidente == '1'}">{{ vote.presidente }}</span></li>
                     <li><strong>Base: </strong> {{ vote.base }}</li>
                     <li><strong>Mayoría: </strong> {{ vote.mayoria }}</li>
                 </ul>
@@ -128,14 +152,25 @@
                             <div class="key" style="background-color: {{ block.color }}"></div>
                             {{ block.name }}
                         </div>
-                    </li>
+					</li>
+                </ul>
+                <button class="chk-bloque-ninguno btn-link">Ninguno</button>
+            </div>
+			<div class="diputados">
+                <h6 ng-show="dips">Diputados</h6>
+                <ul class="unstyled block-list">
+                    <li ng-repeat="congressman in dips">
+                        <div>
+                            <input type="checkbox" class="chk-diputado" value="{{ congressman.id }}"/>
+                            {{ congressman.name }}
+                        </div>
+					</li>
                 </ul>
                 <button class="chk-bloque-ninguno btn-link">Ninguno</button>
             </div>
         </div>
     </div>
 </div>
-
 <div class="bottom-menu bottom-menu-large">
     <div class="container">
         <div class="row" style="">
@@ -146,24 +181,27 @@
             <div class="span2">
                 <h5 class="title">Desarrollo</h5>
                 <ul class="bottom-links">
-                    <li><a href="#fakelink">Andy Tow</a></li>
-                    <li><a href="#fakelink">Gonzalo Bellver</a></li>
-                    <li><a href="#fakelink">Luciano Amor</a></li>
-                    <li><a href="#fakelink">Martín Szyszlican</a></li>
-                    <li><a href="#fakelink">y otros...</a></li>
+                    <li><a href="http://twitter.com/andytow">Andy Tow</a></li>
+                    <li><a href="http://twitter.com/belbosays">Gonzalo Bellver</a></li>
+                    <li><a href="http://twitter.com/luchotuitea">Luciano Amor</a></li>
+                    <li><a href="http://twitter.com/martinszy">Martín Szyszlican</a></li>
+                    <li>y otros...</li>
                 </ul>
             </div>
 
             <div class="span2">
                 <h5 class="title">Secciones</h5>
                 <ul class="bottom-links">
+                    <li><a href="doc.html">Documentación</a>
+                    <li><a href="#intromodal" data-toggle="modal">Acerca de...</a>
                 </ul>
             </div>
 
             <div class="span2">
                 <h5 class="title">HHBA</h5>
-                <ul class="bottom-links">
-                </ul>
+                <div class="span2">
+                    <img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" alt="HacksHackers Buenos Aires">
+                </div>
             </div>
         </div>
     </div>
@@ -189,6 +227,9 @@
 <script src="assets/jquerysvg/js/jquery.svg.min.js"></script>
 <script src="assets/jquerysvg/js/jquery.svgdom.min.js"></script>
 <script src="assets/js/bloques.js"></script>
-
+<script src="assets/js/diputados.js"></script>
+<script>
+    $('#intromodal').modal()
+</script>
 </body>
 </html>
