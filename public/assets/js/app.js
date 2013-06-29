@@ -73,7 +73,8 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
 
     $scope.selectFile = function(file) {
 	    getCheckedBlocks();
-        $scope.selection.file = file;
+        getCheckedCongressmen();
+		$scope.selection.file = file;
         var fileQuery = {
             fields:['*'],
             table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
@@ -139,8 +140,38 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
 
                 $scope.$apply();
                 setCheckedBlocks();
-            })
-        })
 
+            })
+        })	
+        // congressmen
+        ftClient.query({
+            fields: ['diputadoId'],
+            table: '1GNJAVHF_7xPZFhTc_w4RLxcyiD_lAiYTgVlA0D8',
+            tail: "WHERE asuntoId = '" + file.id + "'"
+        }, function(rows) {
+            var congressmenOrder = rows.map(function(row) { return row[0] });
+            ftClient.query({
+                fields: ['*'],
+                table: '1OAvsKOSuQE3NzXNKGLwQpBDj9iK3mLweHb8Lcfg'
+            }, function(rows) {
+                $scope.dips = rows
+                    .map(function(row) {
+                        return {
+							id: row[0],
+							name: row[1]
+                        }
+                    })
+                    .filter(function(dips) {
+                        return dips.order >= 0;
+                    })
+                    .sort(function(a,b) {
+                        return a.order - b.order;
+                    })
+
+                $scope.$apply();
+                setCheckedCongressmen();
+
+            })
+        })		
     }
 }])
