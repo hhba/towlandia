@@ -60,8 +60,11 @@
         </div>
     </div>
 	<div class="row">
-		 <div class="span12">
-            &nbsp;
+		 <div class="span3">
+			<strong>{{ vote.sesion }}</strong>
+		 </div>
+		 <div class="span9">
+			{{ selection.file.titulo }}
 		 </div>
      </div>
     <div class="row mbl">
@@ -131,9 +134,21 @@
                 </ul>
                 <button class="chk-bloque-ninguno btn-link">Ninguno</button>
             </div>
+			<div class="diputados">
+                <h6 ng-show="dips">Diputados</h6>
+                <ul class="unstyled block-list">
+                    <li ng-repeat="congressman in dips">
+                        <div>
+                            <input type="checkbox" class="chk-diputado" value="{{ congressman.id }}"/>
+                            {{ congressman.name }}
+                        </div>
+					</li>
+                </ul>
+                <button class="chk-bloque-ninguno btn-link">Ninguno</button>
+            </div>
         </div>
     </div>
-	<table><tr><td><strong>{{ vote.sesion }}</strong></td><td>{{ selection.file.titulo }}</td></tr></table>
+
 </div>
 
 <div class="bottom-menu bottom-menu-large">
@@ -189,6 +204,6 @@
 <script src="assets/js/jquery.svg.min.js"></script>
 <script src="assets/js/jquery.svgdom.min.js"></script>
 <script src="assets/js/bloques.js"></script>
-
+<script src="assets/js/diputados.js"></script>
 </body>
 </html>
