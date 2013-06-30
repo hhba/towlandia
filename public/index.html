@@ -1,45 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="votaciones">
 <head>
+    <title>Votaciones legislativas</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="assets/flat-ui/css/flat-ui.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet"/>
 </head>
 <body ng-controller="SelectionController">
-
-
-<div class="modal hide fade" id="intromodal">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Votaciones legislativas</h3>
-  </div>
-  <div class="modal-body">
-    <table id="referencetable">
-        <tr>
-            <td class="quadrant0">Votos afirmativos</td>
-            <td class="quadrant1">Votos negativos</td>
-        </tr>
-        <tr>
-            <td class="quadrant2">Abstenciones</td>
-            <td class="quadrant3">Ausentes</td>
-        </tr>
-    </table>
-	    <p>Esta aplicación de datos abiernos muestra bla bla bla askjdhasdkas dlajs dkasdhalskd aslkd asdalisdj asjdlkas dalsdj ajsdlkasj dlaksjd alsk dalsdalksjd alskjd alsd asdad asds dasd asd ads asd ads asd ada a dasd asd ad asda da d da sdad </p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn btn-primary" data-dismiss="modal">Iniciar</a>
-  </div>
-</div>
-      <a href="https://github.com/hhba/towlandia" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-
 <div class="container">
     <div class="row">
         <div class="span10">
-            <h1 style="margin-bottom: 0px">Votaciones legislativas</h1>
+            <h1>La Década Votada</h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row row-selects">
         <div class="span12">
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
@@ -53,7 +28,6 @@
                     </li>
                 </ul>
             </div>
-
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" ng-class="{ disabled: !dates }"><strong>Fecha</strong><span ng-show="selection.date">: {{ selection.date | date:'dd/MM/yyyy' }}</span> </button>
@@ -66,10 +40,9 @@
                     </li>
                 </ul>
             </div>
-
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
+                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Asunto</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
@@ -81,14 +54,10 @@
             </div>
         </div>
     </div>
-	<div class="row">
-		 <div class="span3">
-			<strong>{{ vote.sesion }}</strong>
-		 </div>
-		 <div class="span9">
-			{{ selection.file.titulo }}
-		 </div>
-     </div>
+	<div class="row row-selects">
+		 <div class="span3"><strong>{{ vote.sesion }}</strong></div>
+		 <div class="span9">{{ selection.file.titulo }}</div>
+    </div>
     <div class="row mbl">
         <div class="span9">
             <div id="cuadrantes">
@@ -108,7 +77,7 @@
                         <div class="resultItem">
                             Presentes
     						<span class="nav-counter nav-counter-porcentaje">{{ vote.presentes_p }} %</span>
-                            <span class="nav-counter nav-counter-num">{{ vote.presentes }}</span>
+                            <span class="nav-counter nav-counter-num nav-counter-presentes">{{ vote.presentes }}</span>
                         </div>
                     </li>
                     <li>
@@ -143,43 +112,49 @@
                     </li>
                 </ul>
             </div>
-            <div class="bloques">
-                <h6 ng-show="blocks">Bloques</h6>
-                <ul class="unstyled block-list">
-                    <li ng-repeat="block in blocks">
-                        <div>
-                            <input type="checkbox" class="chk-bloque" value="{{ block.id }}"/>
-                            <div class="key" style="background-color: {{ block.color }}"></div>
-                            {{ block.name }}
-                        </div>
-					</li>
-                </ul>
-                <button class="chk-bloque-ninguno btn-link">Ninguno</button>
-            </div>
-			<div class="diputados">
-                <h6 ng-show="dips">Diputados</h6>
-                <ul class="unstyled block-list">
-                    <li ng-repeat="congressman in dips">
-                        <div>
-                            <input type="checkbox" class="chk-diputado" value="{{ congressman.id }}"/>
-                            {{ congressman.name }}
-                        </div>
-					</li>
-                </ul>
-                <button class="chk-bloque-ninguno btn-link">Ninguno</button>
+            <ul class="nav nav-tabs hide">
+                <li class="active"><a href="#tab-bloques" data-toggle="tab" class="tab-btn">Bloques</a></li>
+                <li><a href="#tab-diputados" data-toggle="tab" class="tab-btn">Diputados</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="bloques tab-pane active" id="tab-bloques" ng-show="blocks">
+                    <ul class="unstyled block-list">
+                        <li ng-repeat="block in blocks">
+                            <div>
+                                <input type="checkbox" class="chk-bloque" value="{{ block.id }}"/>
+                                <div class="key" style="background-color: {{ block.color }}"></div>
+                                <p>{{ block.name }}</p>
+                            </div>
+    					</li>
+                    </ul>
+                    <button class="chk-bloque-ninguno btn-link">Ninguno</button>
+                </div>
+    			<div class="diputados tab-pane" id="tab-diputados" ng-show="cmen">
+                    <ul class="unstyled block-list">
+                        <li ng-repeat="congressman in cmen">
+                            <div>
+                                <input type="checkbox" class="chk-diputado" value="{{ congressman.id }}"/>
+                                <p>{{ congressman.name }}</p>
+                            </div>
+    					</li>
+                    </ul>
+                    <button class="chk-diputado-ninguno btn-link">Ninguno</button>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
-
-<div class="bottom-menu bottom-menu-large">
+<div class="bottom-menu">
     <div class="container">
-        <div class="row" style="">
-            <div class="span2 brand">
-                Disciplina de bloques
+        <div class="row">
+            <div class="span4 brand">Votaciones legislativas</div>
+            <div class="span2">
+                <h5 class="title">Secciones</h5>
+                <ul class="bottom-links">
+                    <li><a href="doc.html" target="_blank">Documentación</a>
+                    <li><a href="#intromodal" data-toggle="modal">Acerca de</a>
+                </ul>
             </div>
-
             <div class="span2">
                 <h5 class="title">Desarrollo</h5>
                 <ul class="bottom-links">
@@ -187,26 +162,54 @@
                     <li><a href="http://twitter.com/belbosays">Gonzalo Bellver</a></li>
                     <li><a href="http://twitter.com/luchotuitea">Luciano Amor</a></li>
                     <li><a href="http://twitter.com/martinszy">Martín Szyszlican</a></li>
-                    <li>y otros...</li>
                 </ul>
             </div>
-
             <div class="span2">
-                <h5 class="title">Secciones</h5>
+                <h5 class="title">Colaboradores</h5>
                 <ul class="bottom-links">
-                    <li><a href="doc.html">Documentación</a>
-                    <li><a href="#intromodal" data-toggle="modal">Acerca de...</a>
+                    <li><a href="#">Teresa Alberto</a></li>
+                    <li><a href="#">Mariela Duarte</a></li>
+                    <li><a href="#">Sonia Jalfin</a></li>
+                    <li><a href="#">Amalín Ramos</a></li>
+                    <li><a href="#">Olivia Sohr</a></li>
+                    <li><a href="#">Agustín Telado</a></li>
+                    <li><a href="#">Alfredo ???</a></li>
                 </ul>
             </div>
-
             <div class="span2">
-                <h5 class="title">HHBA</h5>
-                <div class="span2">
-                    <img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" alt="HacksHackers Buenos Aires">
-                </div>
+                <img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" width="140" alt="HacksHackers Buenos Aires">
             </div>
         </div>
     </div>
+</div>
+<div class="modal hide fade" id="intromodal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Votaciones legislativas</h3>
+    </div>
+    <div class="modal-body">
+        <table id="referencetable">
+            <tr>
+                <td class="quadrant0">Afirmativos</td>
+                <td class="quadrant1">Negativos</td>
+            </tr>
+            <tr>
+                <td class="quadrant2">Abstenciones</td>
+                <td class="quadrant3">Ausentes</td>
+            </tr>
+        </table>
+        <p>Esa aplicación muestra las más de 1.200 votaciones nominales de la Cámara de Diputados de la Nación entre 2003 y 2013 de acuerdo a las <a href="http://www.hcdn.gov.ar/secadmin/ds_electronicos/actas_votacion-portada.html" target="_blank">actas oficiales</a>.</p>
+		<p>Utilice los selectores de Año, Fecha y Asunto para elegir la votación.</p>
+		<p>En los cuadrantes se ubicará cada diputado individual coloreado por bloque político, según si su voto fue <font color = Green>Afirmativo</font> o <font color = Red>Negativo</font>, si optó por la <font color = Gold>Abstención</font> o si estuvo <font color = Grey>Ausente</font>.</p>
+		<p>El panel de la derecha mostrará el resultado, base y tipo de mayoría requerida, asistencia y números de cada votación, incluyendo el voto del presidente cuando lo hubo.</p>
+		<p>Utilice las casillas de verificación de bloques y diputados para resaltarlos y observar mejor sus trayectorias entre votaciones.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-info" data-dismiss="modal">Iniciar</a>
+    </div>
+</div>
+<div>
+    <a href="https://github.com/hhba/towlandia" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 </div>
 
 <script src="assets/js/d3.v3.min.js"></script>
@@ -226,13 +229,9 @@
 <script src="assets/js/FTClient.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/votaciones.js"></script>
-<script src="assets/js/jquery.svg.min.js"></script>
-<script src="assets/js/jquery.svgdom.min.js"></script>
-<script src="assets/js/bloques.js"></script>
-<script src="assets/js/diputados.js"></script>
-<script>
+<script src="assets/jquerysvg/js/jquery.svg.min.js"></script>
+<script src="assets/jquerysvg/js/jquery.svgdom.min.js"></script>
+<script src="assets/js/index.js"></script>
 
-$('#intromodal').modal()
-</script>
 </body>
 </html>
