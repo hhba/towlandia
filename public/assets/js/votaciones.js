@@ -105,8 +105,8 @@ var Votaciones = function(settings) {
 
     function update(asuntoId) {
 
-        getCheckedBlocks();
-        getCheckedCongressmen();
+        // getCheckedBlocks();
+        // getCheckedCongressmen();
 
         for (var i=0; i<quadrants.length; i++) {
             quadrants[i].countX = 0;
