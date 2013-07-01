@@ -210,6 +210,18 @@
 #referencetable .quadrant3 {
     background: #999;
 }
+.modal-body span.quadrant0 {
+    color: #468847;
+}
+.modal-body span.quadrant1 {
+    color: #B94A48;
+}
+.modal-body span.quadrant2 {
+    color: #CCCC00;
+}
+.modal-body span.quadrant3 {
+    color: #999;
+}
 .modal-body p {
     font-size: 15px;
     line-height: normal;

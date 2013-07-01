@@ -142,3 +142,10 @@ function resetChecksCongressmen(size) {
 function showTabs() {
     $('.nav-tabs').show();
 }
+
+
+function setCheckedBlock(clase) {
+    var bloque = clase.substring(6);
+    if(blocksChecked.indexOf(bloque) > -1)
+        checkBlock(bloque);
+}
