@@ -78,6 +78,8 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
     }
 
     $scope.selectFile = function(file) {
+	    // getCheckedBlocks();
+        // getCheckedCongressmen();
 		$scope.selection.file = file;
         var fileQuery = {
             fields:['*'],
@@ -143,6 +145,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     })
 
                 $scope.$apply();
+                setCheckedBlocks();
             })
         })
         // congressmen
@@ -170,6 +173,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     })
 
                 $scope.$apply();
+                setCheckedCongressmen();
             })
         })
     }

@@ -154,9 +154,8 @@ var Votaciones = function(settings) {
             });
 
         transition.each('end', function() {
-            setCheckedBlock(this.classList[1]);
-            //setCheckedCongressmen();
-            console.log('end'+this.classList[1]);
+            setCircleBlock(this.classList[1]);
+            setCircleCongressman(this.id);
         });
 
         svg.selectAll("circle")

@@ -72,10 +72,12 @@ function checkCongressman(diputado) {
 
 var blocksChecked;
 function getCheckedBlocks() {
+    $('circle').removeClass('circle-blur circle-focus');
     blocksChecked = [];
     $('.chk-bloque:checked').each(function() {
         blocksChecked.push($(this).val());
     });
+    console.log(blocksChecked);
 }
 function setCheckedBlocks() {
     if(congressmenChecked.length + blocksChecked.length == 0) {
@@ -88,7 +90,7 @@ function setCheckedBlocks() {
     for(var v in blocksChecked) {
         if($('.chk-bloque[value="' + blocksChecked[v] + '"]').length) {
             $('.chk-bloque[value="' + blocksChecked[v] + '"]').attr('checked', 'checked');
-            checkBlock(blocksChecked[v]);
+            //checkBlock(blocksChecked[v]);
         }
         else
             nBlocks--;
@@ -98,10 +100,12 @@ function setCheckedBlocks() {
 
 var congressmenChecked;
 function getCheckedCongressmen() {
+    $('circle').removeClass('circle-blur circle-focus');
     congressmenChecked = [];
     $('.chk-diputado:checked').each(function() {
         congressmenChecked.push($(this).val());
     });
+    console.log(congressmenChecked);
 }
 function setCheckedCongressmen() {
     if(congressmenChecked.length + blocksChecked.length == 0) {
@@ -114,7 +118,7 @@ function setCheckedCongressmen() {
     for(var v in congressmenChecked) {
         if($('.chk-diputado[value="' + congressmenChecked[v] + '"]').length) {
             $('.chk-diputado[value="' + congressmenChecked[v] + '"]').attr('checked', 'checked');
-            checkCongressman(congressmenChecked[v]);
+            //checkCongressman(congressmenChecked[v]);
         }
         else
             nCongressmen--;
@@ -139,13 +143,16 @@ function resetChecksCongressmen(size) {
     }
     return false;
 }
-function showTabs() {
-    $('.nav-tabs').show();
-}
-
-
-function setCheckedBlock(clase) {
+function setCircleBlock(clase) {
     var bloque = clase.substring(6);
     if(blocksChecked.indexOf(bloque) > -1)
         checkBlock(bloque);
+}
+function setCircleCongressman(id) {
+    var diputado = id.substring(1);
+    if(congressmenChecked.indexOf(diputado) > -1)
+        checkCongressman(diputado);
+}
+function showTabs() {
+    $('.nav-tabs').show();
 }
