@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         <div class="span10">
-            <h1>Votaciones legislativas</h1>
+            <h1>La Década Votada</h1>
         </div>
     </div>
     <div class="row row-selects">
@@ -42,7 +42,7 @@
             </div>
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Expediente</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
+                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Asunto</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
@@ -198,7 +198,11 @@
                 <td class="quadrant3">Ausentes</td>
             </tr>
         </table>
-        <p>Texto explicativo...</p>
+        <p>Esta aplicación muestra las más de 1.200 votaciones nominales de la Cámara de Diputados de la Nación entre 2003 y 2013 de acuerdo a las <a href="http://www.hcdn.gov.ar/secadmin/ds_electronicos/actas_votacion-portada.html" target="_blank">actas oficiales</a>.</p>
+		<p>Utilice los selectores de Año, Fecha y Asunto para elegir la votación.</p>
+		<p>En los cuadrantes se ubicará cada diputado individual coloreado por bloque político, según si su voto fue <font color = Green>Afirmativo</font> o <font color = Red>Negativo</font>, si optó por la <font color = Gold>Abstención</font> o si estuvo <font color = Grey>Ausente</font>.</p>
+		<p>El panel de la derecha mostrará el resultado, base y tipo de mayoría requerida, asistencia y números de cada votación, incluyendo el voto del presidente cuando lo hubo.</p>
+		<p>Utilice las casillas de verificación de bloques y diputados para resaltarlos y observar mejor sus trayectorias entre votaciones.</p>
     </div>
     <div class="modal-footer">
         <a href="#" class="btn btn-info" data-dismiss="modal">Iniciar</a>

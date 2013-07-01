@@ -12,8 +12,9 @@
         <div class="span12">
             <h1>Votaciones legislativas</h1>
             <h2>Documentación</h2>
-            <p>Esta aplicación utiliza tablas Fusion Tables de Google y <a href="http://d3js.org/" target="_blank">D3.js</a> para generar visualizaciones de votaciones nominales de cuerpos legislativos detallando la posición de cada uno de los integrantes, su filiación política y de distrito, el resultado y otros datos de cada votación.</p>
-            <p>Para nuestra aplicación hemos utilizado las <a href="http://www.hcdn.gov.ar/secadmin/ds_electronicos/actas_votacion-portada.html" target="_blank">actas de votaciones nominales de la Cámara de Diputados de la Nación Argentina</a>, disponibles individualmente en documentos PDF. Cada acta contiene los datos generales de la votación y el voto de cada legislador. Volcamos toda esta información en cuatro tablas: <a href="https://www.google.com/fusiontables/DataSource?docid=1GNJAVHF_7xPZFhTc_w4RLxcyiD_lAiYTgVlA0D8" target="_blank">asuntos</a>, <a href="https://www.google.com/fusiontables/DataSource?docid=1KxXAg9YuF_r-1N_LAleR4QqKl4QZMHIeJh0EUf8" target="_blank">votaciones</a>, <a href="https://www.google.com/fusiontables/DataSource?docid=1OAvsKOSuQE3NzXNKGLwQpBDj9iK3mLweHb8Lcfg" target="_blank">diputados</a> y <a href="https://www.google.com/fusiontables/DataSource?docid=1gUTqf8A-nuvBGygRnVDcSftngYZ-z9OvxBs59M0" target="_blank">bloques</a>.</p>
+            <p>Esta <a href="https://github.com/hhba/towlandia" target="_blank">aplicación</a> utiliza <a href="http://d3js.org/" target="_blank">D3.js</a> y <a href="http://www.google.com/drive/apps.html#fusiontables" target="_blank">Fusion Tables</a> de Google para generar visualizaciones de votaciones nominales de cuerpos legislativos detallando la posición asumida de cada uno de los integrantes, su pertenencia a bloques políticos, el resultado y otros datos de cada votación.</p>
+            <p>Para nuestro ejemplo hemos utilizado las <a href="http://www.hcdn.gov.ar/secadmin/ds_electronicos/actas_votacion-portada.html" target="_blank">actas de votaciones nominales de la Cámara de Diputados de la Nación Argentina</a>, disponibles individualmente en documentos PDF. Cada acta contiene los datos generales de la votación y el voto de cada legislador. Volcamos toda esta información en cuatro tablas Fusion Tables: <a href="https://www.google.com/fusiontables/DataSource?docid=1GNJAVHF_7xPZFhTc_w4RLxcyiD_lAiYTgVlA0D8" target="_blank">asuntos</a>, <a href="https://www.google.com/fusiontables/DataSource?docid=1OAvsKOSuQE3NzXNKGLwQpBDj9iK3mLweHb8Lcfg" target="_blank">diputados</a>, <a href="https://www.google.com/fusiontables/DataSource?docid=1gUTqf8A-nuvBGygRnVDcSftngYZ-z9OvxBs59M0" target="_blank">bloques</a> y <a href="https://www.google.com/fusiontables/DataSource?docid=1KxXAg9YuF_r-1N_LAleR4QqKl4QZMHIeJh0EUf8" target="_blank">votaciones</a>.</p>
+  		<hr>
             <h4>Tabla asuntos</h4>
             <p class="doc-img"><img src="assets/img/asuntos.gif" alt="tabla asuntos"></p>
             <table class="table table-bordered table-condensed">
@@ -28,12 +29,12 @@
                     <tr>
                         <td>asuntoId</td>
                         <td>Número</td>
-                        <td>Identificador de votación individual. En nuestro ejemplo la generamos a partir de una clave única concatenando asunto + fecha + hora</td>
+                        <td>Identificador de votación individual</td>
                     </tr>
                     <tr>
                         <td>sesion</td>
                         <td>Texto</td>
-                        <td>Período o Legislatura, Sesión, Reunión (opcional)</td>
+                        <td>Período parlamentario, Congreso o Legislatura, Sesión, Reunión</td>
                     </tr>
                     <tr>
                         <td>asunto</td>
@@ -53,17 +54,17 @@
                     <tr>
                         <td>hora</td>
                         <td>Fecha/hora</td>
-                        <td>Hora de la votación</td>
+                        <td>Hora de la votación en formato HH:MM</td>
                     </tr>
                     <tr>
                         <td>base</td>
                         <td>Texto</td>
-                        <td>Población de legisladores sobre la que se cuenta la mayoría necesaria reglamentariamente para aprobar el asunto (por ej.: Votos emitidos, Miembros del cuerpo)</td>
+                        <td>Población de integrantes del cuerpo sobre la que se cuenta la mayoría necesaria reglamentariamente para aprobar el asunto (Votos emitidos, Miembros del cuerpo)</td>
                     </tr>
                     <tr>
                         <td>mayoria</td>
                         <td>Texto</td>
-                        <td>Mayoría mínima necesaria para aprobar el asunto (por ej.: Más de la mitad, Dos tercios, Tres cuartos)</td>
+                        <td>Mayoría mínima necesaria para aprobar el asunto (Más de la mitad, Dos tercios, Tres cuartos)</td>
                     </tr>
                     <tr>
                         <td>resultado</td>
@@ -73,32 +74,32 @@
                     <tr>
                         <td>presidente</td>
                         <td>Texto</td>
-                        <td>Nombre del que preside el cuerpo</td>
+                        <td>Nombre de quien preside el cuerpo</td>
                     </tr>
                     <tr>
                         <td>presentes</td>
                         <td>Número</td>
-                        <td>Número absoluto de legisladores presentes</td>
+                        <td>Número absoluto de integrantes del cuerpo presentes</td>
                     </tr>
                     <tr>
                         <td>ausentes</td>
                         <td>Número</td>
-                        <td>Número absoluto de legisladores ausentes</td>
+                        <td>Número absoluto de integrantes del cuerpo ausentes</td>
                     </tr>
                     <tr>
                         <td>abstenciones</td>
                         <td>Número</td>
-                        <td>Número absoluto de legisladores que se abstuvieron</td>
+                        <td>Número absoluto de integrantes del cuerpo que se abstuvieron</td>
                     </tr>
                     <tr>
                         <td>afirmativos</td>
                         <td>Número</td>
-                        <td>Número absoluto de legisladores que votaron afirmativamente</td>
+                        <td>Número absoluto de integrantes del cuerpo que votaron afirmativamente</td>
                     </tr>
                     <tr>
                         <td>negativos</td>
                         <td>Número</td>
-                        <td>Número absoluto de legisladores que votaron negativamente</td>
+                        <td>Número absoluto de integrantes del cuerpo que votaron negativamente</td>
                     </tr>
                     <tr>
                         <td>votopresidente</td>
@@ -108,46 +109,14 @@
                     <tr>
                         <td>titulo</td>
                         <td>Texto</td>
-                        <td>Descripción del asunto objeto de votación. Es un campo adicional que permite más detalle. Puede obtenerse del acta o de otra fuente sistematizada.</td>
+                        <td>Descripción del asunto objeto de votación. Es un campo adicional que permite más detalle. Puede obtenerse del acta o de otra fuente sistematizada (Diario de Sesiones, Boletín de Asuntos Tratados).</td>
                     </tr>
                 </tbody>
             </table>
-            <h4>Tabla votaciones</h4>
-            <p class="doc-img"><img src="assets/img/votaciones.gif" alt="tabla votaciones"></p>
-            <table class="table table-bordered table-condensed">
-                <thead>
-                    <tr>
-                        <th>Campo</th>
-                        <th>Tipo</th>
-                        <th>Descripción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>asuntoId</td>
-                        <td>Número</td>
-                        <td>Identificador de votación individual. En nuestro ejemplo la generamos a partir de una clave única concatenando asunto+fecha+hora</td>
-                    </tr>
-                    <tr>
-                        <td>diputado</td>
-                        <td>Número</td>
-                        <td>Identificador de legislador individual. En nuestro ejemplo es la concatenación de nombre + distrito</td>
-                    </tr>
-                    <tr>
-                        <td>bloque</td>
-                        <td>Número</td>
-                        <td>Identificador de bloque individual</td>
-                    </tr>
-                    <tr>
-                        <td>voto</td>
-                        <td>Número</td>
-                        <td>Actuación del legislador en la votación individual.0 = Afirmativo, 1 = Negativo, 2 = Abstención, 3 = Ausente</td>
-                    </tr>
-                </tbody>
-            </table>
+			<hr>
             <h4>Tabla diputados</h4>
             <p class="doc-img"><img src="assets/img/diputados.gif" alt="tabla diputados"></p>
-            <p>La tabla diputados resulta de una consulta <code>SELECT DISTINCT nombre, distrito</code> de la tabla <em>votaciones</em> con los nombres de los legisladores en texto, antes de su codificación.</p>
+            <p>En nuestro ejemplo la tabla diputados resulta de una consulta <code>SELECT DISTINCT nombre, distrito</code> de la tabla <em>votaciones</em> con los nombres de los legisladores en texto, antes de su codificación.</p>
             <table class="table table-bordered table-condensed">
                 <thead>
                     <tr>
@@ -160,12 +129,12 @@
                     <tr>
                         <td>diputadoId</td>
                         <td>Número</td>
-                        <td>Identificador del legislador. En nuestro ejemplo lo generamos a partir de concatenar nombre + distrito, considerando que una misma persona puede representar diferentes distritos en diferentes períodos (encontramos dos casos en nuestra base de 10 años de votaciones)</td>
+                        <td>Identificador del legislador individual. Corresponde al campo diputado de la tabla votaciones</td>
                     </tr>
                     <tr>
                         <td>nombre</td>
                         <td>Texto</td>
-                        <td>Nombre del legislador</td>
+                        <td>Apellido y nombres del legislador</td>
                     </tr>
                     <tr>
                         <td>distrito</td>
@@ -174,6 +143,7 @@
                     </tr>
                 </tbody>
             </table>
+			<hr>
             <h4>Tabla bloques</h4>
             <p class="doc-img"><img src="assets/img/bloques.gif" alt="tabla bloques"></p>
             <table class="table table-bordered table-condensed">
@@ -188,7 +158,7 @@
                     <tr>
                         <td>bloqueId</td>
                         <td>Número</td>
-                        <td>Identificador de bloque</td>
+                        <td>Identificador de bloque. Corresponde al campo bloque de la tabla votaciones</td>
                     </tr>
                     <tr>
                         <td>bloque</td>
@@ -198,10 +168,44 @@
                     <tr>
                         <td>color</td>
                         <td>Texto</td>
-                        <td>Color del bloque en código hexadecimal</td>
+                        <td>Color del bloque en código hexadecimal. El usuario puede asignar manualmente el color de cada bloque. Si el valor queda vacío, se le aplicará al bloque correspondiente uno de una escala de grises predeterminada</td>
                     </tr>
                 </tbody>
             </table>
+			<hr>
+            <h4>Tabla votaciones</h4>
+            <p class="doc-img"><img src="assets/img/votaciones.gif" alt="tabla votaciones"></p>
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>asuntoId</td>
+                        <td>Número</td>
+                        <td>Identificador de votación individual. Corresponde al campo asuntoId de la tabla asuntos</td>
+                    </tr>
+                    <tr>
+                        <td>diputadoId</td>
+                        <td>Número</td>
+                        <td>Identificador de legislador individual. En nuestro ejemplo los individualizamos concatenando nombre y distrito</td>
+                    </tr>
+                    <tr>
+                        <td>bloqueId</td>
+                        <td>Número</td>
+                        <td>Identificador de bloque individual</td>
+                    </tr>
+                    <tr>
+                        <td>voto</td>
+                        <td>Número</td>
+                        <td>Posición del legislador en la votación. 0 = Afirmativo, 1 = Negativo, 2 = Abstención, 3 = Ausente</td>
+                    </tr>
+                </tbody>
+            </table>			
         </div>
     </div>
 </div>
