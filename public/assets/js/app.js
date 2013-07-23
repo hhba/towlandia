@@ -196,10 +196,25 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         if ($scope.playing) {
             var currentFileIndex = $scope.files.indexOf($scope.selection.file);
             var nextFileIndex = currentFileIndex+1;
-            console.log("load file index " + nextFileIndex);        //TODO(gb): Remove trace!!!
-            $scope.selectFile($scope.files[nextFileIndex], function() {
+            if (nextFileIndex == $scope.files.length) {
+                selectNextDate();
+            } else {
+                console.log("load file index " + nextFileIndex);        //TODO(gb): Remove trace!!!
+                $scope.selectFile($scope.files[nextFileIndex], function() {
+                    setTimeout(selectNextFile, 5000);
+                });
+            }
+        }
+    }
+
+    function selectNextDate() {
+        var currentDateIndex = $scope.dates.indexOf($scope.selection.date);
+        var nextDateIndex = currentDateIndex+1;
+        console.log("load date index " + nextDateIndex);        //TODO(gb): Remove trace!!!
+        $scope.selectDate($scope.dates[nextDateIndex], function() {
+            $scope.selectFile($scope.files[0], function() {
                 setTimeout(selectNextFile, 5000);
             });
-        }
+        });
     }
 }])
