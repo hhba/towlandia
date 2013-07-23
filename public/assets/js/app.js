@@ -53,7 +53,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         })
     }
 
-    $scope.selectDate = function(date) {
+    $scope.selectDate = function(date, success) {
         $scope.selection.date = date;
         $scope.selection.file = null;
         $scope.files = null;
@@ -73,14 +73,17 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     titulo: row[2]
                 }
             });
+            if (success) {
+                success.apply(null);
+            }
             $scope.$apply();
         })
     }
 
-    $scope.selectFile = function(file) {
-	    getCheckedBlocks();
+    $scope.selectFile = function(file, success) {
+        getCheckedBlocks();
         getCheckedCongressmen();
-		$scope.selection.file = file;
+        $scope.selection.file = file;
         var fileQuery = {
             fields:['*'],
             table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
@@ -90,7 +93,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         ftClient.query(fileQuery, function(rows) {
             var vote = rows.map(function(row) {
                 return {
-					sesion: row[1],
+                    sesion: row[1],
                     asunto: row[2],
                     presidente: row[9],
                     resultado: row[8],
@@ -106,13 +109,13 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     afirmativos_p: (parseInt(row[13]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
                     negativos: row[14],
                     negativos_p: (parseInt(row[14]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
-					votopresidente: row[15]
+                    votopresidente: row[15]
                 }
             })[0];
             $scope.vizShown = true;
-            $scope.viz.showVote(file.id);
-
+            $scope.viz.showVote(file.id, success);
             $scope.vote = vote;
+
             $scope.$apply();
 
         });
@@ -163,8 +166,8 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                 $scope.cmen = rows
                     .map(function(row) {
                         return {
-							id: row[0],
-							name: row[1],
+                            id: row[0],
+                            name: row[1],
                             order: congressmenOrder.indexOf(row[0])
                         }
                     })
@@ -176,5 +179,25 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                 setCheckedCongressmen();
             })
         })
+    }
+
+    $scope.play = function() {
+        console.log("PLAY THE MOTHERFUCKER");        //TODO(gb): Remove trace!!!
+        $scope.playing = true;
+        selectNextFile();
+    }
+
+    $scope.pause = function() {
+        console.log("PAUSE THE MOTHERFUCKER");        //TODO(gb): Remove trace!!!
+        $scope.playing = false;
+    }
+
+    function selectNextFile() {
+        var currentFileIndex = $scope.files.indexOf($scope.selection.file);
+        var nextFileIndex = currentFileIndex+1;
+        console.log("load file index " + nextFileIndex);        //TODO(gb): Remove trace!!!
+        $scope.selectFile($scope.files[nextFileIndex], function() {
+            setTimeout(selectNextFile, 5000);
+        });
     }
 }])

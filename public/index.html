@@ -13,9 +13,10 @@
         <div class="span10">
             <h1>La Década Votada</h1>
         </div>
+
     </div>
     <div class="row row-selects">
-        <div class="span12">
+        <div class="span11">
             <div class="btn-group">
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" ng-class="{ disabled: !years }"><strong>Año</strong><span ng-show="selection.year">: {{ selection.year }}</span> </button>
@@ -52,6 +53,10 @@
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="span1" ng-cloak>
+            <button class="btn btn-success" ng-show="vizShown && !playing" ng-click="play()"><i class="icon-play"></i></button>
+            <button class="btn btn-success" ng-show="vizShown && playing" ng-click="pause()"><i class="icon-pause"></i></button>
         </div>
     </div>
 	<div class="row row-selects">
