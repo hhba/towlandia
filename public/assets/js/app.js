@@ -193,11 +193,13 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
     }
 
     function selectNextFile() {
-        var currentFileIndex = $scope.files.indexOf($scope.selection.file);
-        var nextFileIndex = currentFileIndex+1;
-        console.log("load file index " + nextFileIndex);        //TODO(gb): Remove trace!!!
-        $scope.selectFile($scope.files[nextFileIndex], function() {
-            setTimeout(selectNextFile, 5000);
-        });
+        if ($scope.playing) {
+            var currentFileIndex = $scope.files.indexOf($scope.selection.file);
+            var nextFileIndex = currentFileIndex+1;
+            console.log("load file index " + nextFileIndex);        //TODO(gb): Remove trace!!!
+            $scope.selectFile($scope.files[nextFileIndex], function() {
+                setTimeout(selectNextFile, 5000);
+            });
+        }
     }
 }])
