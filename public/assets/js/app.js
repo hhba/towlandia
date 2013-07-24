@@ -19,6 +19,7 @@ var filters = angular.module('votaciones.filters', []);
 
 filters.filter('truncate', [function() {
     return function(text, n) {
+        if (!text) return;
         var useWordBoundary = false;
         var toLong = text.length>n,
             s_ = toLong ? text.substr(0,n-1) : text;
@@ -255,7 +256,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             $scope.selectYear($scope.years[nextYearIndex], function() {
                 $scope.selectDate($scope.dates[0], function() {
                     $scope.selectFile($scope.files[0], function() {
-                        setTimeout(selectNextFile, 5000);
+                        setTimeout(selectNextFile, 3000);
                     });
                 });
             });
