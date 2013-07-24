@@ -43,7 +43,7 @@
             </div>
             <div class="btn-group" ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Asunto</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
+                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Asunto</strong><span ng-show="selection.file">: {{ selection.file.name | truncate:45 }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
@@ -55,8 +55,12 @@
             </div>
         </div>
         <div class="span1" ng-cloak>
-            <button class="btn btn-success" ng-show="vizShown && !playing" ng-click="play()"><i class="icon-play"></i></button>
-            <button class="btn btn-success" ng-show="vizShown && playing" ng-click="pause()"><i class="icon-pause"></i></button>
+            <button class="btn btn-success" ng-show="vizShown && !playing" ng-click="play()" ng-class="{disabled: lastFile}">
+                <i class="icon-play"></i>
+            </button>
+            <button class="btn btn-success" ng-show="vizShown && playing" ng-click="pause()">
+                <i class="icon-pause"></i>
+            </button>
         </div>
     </div>
 	<div class="row row-selects">
