@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="span3">
-            <div class="results" ng-show="vizShown">
+            <div class="results" ng-show="vizShown" ng-cloak>
                 <ul class="unstyled ul-resultados">
                     <li><strong>Resultado: </strong> <span class="label label-large" ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
                     <li><strong>Presidente: </strong><span class="label label-large" ng-class="{'label-success': vote.votopresidente == '0', 'label-important': vote.votopresidente == '1'}">{{ vote.presidente }}</span></li>
