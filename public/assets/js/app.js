@@ -1,7 +1,7 @@
 'use strict'
 
 // The app
-var app = angular.module('votaciones', ['votaciones.services', 'votaciones.controllers']);
+var app = angular.module('votaciones', ['votaciones.services', 'votaciones.controllers', 'votaciones.filters']);
 
 // The services
 var services = angular.module('votaciones.services', []);
@@ -13,6 +13,19 @@ services.factory('Selection', function() {
         file : null
     }
 })
+
+// The filters
+var filters = angular.module('votaciones.filters', []);
+
+filters.filter('truncate', [function() {
+    return function(text, n) {
+        var useWordBoundary = false;
+        var toLong = text.length>n,
+            s_ = toLong ? text.substr(0,n-1) : text;
+        s_ = useWordBoundary && toLong ? s_.substr(0,s_.lastIndexOf(' ')) : s_;
+        return  toLong ? s_ + '...' : s_;
+    }
+}])
 
 // The controllers
 var controllers = angular.module('votaciones.controllers', ['votaciones.services']);
@@ -35,7 +48,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         $scope.$apply();
     })
 
-    $scope.selectYear = function(year) {
+    $scope.selectYear = function(year, success) {
         $scope.selection.year = year;
         $scope.selection.date = null;
         $scope.dates = null;
@@ -49,11 +62,14 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         }
         ftClient.query(datesQuery, function(rows) {
             $scope.dates = rows.map(function(row) { return Date.parse(row[0])});
+            if (success) {
+                success.apply(null);
+            }
             $scope.$apply();
         })
     }
 
-    $scope.selectDate = function(date) {
+    $scope.selectDate = function(date, success) {
         $scope.selection.date = date;
         $scope.selection.file = null;
         $scope.files = null;
@@ -73,24 +89,35 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     titulo: row[2]
                 }
             });
+            if (success) {
+                success.apply(null);
+            }
             $scope.$apply();
         })
     }
 
-    $scope.selectFile = function(file) {
-	    getCheckedBlocks();
+    $scope.selectFile = function(file, success) {
+        getCheckedBlocks();
         getCheckedCongressmen();
-		$scope.selection.file = file;
+        $scope.selection.file = file;
         var fileQuery = {
             fields:['*'],
             table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
             tail: "WHERE asuntoId = '" + file.id + "'"
         }
 
+        var lastFile = false;
+        if ($scope.years.indexOf($scope.selection.year) == ($scope.years.length - 1) &&
+            $scope.dates.indexOf($scope.selection.date) == ($scope.dates.length - 1) &&
+            $scope.files.indexOf($scope.selection.file) == ($scope.files.length - 1)) {
+            lastFile = true;
+        }
+        $scope.lastFile = lastFile;
+
         ftClient.query(fileQuery, function(rows) {
             var vote = rows.map(function(row) {
                 return {
-					sesion: row[1],
+                    sesion: row[1],
                     asunto: row[2],
                     presidente: row[9],
                     resultado: row[8],
@@ -106,13 +133,13 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     afirmativos_p: (parseInt(row[13]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
                     negativos: row[14],
                     negativos_p: (parseInt(row[14]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
-					votopresidente: row[15]
+                    votopresidente: row[15]
                 }
             })[0];
             $scope.vizShown = true;
-            $scope.viz.showVote(file.id);
-
+            $scope.viz.showVote(file.id, success);
             $scope.vote = vote;
+
             $scope.$apply();
 
         });
@@ -163,8 +190,8 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                 $scope.cmen = rows
                     .map(function(row) {
                         return {
-							id: row[0],
-							name: row[1],
+                            id: row[0],
+                            name: row[1],
                             order: congressmenOrder.indexOf(row[0])
                         }
                     })
@@ -176,5 +203,62 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                 setCheckedCongressmen();
             })
         })
+    }
+
+    $scope.play = function() {
+        if (!$scope.lastFile) {
+            $scope.playing = true;
+            selectNextFile();
+        }
+    }
+
+    $scope.pause = function() {
+        $scope.playing = false;
+    }
+
+    function selectNextFile() {
+        if ($scope.playing) {
+            var currentFileIndex = $scope.files.indexOf($scope.selection.file);
+            var nextFileIndex = currentFileIndex+1;
+            if (nextFileIndex == $scope.files.length) {
+                selectNextDate();
+            } else {
+                $scope.selectFile($scope.files[nextFileIndex], function() {
+                    setTimeout(selectNextFile, 5000);
+                });
+            }
+        }
+    }
+
+    function selectNextDate() {
+        var currentDateIndex = $scope.dates.indexOf($scope.selection.date);
+        var nextDateIndex = currentDateIndex+1;
+        if (nextDateIndex == $scope.dates.length) {
+            selectNextYear();
+        } else {
+            $scope.selectDate($scope.dates[nextDateIndex], function() {
+                $scope.selectFile($scope.files[0], function() {
+                    setTimeout(selectNextFile, 5000);
+                });
+            });
+        }
+    }
+
+    function selectNextYear() {
+        var currentYearIndex = $scope.years.indexOf($scope.selection.year);
+        var nextYearIndex = currentYearIndex+1;
+        if (nextYearIndex == $scope.years.length) {
+            $scope.playing = false;
+            $scope.$apply();
+            return;
+        } else {
+            $scope.selectYear($scope.years[nextYearIndex], function() {
+                $scope.selectDate($scope.dates[0], function() {
+                    $scope.selectFile($scope.files[0], function() {
+                        setTimeout(selectNextFile, 5000);
+                    });
+                });
+            });
+        }
     }
 }])

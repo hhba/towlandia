@@ -13,10 +13,11 @@
         <div class="span10">
             <h1>La Década Votada</h1>
         </div>
+
     </div>
     <div class="row row-selects">
-        <div class="span12">
-            <div class="btn-group">
+        <div class="span11">
+            <div class="btn-group" ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" data-ng-class="{ disabled: !years }"><strong>Año</strong><span data-ng-show="selection.year">: {{ selection.year }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !years }" data-toggle="dropdown">
@@ -28,7 +29,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="btn-group">
+            <div class="btn-group" ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" data-ng-class="{ disabled: !dates }"><strong>Fecha</strong><span data-ng-show="selection.date">: {{ selection.date | date:'dd/MM/yyyy' }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !dates }" data-toggle="dropdown">
@@ -40,9 +41,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="btn-group">
+            <div class="btn-group" ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" data-ng-class="{ disabled: !files }"><strong>Asunto</strong><span data-ng-show="selection.file">: {{ selection.file.name }}</span> </button>
+<<<<<<< HEAD
+                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" data-ng-class="{ disabled: !files }"><strong>Asunto</strong><span data-ng-show="selection.file">: {{ selection.file.name | truncate:45 }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
@@ -52,6 +54,14 @@
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="span1" ng-cloak>
+            <button class="btn btn-success" ng-show="vizShown && !playing" ng-click="play()" ng-class="{disabled: lastFile}">
+                <i class="icon-play"></i>
+            </button>
+            <button class="btn btn-success" ng-show="vizShown && playing" ng-click="pause()">
+                <i class="icon-pause"></i>
+            </button>
         </div>
     </div>
 	<div class="row row-selects">

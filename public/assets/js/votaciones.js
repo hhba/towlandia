@@ -81,7 +81,7 @@ var Votaciones = function(settings) {
 
     });
 
-    votaciones.showVote = function(asuntoId) {
+    votaciones.showVote = function(asuntoId, success) {
         // Votaciones
         ftClient.query({
             fields: ["*"],
@@ -97,17 +97,13 @@ var Votaciones = function(settings) {
                 }
             })
             showTabs();
-            update(asuntoId);
+            update(asuntoId, success);
         });
     }
 
     votaciones.color = color;
 
-    function update(asuntoId) {
-
-        // getCheckedBlocks();
-        // getCheckedCongressmen();
-
+    function update(asuntoId, success) {
         for (var i=0; i<quadrants.length; i++) {
             quadrants[i].countX = 0;
             quadrants[i].countY = 0;
@@ -174,6 +170,9 @@ var Votaciones = function(settings) {
                     }
                 }
             });
+        if (success) {
+            success.apply(null);
+        }
     }
     function getBlock(blockId) {
         return blocks.filter(function(bloque) { return bloque.bloqueId == blockId })[0];
