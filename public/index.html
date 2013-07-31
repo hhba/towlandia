@@ -1,57 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="votaciones">
+<html lang="en" data-ng-app="votaciones">
 <head>
-    <title>Votaciones legislativas</title>
+    <title>Década Votada</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="assets/flat-ui/css/flat-ui.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet"/>
 </head>
-<body ng-controller="SelectionController">
+<body data-ng-controller="SelectionController">
 <div class="container">
     <div class="row">
-        <div class="span10">
-            <h1>La Década Votada</h1>
+        <div class="span7">
+            <h1>Década Votada</h1>
         </div>
+		<div class="span5">
+			<p>Seleccione votación por año y fecha<br>o navegue el <a href="../disciplina-archive/archive.html" target="_blank">archivo</a>.</p>
+		</div>
     </div>
     <div class="row row-selects">
-        <div class="span12">
-            <div class="btn-group">
+        <div class="span11">
+            <div class="btn-group" ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" ng-class="{ disabled: !years }"><strong>Año</strong><span ng-show="selection.year">: {{ selection.year }}</span> </button>
-                <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !years }" data-toggle="dropdown">
+                <button class="btn btn-info" data-ng-class="{ disabled: !years }"><strong>Año</strong><span data-ng-show="selection.year">: {{ selection.year }}</span> </button>
+                <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !years }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-inverse">
-                    <li ng-repeat="year in years" ng-class="{ 'selected' : selection.year == year }">
-                        <a href="#" ng-click="selectYear(year)">{{ year }}</a>
+                    <li data-ng-repeat="year in years" data-ng-class="{ 'selected' : selection.year == year }">
+                        <a href="#" data-ng-click="selectYear(year)">{{ year }}</a>
                     </li>
                 </ul>
             </div>
-            <div class="btn-group">
+            <div class="btn-group" ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" ng-class="{ disabled: !dates }"><strong>Fecha</strong><span ng-show="selection.date">: {{ selection.date | date:'dd/MM/yyyy' }}</span> </button>
-                <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !dates }" data-toggle="dropdown">
+                <button class="btn btn-info" data-ng-class="{ disabled: !dates }"><strong>Fecha</strong><span data-ng-show="selection.date">: {{ selection.date | date:'dd/MM/yyyy' }}</span> </button>
+                <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !dates }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-inverse">
-                    <li ng-repeat="date in dates" ng-class="{ 'selected' : selection.date == date }">
-                        <a href="#" ng-click="selectDate(date)">{{ date | date:'dd/MM/yyyy' }}</a>
+                    <li data-ng-repeat="date in dates" data-ng-class="{ 'selected' : selection.date == date }">
+                        <a href="#" data-ng-click="selectDate(date)">{{ date | date:'dd/MM/yyyy' }}</a>
                     </li>
                 </ul>
             </div>
-            <div class="btn-group">
+            <div class="btn-group" ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
-                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" ng-class="{ disabled: !files }"><strong>Asunto</strong><span ng-show="selection.file">: {{ selection.file.name }}</span> </button>
-                <button class="btn btn-info dropdown-toggle" ng-class="{ disabled: !files }" data-toggle="dropdown">
+                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" data-ng-class="{ disabled: !files }"><strong>Asunto</strong><span data-ng-show="selection.file">: {{ selection.file.name | truncate:45 }}</span> </button>
+                <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !files }" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu dropdown-inverse ul-select-exp">
-                    <li ng-repeat="file in files"  title = "{{ file.titulo }}" ng-class="{ 'selected' : selection.file.id == file.id }">
-                        <a href="#" ng-click="selectFile(file)">{{ file.name }}</a>
+                    <li data-ng-repeat="file in files"  title = "{{ file.titulo }}" data-ng-class="{ 'selected' : selection.file.id == file.id }">
+                        <a href="#" data-ng-click="selectFile(file)">{{ file.name }}</a>
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="span1" ng-cloak>
+            <button class="btn btn-success" ng-show="vizShown && !playing" ng-click="play()" ng-class="{disabled: lastFile}" title="Play">
+                <i class="icon-play"></i>
+            </button>
+            <button class="btn btn-success" ng-show="vizShown && playing" ng-click="pause()" title="Pause">
+                <i class="icon-pause"></i>
+            </button>
         </div>
     </div>
 	<div class="row row-selects">
@@ -64,10 +75,10 @@
             </div>
         </div>
         <div class="span3">
-            <div class="results" ng-show="vizShown">
+            <div class="results" data-ng-show="vizShown">
                 <ul class="unstyled ul-resultados">
-                    <li><strong>Resultado: </strong> <span class="label label-large" ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
-                    <li><strong>Presidente: </strong><span class="label label-large" ng-class="{'label-success': vote.votopresidente == '0', 'label-important': vote.votopresidente == '1'}">{{ vote.presidente }}</span></li>
+                    <li><strong>Resultado: </strong> <span class="label label-large" data-ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
+                    <li><strong>Presidente: </strong><span class="label label-large" data-ng-class="{'label-success': vote.votopresidente == '0', 'label-important': vote.votopresidente == '1'}">{{ vote.presidente }}</span></li>
                     <li><strong>Base: </strong> {{ vote.base }}</li>
                     <li><strong>Mayoría: </strong> {{ vote.mayoria }}</li>
                 </ul>
@@ -117,9 +128,9 @@
                 <li><a href="#tab-diputados" data-toggle="tab" class="tab-btn">Diputados</a></li>
             </ul>
             <div class="tab-content">
-                <div class="bloques tab-pane active" id="tab-bloques" ng-show="blocks">
+                <div class="bloques tab-pane active" id="tab-bloques" data-ng-show="blocks">
                     <ul class="unstyled block-list">
-                        <li ng-repeat="block in blocks">
+                        <li data-ng-repeat="block in blocks">
                             <div>
                                 <input type="checkbox" class="chk-bloque" value="{{ block.id }}"/>
                                 <div class="key" style="background-color: {{ block.color }}"></div>
@@ -129,9 +140,9 @@
                     </ul>
                     <button class="chk-bloque-ninguno btn-link">Ninguno</button>
                 </div>
-    			<div class="diputados tab-pane" id="tab-diputados" ng-show="cmen">
+    			<div class="diputados tab-pane" id="tab-diputados" data-ng-show="cmen">
                     <ul class="unstyled block-list">
-                        <li ng-repeat="congressman in cmen">
+                        <li data-ng-repeat="congressman in cmen">
                             <div>
                                 <input type="checkbox" class="chk-diputado" value="{{ congressman.id }}"/>
                                 <p>{{ congressman.name }}</p>
@@ -158,22 +169,22 @@
             <div class="span2">
                 <h5 class="title">Desarrollo</h5>
                 <ul class="bottom-links">
-                    <li><a href="http://twitter.com/andytow">Andy Tow</a></li>
-                    <li><a href="http://twitter.com/belbosays">Gonzalo Bellver</a></li>
-                    <li><a href="http://twitter.com/luchotuitea">Luciano Amor</a></li>
-                    <li><a href="http://twitter.com/martinszy">Martín Szyszlican</a></li>
+                    <li><a href="http://twitter.com/andy_tow" target="_blank">Andy Tow</a></li>
+                    <li><a href="http://twitter.com/belbosays" target="_blank">Gonzalo Bellver</a></li>
+                    <li><a href="http://twitter.com/luchotuitea" target="_blank">Luciano Amor</a></li>
+                    <li><a href="http://twitter.com/martinszy" target="_blank">Martín Szyszlican</a></li>
                 </ul>
             </div>
             <div class="span2">
                 <h5 class="title">Colaboradores</h5>
                 <ul class="bottom-links">
-                    <li><a href="#">Teresa Alberto</a></li>
-                    <li><a href="#">Mariela Duarte</a></li>
-                    <li><a href="#">Sonia Jalfin</a></li>
-                    <li><a href="#">Amalín Ramos</a></li>
-                    <li><a href="#">Olivia Sohr</a></li>
+                    <li><a href="https://twitter.com/Tessconlimon" target="_blank">Teresa Alberto</a></li>
+                    <li><a href="https://twitter.com/mduarte34" target="_blank">Mariela Duarte</a></li>
+                    <li><a href="https://twitter.com/soniajalfin" target="_blank">Sonia Jalfin</a></li>
+                    <li><a href="https://twitter.com/amelrame" target="_blank">Amalín Ramos</a></li>
+                    <li><a href="https://twitter.com/olisohr" target="_blank">Olivia Sohr</a></li>
                     <li><a href="#">Agustín Telado</a></li>
-                    <li><a href="#">Alfredo ???</a></li>
+                    <li><a href="https://twitter.com/tkalfigo" target="_blank">Thalis Kalfigkopoulos</a></li>
                 </ul>
             </div>
             <div class="span2">
@@ -185,7 +196,7 @@
 <div class="modal hide fade" id="intromodal">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Votaciones legislativas</h3>
+        <h3>Década Votada</h3>
     </div>
     <div class="modal-body">
         <table id="referencetable">
@@ -200,7 +211,7 @@
         </table>
         <p>Esta aplicación muestra las más de 1.200 votaciones nominales de la Cámara de Diputados de la Nación entre 2003 y 2013 de acuerdo a las <a href="http://www.hcdn.gov.ar/secadmin/ds_electronicos/actas_votacion-portada.html" target="_blank">actas oficiales</a>.</p>
 		<p>Utilice los selectores de Año, Fecha y Asunto para elegir la votación.</p>
-		<p>En los cuadrantes se ubicará cada diputado individual coloreado por bloque político, según si su voto fue <font color = Green>Afirmativo</font> o <font color = Red>Negativo</font>, si optó por la <font color = Gold>Abstención</font> o si estuvo <font color = Grey>Ausente</font>.</p>
+		<p>En los cuadrantes se ubicará cada diputado individual coloreado por bloque político, según si su voto fue <span class="quadrant0">Afirmativo</span> o <span class="quadrant1">Negativo</span>, si optó por la <span class="quadrant2">Abstención</span> o si estuvo <span class="quadrant3">Ausente</span>.</p>
 		<p>El panel de la derecha mostrará el resultado, base y tipo de mayoría requerida, asistencia y números de cada votación, incluyendo el voto del presidente cuando lo hubo.</p>
 		<p>Utilice las casillas de verificación de bloques y diputados para resaltarlos y observar mejor sus trayectorias entre votaciones.</p>
     </div>
