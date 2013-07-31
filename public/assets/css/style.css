@@ -258,3 +258,10 @@
     padding: 0;
     margin: 0;
 }
+p.archivo {
+    line-height: normal;
+    margin-top: 32px;
+}
+.bottom-links li {
+    float: none;
+}

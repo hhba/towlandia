@@ -10,14 +10,16 @@
 <body data-ng-controller="SelectionController">
 <div class="container">
     <div class="row">
-        <div class="span10">
+        <div class="span8">
             <h1>La Década Votada</h1>
         </div>
-
+        <div class="span4">
+            <p class="archivo">Seleccione votación por año y fecha<br/>o navegue el <a href="../disciplina-archive/archive.html" target="_blank">archivo</a>.</p>
+        </div>
     </div>
     <div class="row row-selects">
         <div class="span11">
-            <div class="btn-group" ng-cloak>
+            <div class="btn-group" data-ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" data-ng-class="{ disabled: !years }"><strong>Año</strong><span data-ng-show="selection.year">: {{ selection.year }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !years }" data-toggle="dropdown">
@@ -29,7 +31,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="btn-group" ng-cloak>
+            <div class="btn-group" data-ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" data-ng-class="{ disabled: !dates }"><strong>Fecha</strong><span data-ng-show="selection.date">: {{ selection.date | date:'dd/MM/yyyy' }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !dates }" data-toggle="dropdown">
@@ -41,7 +43,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="btn-group" ng-cloak>
+            <div class="btn-group" data-ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" data-ng-class="{ disabled: !files }"><strong>Asunto</strong><span data-ng-show="selection.file">: {{ selection.file.name | truncate:45 }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !files }" data-toggle="dropdown">
@@ -54,11 +56,11 @@
                 </ul>
             </div>
         </div>
-        <div class="span1" ng-cloak>
-            <button class="btn pull-right" ng-show="vizShown && !playing" ng-click="play()" ng-class="{disabled: lastFile}">
+        <div class="span1" data-ng-cloak>
+            <button class="btn btn-success pull-right" title="play" data-ng-show="vizShown && !playing" data-ng-click="play()" data-ng-class="{disabled: lastFile}">
                 <i class="icon-play icon-white"></i>
             </button>
-            <button class="btn btn-success pull-right" ng-show="vizShown && playing" ng-click="pause()">
+            <button class="btn btn-success pull-right" title="pause" data-ng-show="vizShown && playing" data-ng-click="pause()">
                 <i class="icon-pause icon-white"></i>
             </button>
         </div>
@@ -73,7 +75,7 @@
             </div>
         </div>
         <div class="span3">
-            <div class="results" data-ng-show="vizShown" ng-cloak>
+            <div class="results" data-ng-show="vizShown" data-ng-cloak>
                 <ul class="unstyled ul-resultados">
                     <li><strong>Resultado: </strong> <span class="label label-large" data-ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
                     <li><strong>Presidente: </strong><span class="label label-large" data-ng-class="{'label-success': vote.votopresidente == '0', 'label-important': vote.votopresidente == '1'}">{{ vote.presidente }}</span></li>
@@ -156,7 +158,7 @@
 <div class="bottom-menu">
     <div class="container">
         <div class="row">
-            <div class="span4 brand">La Década Votada</div>
+            <div class="span3 brand">La Década Votada</div>
             <div class="span2">
                 <h5 class="title">Secciones</h5>
                 <ul class="bottom-links">
@@ -173,7 +175,7 @@
                     <li><a href="http://twitter.com/martinszy">Martín Szyszlican</a></li>
                 </ul>
             </div>
-            <div class="span2">
+            <div class="span3">
                 <h5 class="title">Colaboradores</h5>
                 <ul class="bottom-links">
                     <li><a href="#">Teresa Alberto</a></li>
@@ -183,6 +185,7 @@
                     <li><a href="#">Olivia Sohr</a></li>
                     <li><a href="#">Agustín Telado</a></li>
                     <li><a href="#">Alfredo Ramírez</a></li>
+                    <li><a href="#">Thalis Kalfigkopoulos</a></li>
                 </ul>
             </div>
             <div class="span2">

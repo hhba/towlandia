@@ -12,6 +12,9 @@ $(document).ready(function() {
         delay: {show: 500}
     });
     $('#intromodal').modal();
+    $('.btn').tooltip({
+        placement: 'bottom'
+    });
 
     // bloques
     $('.chk-bloque-ninguno').hide();
