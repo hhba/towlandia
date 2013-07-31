@@ -81,7 +81,7 @@ var Votaciones = function(settings) {
 
     });
 
-    votaciones.showVote = function(asuntoId) {
+    votaciones.showVote = function(asuntoId, success) {
         // Votaciones
         ftClient.query({
             fields: ["*"],
@@ -96,38 +96,41 @@ var Votaciones = function(settings) {
                     voto: row[3]
                 }
             })
-            update(asuntoId);
+            showTabs();
+            update(asuntoId, success);
         });
     }
 
     votaciones.color = color;
 
-    function update(asuntoId) {
+    function update(asuntoId, success) {
         for (var i=0; i<quadrants.length; i++) {
             quadrants[i].countX = 0;
             quadrants[i].countY = 0;
         }
         var votes = getSortedData(data);
-        var dot = svg.selectAll(".dot")
+        var dot = svg.selectAll("circle")
             .data(votes, function(d) {
                 return d.diputadoId;
             });
             dot.enter()
               .append("circle")
-                .attr("class", function(d) {
-                    return "dot bloque"+ d.bloqueId;
-                })
 				.attr("id", function(d) {
 					return "d" + d.diputadoId;
 				})
+                .attr("class", function(d) {
+                    return "dot bloque"+ d.bloqueId;
+                })
                 .attr("r", 0);
             dot.exit()
                 .attr('r', 0)
                 .remove();
 
-        svg.selectAll("circle")
-            .transition()
+        var transition = svg.selectAll("circle").transition()
             .duration(1000)
+            .attr("class", function(d) {
+                return "dot bloque"+ d.bloqueId;
+            })
             .attr("r", dotRadius-1)
             .attr("fill", function(d) {
                 return blocks.filter(function(block) { return block.bloqueId == d.bloqueId})[0].color;
@@ -146,6 +149,11 @@ var Votaciones = function(settings) {
                 return yIni + (fila * dotRadius * 2) + dotRadius;
             });
 
+        transition.each('end', function() {
+            setCircleBlock(this.classList[1]);
+            setCircleCongressman(this.id);
+        });
+
         svg.selectAll("circle")
             .tooltip(function(d,i) {
                 return {
@@ -162,6 +170,9 @@ var Votaciones = function(settings) {
                     }
                 }
             });
+        if (success) {
+            success.apply(null);
+        }
     }
     function getBlock(blockId) {
         return blocks.filter(function(bloque) { return bloque.bloqueId == blockId })[0];
