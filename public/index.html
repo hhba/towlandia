@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="votaciones">
 <head>
-    <title>La Década Votada</title>
+    <title>Década Votada</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="assets/flat-ui/css/flat-ui.css" rel="stylesheet">
@@ -10,14 +10,16 @@
 <body data-ng-controller="SelectionController">
 <div class="container">
     <div class="row">
-        <div class="span10">
-            <h1>La Década Votada</h1>
+        <div class="span8">
+            <h1>Década Votada</h1>
         </div>
-
+        <div class="span4">
+            <!-- <p class="archivo">Seleccione votación por año y fecha<br/>o navegue el <a href="../disciplina-archive/archive.html" target="_blank">archivo</a>.</p> -->
+        </div>
     </div>
     <div class="row row-selects">
         <div class="span11">
-            <div class="btn-group" ng-cloak>
+            <div class="btn-group" data-ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" data-ng-class="{ disabled: !years }"><strong>Año</strong><span data-ng-show="selection.year">: {{ selection.year }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !years }" data-toggle="dropdown">
@@ -29,7 +31,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="btn-group" ng-cloak>
+            <div class="btn-group" data-ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" data-ng-class="{ disabled: !dates }"><strong>Fecha</strong><span data-ng-show="selection.date">: {{ selection.date | date:'dd/MM/yyyy' }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !dates }" data-toggle="dropdown">
@@ -41,7 +43,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="btn-group" ng-cloak>
+            <div class="btn-group" data-ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" data-ng-class="{ disabled: !files }"><strong>Asunto</strong><span data-ng-show="selection.file">: {{ selection.file.name | truncate:45 }}</span> </button>
                 <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !files }" data-toggle="dropdown">
@@ -54,11 +56,11 @@
                 </ul>
             </div>
         </div>
-        <div class="span1" ng-cloak>
-            <button class="btn btn-success" ng-show="vizShown && !playing" ng-click="play()" ng-class="{disabled: lastFile}">
+        <div class="span1" data-ng-cloak>
+            <button class="btn btn-success pull-right" title="play" data-ng-show="vizShown && !playing" data-ng-click="play()" data-ng-class="{disabled: lastFile}">
                 <i class="icon-play"></i>
             </button>
-            <button class="btn btn-success" ng-show="vizShown && playing" ng-click="pause()">
+            <button class="btn btn-success pull-right" title="pause" data-ng-show="vizShown && playing" data-ng-click="pause()">
                 <i class="icon-pause"></i>
             </button>
         </div>
@@ -73,7 +75,7 @@
             </div>
         </div>
         <div class="span3">
-            <div class="results" data-ng-show="vizShown">
+            <div class="results" data-ng-show="vizShown" data-ng-cloak>
                 <ul class="unstyled ul-resultados">
                     <li><strong>Resultado: </strong> <span class="label label-large" data-ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
                     <li><strong>Presidente: </strong><span class="label label-large" data-ng-class="{'label-success': vote.votopresidente == '0', 'label-important': vote.votopresidente == '1'}">{{ vote.presidente }}</span></li>
@@ -156,7 +158,7 @@
 <div class="bottom-menu">
     <div class="container">
         <div class="row">
-            <div class="span4 brand">Votaciones legislativas</div>
+            <div class="span3 brand">Década Votada</div>
             <div class="span2">
                 <h5 class="title">Secciones</h5>
                 <ul class="bottom-links">
@@ -167,22 +169,23 @@
             <div class="span2">
                 <h5 class="title">Desarrollo</h5>
                 <ul class="bottom-links">
-                    <li><a href="http://twitter.com/andytow">Andy Tow</a></li>
-                    <li><a href="http://twitter.com/belbosays">Gonzalo Bellver</a></li>
-                    <li><a href="http://twitter.com/luchotuitea">Luciano Amor</a></li>
-                    <li><a href="http://twitter.com/martinszy">Martín Szyszlican</a></li>
+                    <li><a href="http://twitter.com/andy_tow" target="_blank">Andy Tow</a></li>
+                    <li><a href="http://twitter.com/belbosays" target="_blank">Gonzalo Bellver</a></li>
+                    <li><a href="http://twitter.com/luchotuitea" target="_blank">Luciano Amor</a></li>
+                    <li><a href="http://twitter.com/martinszy" target="_blank">Martín Szyszlican</a></li>
                 </ul>
             </div>
-            <div class="span2">
+            <div class="span3">
                 <h5 class="title">Colaboradores</h5>
                 <ul class="bottom-links">
-                    <li><a href="#">Teresa Alberto</a></li>
-                    <li><a href="#">Mariela Duarte</a></li>
-                    <li><a href="#">Sonia Jalfin</a></li>
-                    <li><a href="#">Amalín Ramos</a></li>
-                    <li><a href="#">Olivia Sohr</a></li>
+                    <li><a href="https://twitter.com/Tessconlimon" target="_blank">Teresa Alberto</a></li>
+                    <li><a href="https://twitter.com/mduarte34" target="_blank">Mariela Duarte</a></li>
+                    <li><a href="https://twitter.com/soniajalfin" target="_blank">Sonia Jalfin</a></li>
+                    <li><a href="https://twitter.com/amelrame" target="_blank">Amalín Ramos</a></li>
+                    <li><a href="https://twitter.com/olisohr" target="_blank">Olivia Sohr</a></li>
                     <li><a href="#">Agustín Telado</a></li>
                     <li><a href="#">Alfredo Ramírez</a></li>
+                    <li><a href="https://twitter.com/tkalfigo" target="_blank">Thalis Kalfigkopoulos</a></li>
                 </ul>
             </div>
             <div class="span2">
@@ -194,7 +197,7 @@
 <div class="modal hide fade" id="intromodal">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>La Década Votada</h3>
+        <h3>Década Votada</h3>
     </div>
     <div class="modal-body">
         <table id="referencetable">
@@ -241,6 +244,13 @@
 <script src="assets/jquerysvg/js/jquery.svg.min.js"></script>
 <script src="assets/jquerysvg/js/jquery.svgdom.min.js"></script>
 <script src="assets/js/index.js"></script>
-
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43672173-1', 'decadavotada.com.ar');
+  ga('send', 'pageview');
+</script>
 </body>
 </html>
