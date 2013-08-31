@@ -6,14 +6,23 @@ Esta aplicación muestra las más de 1.200 votaciones nominales de la Cámara de
 
 Comenzó a desarrollarse en el Hackatón sobre D3.js organizado por Hack/Hackers Buenos Aires, en abril de 2013.
 
-## Desarrollado por
+## TODO
+
+* Buscador por ley
+* Ir a votacion por id desde url (para poder hacer referencia a una votación desde, por ejemplo, un mail o tweet)
+* Mejorar orden de bloques (para que siempre queden primero, en cada cuadrante, los bloques con más miembros)
+* Fijar tooltip
+* Elegir licencia
+* Borrar archivos no usados
+
+### Desarrollado por
 
 * Andy Tow
 * Gonzalo Bellver
 * Luciano Amor
 * Martín Szyszlican
 
-## Colaboradores
+### Colaboradores
 
 * Teresa Alberto
 * Mariela Duarte
