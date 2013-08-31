@@ -9,6 +9,7 @@ Comenzó a desarrollarse en el Hackatón sobre D3.js organizado por Hack/Hackers
 ## TODO
 
 * Buscador por ley
+* Mostrar última votación por default
 * Ir a votacion por id desde url (para poder hacer referencia a una votación desde, por ejemplo, un mail o tweet)
 * Mejorar orden de bloques (para que siempre queden primero, en cada cuadrante, los bloques con más miembros)
 * Fijar tooltip
