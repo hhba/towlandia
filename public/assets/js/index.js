@@ -11,7 +11,11 @@ $(document).ready(function() {
         placement: 'right',
         delay: {show: 500}
     });
-    $('#intromodal').modal();
+    $('#intromodal').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: false
+    });
     $('.btn').tooltip({
         placement: 'bottom'
     });

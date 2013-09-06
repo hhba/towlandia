@@ -14,7 +14,8 @@ Comenzó a desarrollarse en el Hackatón sobre D3.js organizado por Hack/Hackers
 * Mejorar orden de bloques (para que siempre queden primero, en cada cuadrante, los bloques con más miembros)
 * Fijar tooltip
 * Elegir licencia
-* Borrar archivos no usados
+* Borrar archivos no usados/duplicados
+* Disclaimer (por posibles errores involuntarios)
 
 ### Desarrollado por
 

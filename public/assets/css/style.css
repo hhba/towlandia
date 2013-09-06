@@ -6,10 +6,18 @@
 [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none !important;
 }
-
+h1 small {
+    font-size: .4em;
+    vertical-align: super;
+}
+h1 small.diputados {
+    color: #3498DB;
+}
+h1 small.senadores {
+    color: #E74C3C;
+}
 #cuadrantes {
 }
-
 .circulo {
     width: 20px;
     height: 20px;
@@ -43,7 +51,6 @@
     text-align: center;
 }
 #aus {
-
 }
 #pos {
     margin-top: -2em;
@@ -51,35 +58,28 @@
 }
 #neg {
     margin-top: -2em;
-
 }
 #abs {
     margin-left: -10em;
-
 }
-
 #main {
     width: 700px;
     margin: 0 auto;
 }
-
 .axis path,
 .axis line {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
 }
-
 .quadrant {
     opacity: 0.2;
     stroke: #333;
 }
-
 .dropdown-menu {
     max-height: 330px;
     overflow-y: scroll;
 }
-
 .resultItem {
     font-weight: 700;
     margin-left: -13px;
@@ -90,7 +90,6 @@
     color: #526476;
     font-size: 14px;
 }
-
 .row-selects {
     margin-bottom: 10px;
 }
@@ -236,6 +235,9 @@
     font-size: 15px;
     line-height: normal;
 }
+.modal-footer {
+    text-align: center;
+}
 .bottom-menu {
     padding: 20px 0;
 }
@@ -264,4 +266,9 @@ p.archivo {
 }
 .bottom-links li {
     float: none;
+}
+.bottom-links li.lead {
+    font-size: 1.1em;
+    font-weight: bold;
+    line-height: 1.1em;
 }
