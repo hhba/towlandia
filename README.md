@@ -28,6 +28,7 @@ Comenzó a desarrollarse en el Hackatón sobre D3.js organizado por Hack/Hackers
 
 * Teresa Alberto
 * Mariela Duarte
+* Yamila García
 * Sonia Jalfin
 * Amalín Ramos
 * Olivia Sohr
