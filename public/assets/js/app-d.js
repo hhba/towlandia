@@ -47,6 +47,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
     ftClient.query(yearsQuery, function(rows) {
         $scope.years = rows.map(function(row) { return row[0] });
         $scope.$apply();
+        selectNextYear();
     })
 
     $scope.selectYear = function(year, success) {
