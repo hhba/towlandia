@@ -40,13 +40,14 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
 
     var yearsQuery = {
         fields:['ano'],
-        table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
+        table: '1M046BCqwBNjxe9CXbcvUUi0JT6HohC8Gq4S7gRM',
         tail: 'GROUP BY ano ORDER BY ano'
     };
 
     ftClient.query(yearsQuery, function(rows) {
         $scope.years = rows.map(function(row) { return row[0] });
         $scope.$apply();
+        selectNextYear();
     })
 
     $scope.selectYear = function(year, success) {
@@ -58,7 +59,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
 
         var datesQuery = {
             fields:['fecha'],
-            table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
+            table: '1M046BCqwBNjxe9CXbcvUUi0JT6HohC8Gq4S7gRM',
             tail: 'WHERE ano="' + year + '" GROUP BY fecha ORDER BY fecha'
         }
         ftClient.query(datesQuery, function(rows) {
@@ -79,7 +80,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
 
         var filesQuery = {
             fields:['asunto', 'asuntoId', 'titulo'],
-            table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
+            table: '1M046BCqwBNjxe9CXbcvUUi0JT6HohC8Gq4S7gRM',
             tail: "WHERE fecha = '" + $date(date, 'MM/dd/yyyy') + "' ORDER BY hora"
         }
         ftClient.query(filesQuery, function(rows) {
@@ -103,7 +104,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         $scope.selection.file = file;
         var fileQuery = {
             fields:['*'],
-            table: '1ELTXADIfpiUWfQfL9D8ia8p4VTw17UOoKXxsci4',
+            table: '1M046BCqwBNjxe9CXbcvUUi0JT6HohC8Gq4S7gRM',
             tail: "WHERE asuntoId = '" + file.id + "'"
         }
 
@@ -134,7 +135,8 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                     afirmativos_p: (parseInt(row[13]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
                     negativos: row[14],
                     negativos_p: (parseInt(row[14]) / (parseInt(row[12]) + parseInt(row[13]) + parseInt(row[14])) * 100).toFixed(1),
-                    votopresidente: row[15]
+                    votopresidente: row[15],
+					auditoria: row[17]
                 }
             })[0];
             $scope.vizShown = true;
@@ -148,13 +150,13 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         // Blocks
         ftClient.query({
             fields: ['bloqueId', 'COUNT()'],
-            table: '1GNJAVHF_7xPZFhTc_w4RLxcyiD_lAiYTgVlA0D8',
+            table: '1ihmsVlVwX1sTp4JQ8HK4k07vS8e8_orVY_NvJ9E',
             tail: "WHERE asuntoId = '" + file.id + "' GROUP BY bloqueId ORDER BY COUNT() DESC"
         }, function(rows) {
             var blockOrder = rows.map(function(row) { return row[0] });
             ftClient.query({
                 fields: ['*'],
-                table: '1gUTqf8A-nuvBGygRnVDcSftngYZ-z9OvxBs59M0'
+                table: '1vKsuSvTBS_pwgJl7dcbtiMWrOrilaroritbDOOI'
             }, function(rows) {
                 $scope.blocks = rows
                     .map(function(row) {
@@ -179,13 +181,13 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         // congressmen
         ftClient.query({
             fields: ['diputadoId'],
-            table: '1GNJAVHF_7xPZFhTc_w4RLxcyiD_lAiYTgVlA0D8',
+            table: '1ihmsVlVwX1sTp4JQ8HK4k07vS8e8_orVY_NvJ9E',
             tail: "WHERE asuntoId = '" + file.id + "'"
         }, function(rows) {
             var congressmenOrder = rows.map(function(row) { return row[0] });
             ftClient.query({
                 fields: ['*'],
-                table: '1OAvsKOSuQE3NzXNKGLwQpBDj9iK3mLweHb8Lcfg',
+                table: '1rhy-SIM34RqWGLRnRoA7UeBavBc9GUf6EvnlXZg',
                 tail: "ORDER BY nombre ASC"
             }, function(rows) {
                 $scope.cmen = rows

@@ -47,7 +47,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
     ftClient.query(yearsQuery, function(rows) {
         $scope.years = rows.map(function(row) { return row[0] });
         $scope.$apply();
-        selectLastFile();
+        selectNextYear();
     })
 
     $scope.selectYear = function(year, success) {
@@ -263,13 +263,4 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             });
         }
     }
-
-    function selectLastFile() {
-        $scope.selectYear($scope.years[$scope.years.length-1], function() {
-            $scope.selectDate($scope.dates[$scope.dates.length-1], function() {
-                $scope.selectFile($scope.files[$scope.files.length-1]);
-            });
-        });
-    }
-
 }])

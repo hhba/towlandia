@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         <div class="span8">
-            <h1>Década Votada <small class="diputados">[diputados]</small></h1>
+            <h1>Década Votada <small class="senadores">[senadores]</small></h1>
         </div>
         <div class="span4">
             <!-- <p class="archivo">Seleccione votación por año y fecha<br/>o navegue el <a href="../disciplina-archive/archive.html" target="_blank">archivo</a>.</p> -->
@@ -73,6 +73,9 @@
         <div class="span9">
             <div id="cuadrantes">
             </div>
+            <div class="row row-selects">
+                <div class="span9"><strong>Observaciones: </strong><small>{{ vote.auditoria }}</small></div>
+            </div>
         </div>
         <div class="span3">
             <div class="results" data-ng-show="vizShown" data-ng-cloak>
@@ -125,7 +128,7 @@
             </div>
             <ul class="nav nav-tabs hide">
                 <li class="active"><a href="#tab-bloques" data-toggle="tab" class="tab-btn">Bloques</a></li>
-                <li><a href="#tab-diputados" data-toggle="tab" class="tab-btn">Diputados</a></li>
+                <li><a href="#tab-diputados" data-toggle="tab" class="tab-btn">Senadores</a></li>
             </ul>
             <div class="tab-content">
                 <div class="bloques tab-pane active" id="tab-bloques" data-ng-show="blocks">
@@ -162,10 +165,9 @@
             <div class="span2">
                 <h5 class="title">Secciones</h5>
                 <ul class="bottom-links">
-                    <li class="lead"><a href="index-s.html">Senado de la Nación</a></li>
+                    <li class="lead"><a href="index-d.html">Cámara de Diputados de la Nación</a></li>
                     <li><a href="doc.html" target="_blank">Documentación</a></li>
                     <li><a href="#intromodal" data-toggle="modal">Acerca de</a></li>
-                    <li><a href="https://github.com/hhba/towlandia" target="_blank">GitHub</a></li>
                 </ul>
             </div>
             <div class="span2">
@@ -213,15 +215,18 @@
             </tr>
         </table>
         <p>Esta aplicación muestra las más de 2.800 votaciones nominales de las Cámara de Diputados y Senadores de la Nación Argentina entre 2003 y 2013 de acuerdo a las actas oficiales (<a href="http://www.hcdn.gov.ar/secadmin/ds_electronicos/actas_votacion-portada.html" target="_blank">diputados</a> y <a href="http://www.senado.gov.ar" target="_blank">senadores</a>).</p>
-		<p>Utilice los selectores de Año, Fecha y Asunto para elegir la votación.</p>
-		<p>En los cuadrantes se ubicará cada legislador coloreado por bloque político, según si su voto fue <span class="quadrant0">Afirmativo</span> o <span class="quadrant1">Negativo</span>, si optó por la <span class="quadrant2">Abstención</span> o si estuvo <span class="quadrant3">Ausente</span>.</p>
-		<p>El panel de la derecha mostrará el resultado, base y tipo de mayoría requerida, asistencia y números de cada votación, incluyendo el voto del presidente cuando lo hubo.</p>
-		<p>Utilice las casillas de verificación de bloques y legisladores para resaltarlos y observar mejor sus trayectorias entre votaciones.</p>
+        <p>Utilice los selectores de Año, Fecha y Asunto para elegir la votación.</p>
+        <p>En los cuadrantes se ubicará cada legislador coloreado por bloque político, según si su voto fue <span class="quadrant0">Afirmativo</span> o <span class="quadrant1">Negativo</span>, si optó por la <span class="quadrant2">Abstención</span> o si estuvo <span class="quadrant3">Ausente</span>.</p>
+        <p>El panel de la derecha mostrará el resultado, base y tipo de mayoría requerida, asistencia y números de cada votación, incluyendo el voto del presidente cuando lo hubo.</p>
+        <p>Utilice las casillas de verificación de bloques y legisladores para resaltarlos y observar mejor sus trayectorias entre votaciones.</p>
     </div>
     <div class="modal-footer">
-        <a class="btn btn-info btn-large" data-dismiss="modal">Diputados</a>
-        <a href="index-s.html" class="btn btn-danger btn-large">Senadores</a>
+        <a href="index-d.html" class="btn btn-info btn-large">Diputados</a>
+        <a class="btn btn-danger btn-large" data-dismiss="modal">Senadores</a>
     </div>
+</div>
+<div>
+    <a href="https://github.com/hhba/towlandia" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: -1;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 </div>
 
 <script src="assets/js/d3.v3.min.js"></script>
@@ -239,8 +244,8 @@
 <script src="assets/flat-ui/js/jquery.placeholder.js"></script>
 <script src="assets/flat-ui/js/jquery.stacktable.js"></script>
 <script src="assets/js/FTClient.js"></script>
-<script src="assets/js/app-d.js"></script>
-<script src="assets/js/votaciones-d.js"></script>
+<script src="assets/js/app-s.js"></script>
+<script src="assets/js/votaciones-s.js"></script>
 <script src="assets/jquerysvg/js/jquery.svg.min.js"></script>
 <script src="assets/jquerysvg/js/jquery.svgdom.min.js"></script>
 <script src="assets/js/index.js"></script>
