@@ -57,11 +57,11 @@
             </div>
         </div>
         <div class="span1" data-ng-cloak>
-            <button class="btn btn-success pull-right" title="play" data-ng-show="vizShown && !playing" data-ng-click="play()" data-ng-class="{disabled: lastFile}">
-                <i class="icon-play"></i>
+            <button class="btn btn-success btn-short pull-right" title="siguiente" data-ng-show="vizShown" data-ng-click="next()" data-ng-class="{disabled: lastFile}">
+                <i class="icon-chevron-right"></i>
             </button>
-            <button class="btn btn-success pull-right" title="pause" data-ng-show="vizShown && playing" data-ng-click="pause()">
-                <i class="icon-pause"></i>
+            <button class="btn btn-success btn-short pull-right" title="anterior" data-ng-show="vizShown" data-ng-click="prev()" data-ng-class="{disabled: firstFile}">
+                <i class="icon-chevron-left"></i>
             </button>
         </div>
     </div>
@@ -165,7 +165,6 @@
                     <li class="lead"><a href="index-s.html">Senado de la Nación</a></li>
                     <li><a href="doc.html" target="_blank">Documentación</a></li>
                     <li><a href="#intromodal" data-toggle="modal">Acerca de</a></li>
-                    <li><a href="https://github.com/hhba/towlandia" target="_blank">GitHub</a></li>
                 </ul>
             </div>
             <div class="span2">
@@ -192,7 +191,9 @@
                 </ul>
             </div>
             <div class="span2">
-                <a href="http://hhba.info/" target="_blank"><img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" width="140" alt="HacksHackers Buenos Aires"></a>
+                <ul class="bottom-icons">
+                    <li><a href="http://hhba.info/" target="_blank"><img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" width="140" alt="HacksHackers Buenos Aires"></a></li>
+                    <li><a href="https://github.com/hhba/towlandia" target="_blank"><img src="img/GitHub-Mark-32px.png" alt="GitHub"></a></li>
             </div>
         </div>
     </div>
@@ -245,12 +246,12 @@
 <script src="assets/jquerysvg/js/jquery.svgdom.min.js"></script>
 <script src="assets/js/index.js"></script>
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-43672173-1', 'decadavotada.com.ar');
-    ga('send', 'pageview');
+    // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    // ga('create', 'UA-43672173-1', 'decadavotada.com.ar');
+    // ga('send', 'pageview');
 </script>
 </body>
 </html>

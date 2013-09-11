@@ -272,3 +272,15 @@ p.archivo {
     font-weight: bold;
     line-height: 1.1em;
 }
+.bottom-icons li {
+    text-align: center;
+    float: none;
+    margin: 0 0 10px;
+}
+.btn.btn-short {
+    padding: 6px;
+    margin: 4px 0 0 4px;
+}
+.btn.disabled {
+  cursor: not-allowed;
+}

@@ -47,7 +47,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
     ftClient.query(yearsQuery, function(rows) {
         $scope.years = rows.map(function(row) { return row[0] });
         $scope.$apply();
-        selectNextYear();
+        selectLastFile();
     })
 
     $scope.selectYear = function(year, success) {
@@ -108,13 +108,21 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             tail: "WHERE asuntoId = '" + file.id + "'"
         }
 
-        var lastFile = false;
+        var lastFile = false,
+            firstFile = false;
         if ($scope.years.indexOf($scope.selection.year) == ($scope.years.length - 1) &&
             $scope.dates.indexOf($scope.selection.date) == ($scope.dates.length - 1) &&
             $scope.files.indexOf($scope.selection.file) == ($scope.files.length - 1)) {
             lastFile = true;
         }
         $scope.lastFile = lastFile;
+
+        if ($scope.years.indexOf($scope.selection.year) == 0 &&
+            $scope.dates.indexOf($scope.selection.date) == 0 &&
+            $scope.files.indexOf($scope.selection.file) == 0) {
+            firstFile = true;
+        }
+        $scope.firstFile = firstFile;
 
         ftClient.query(fileQuery, function(rows) {
             var vote = rows.map(function(row) {
@@ -218,6 +226,19 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         $scope.playing = false;
     }
 
+    $scope.prev = function() {
+        if (!$scope.firstFile) {
+            selectPrevFile();
+        }
+    }
+
+    $scope.next = function() {
+        if (!$scope.lastFile) {
+            selectNextFile();
+        }
+    }
+
+/*
     function selectNextFile() {
         if ($scope.playing) {
             var currentFileIndex = $scope.files.indexOf($scope.selection.file);
@@ -263,4 +284,90 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             });
         }
     }
+*/
+
+    function selectNextFile() {
+        var currentFileIndex = $scope.files.indexOf($scope.selection.file);
+        var nextFileIndex = currentFileIndex+1;
+        if (nextFileIndex == $scope.files.length) {
+            selectNextDate();
+        } else {
+            $scope.selectFile($scope.files[nextFileIndex]);
+        }
+    }
+
+    function selectNextDate() {
+        var currentDateIndex = $scope.dates.indexOf($scope.selection.date);
+        var nextDateIndex = currentDateIndex+1;
+        if (nextDateIndex == $scope.dates.length) {
+            selectNextYear();
+        } else {
+            $scope.selectDate($scope.dates[nextDateIndex], function() {
+                $scope.selectFile($scope.files[0]);
+            });
+        }
+    }
+
+    function selectNextYear() {
+        var currentYearIndex = $scope.years.indexOf($scope.selection.year);
+        var nextYearIndex = currentYearIndex+1;
+        if (nextYearIndex == $scope.years.length) {
+            $scope.lastFile = true;
+            $scope.$apply();
+            return;
+        } else {
+            $scope.selectYear($scope.years[nextYearIndex], function() {
+                $scope.selectDate($scope.dates[0], function() {
+                    $scope.selectFile($scope.files[0]);
+                });
+            });
+        }
+    }
+
+    function selectPrevFile() {
+        var currentFileIndex = $scope.files.indexOf($scope.selection.file);
+        var prevFileIndex = currentFileIndex-1;
+        if (prevFileIndex < 0) {
+            selectPrevDate();
+        } else {
+            $scope.selectFile($scope.files[prevFileIndex]);
+        }
+    }
+
+    function selectPrevDate() {
+        var currentDateIndex = $scope.dates.indexOf($scope.selection.date);
+        var prevDateIndex = currentDateIndex-1;
+        if (prevDateIndex < 0) {
+            selectPrevYear();
+        } else {
+            $scope.selectDate($scope.dates[prevDateIndex], function() {
+                $scope.selectFile($scope.files[$scope.files.length-1]);
+            });
+        }
+    }
+
+    function selectPrevYear() {
+        var currentYearIndex = $scope.years.indexOf($scope.selection.year);
+        var prevYearIndex = currentYearIndex-1;
+        if (prevYearIndex < 0) {
+            $scope.firsfFile = true;
+            $scope.$apply();
+            return;
+        } else {
+            $scope.selectYear($scope.years[prevYearIndex], function() {
+                $scope.selectDate($scope.dates[$scope.dates.length-1], function() {
+                    $scope.selectFile($scope.files[$scope.files.length-1]);
+                });
+            });
+        }
+    }
+
+    function selectLastFile() {
+        $scope.selectYear($scope.years[$scope.years.length-1], function() {
+            $scope.selectDate($scope.dates[$scope.dates.length-1], function() {
+                $scope.selectFile($scope.files[$scope.files.length-1]);
+            });
+        });
+    }
+
 }])
