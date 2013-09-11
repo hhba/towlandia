@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es" data-ng-app="votaciones">
+<head>
+    <title>Década Votada</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/flat-ui/css/flat-ui.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet"/>
+</head>
+<body data-ng-controller="SelectionController">
+<div class="container">
+    <div class="row">
+        <div class="span8">
+            <h1>Década Votada <small class="diputados">[diputados]</small></h1>
+        </div>
+        <div class="span4">
+            <!-- <p class="archivo">Seleccione votación por año y fecha<br/>o navegue el <a href="../disciplina-archive/archive.html" target="_blank">archivo</a>.</p> -->
+        </div>
+    </div>
+    <div class="row row-selects">
+        <div class="span11">
+            <div class="btn-group" data-ng-cloak>
+                <i class="dropdown-arrow dropdown-arrow-inverse"></i>
+                <button class="btn btn-info" data-ng-class="{ disabled: !years }"><strong>Año</strong><span data-ng-show="selection.year">: {{ selection.year }}</span> </button>
+                <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !years }" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-inverse">
+                    <li data-ng-repeat="year in years" data-ng-class="{ 'selected' : selection.year == year }">
+                        <a href="#" data-ng-click="selectYear(year)">{{ year }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group" data-ng-cloak>
+                <i class="dropdown-arrow dropdown-arrow-inverse"></i>
+                <button class="btn btn-info" data-ng-class="{ disabled: !dates }"><strong>Fecha</strong><span data-ng-show="selection.date">: {{ selection.date | date:'dd/MM/yyyy' }}</span> </button>
+                <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !dates }" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-inverse">
+                    <li data-ng-repeat="date in dates" data-ng-class="{ 'selected' : selection.date == date }">
+                        <a href="#" data-ng-click="selectDate(date)">{{ date | date:'dd/MM/yyyy' }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group" data-ng-cloak>
+                <i class="dropdown-arrow dropdown-arrow-inverse"></i>
+                <button class="btn btn-info" style="width: 100%" title = "{{ selection.file.titulo }}" data-ng-class="{ disabled: !files }"><strong>Asunto</strong><span data-ng-show="selection.file">: {{ selection.file.name | truncate:45 }}</span> </button>
+                <button class="btn btn-info dropdown-toggle" data-ng-class="{ disabled: !files }" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-inverse ul-select-exp">
+                    <li data-ng-repeat="file in files"  title = "{{ file.titulo }}" data-ng-class="{ 'selected' : selection.file.id == file.id }">
+                        <a href="#" data-ng-click="selectFile(file)">{{ file.name }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="span1" data-ng-cloak>
+            <button class="btn btn-success pull-right" title="play" data-ng-show="vizShown && !playing" data-ng-click="play()" data-ng-class="{disabled: lastFile}">
+                <i class="icon-play"></i>
+            </button>
+            <button class="btn btn-success pull-right" title="pause" data-ng-show="vizShown && playing" data-ng-click="pause()">
+                <i class="icon-pause"></i>
+            </button>
+        </div>
+    </div>
+	<div class="row row-selects">
+		 <div class="span3"><strong>{{ vote.sesion }}</strong></div>
+		 <div class="span9">{{ selection.file.titulo }}</div>
+    </div>
+    <div class="row mbl">
+        <div class="span9">
+            <div id="cuadrantes">
+            </div>
+        </div>
+        <div class="span3">
+            <div class="results" data-ng-show="vizShown" data-ng-cloak>
+                <ul class="unstyled ul-resultados">
+                    <li><strong>Resultado: </strong> <span class="label label-large" data-ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
+                    <li><strong>Presidente: </strong><span class="label label-large" data-ng-class="{'label-success': vote.votopresidente == '0', 'label-important': vote.votopresidente == '1'}">{{ vote.presidente }}</span></li>
+                    <li><strong>Base: </strong> {{ vote.base }}</li>
+                    <li><strong>Mayoría: </strong> {{ vote.mayoria }}</li>
+                </ul>
+
+                <ul class="nav nav-list nav-list-vivid">
+                    <li>
+                        <div class="resultItem">
+                            Presentes
+    						<span class="nav-counter nav-counter-porcentaje">{{ vote.presentes_p }} %</span>
+                            <span class="nav-counter nav-counter-num nav-counter-presentes">{{ vote.presentes }}</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="resultItem">
+                            Ausentes
+							<span class="nav-counter nav-counter-porcentaje">{{ vote.ausentes_p }} %</span>
+                            <span class="nav-counter nav-counter-num">{{ vote.ausentes }}</span>
+                        </div>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Votación</li>
+                    <li>
+                        <div class="resultItem">
+                            Afirmativos
+							<span class="nav-counter nav-counter-porcentaje">{{ vote.afirmativos_p }} %</span>
+                            <span class="nav-counter nav-counter-num nav-counter-afirmativos">{{ vote.afirmativos }}</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="resultItem">
+                            Negativos
+							<span class="nav-counter nav-counter-porcentaje">{{ vote.negativos_p }} %</span>
+                            <span class="nav-counter nav-counter-num nav-counter-negativos">{{ vote.negativos }}</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="resultItem">
+                            Abstenciones
+							<span class="nav-counter nav-counter-porcentaje">{{ vote.abstenciones_p }} %</span>
+                            <span class="nav-counter nav-counter-num nav-counter-abstenciones">{{ vote.abstenciones }}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <ul class="nav nav-tabs hide">
+                <li class="active"><a href="#tab-bloques" data-toggle="tab" class="tab-btn">Bloques</a></li>
+                <li><a href="#tab-diputados" data-toggle="tab" class="tab-btn">Diputados</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="bloques tab-pane active" id="tab-bloques" data-ng-show="blocks">
+                    <ul class="unstyled block-list">
+                        <li data-ng-repeat="block in blocks">
+                            <div>
+                                <input type="checkbox" class="chk-bloque" value="{{ block.id }}"/>
+                                <div class="key" style="background-color: {{ block.color }}"></div>
+                                <p>{{ block.name }}</p>
+                            </div>
+    					</li>
+                    </ul>
+                    <button class="chk-bloque-ninguno btn-link">Ninguno</button>
+                </div>
+    			<div class="diputados tab-pane" id="tab-diputados" data-ng-show="cmen">
+                    <ul class="unstyled block-list">
+                        <li data-ng-repeat="congressman in cmen">
+                            <div>
+                                <input type="checkbox" class="chk-diputado" value="{{ congressman.id }}"/>
+                                <p>{{ congressman.name }}</p>
+                            </div>
+    					</li>
+                    </ul>
+                    <button class="chk-diputado-ninguno btn-link">Ninguno</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bottom-menu">
+    <div class="container">
+        <div class="row">
+            <div class="span3 brand">Década Votada</div>
+            <div class="span2">
+                <h5 class="title">Secciones</h5>
+                <ul class="bottom-links">
+                    <li class="lead"><a href="index-s.html">Senado de la Nación</a></li>
+                    <li><a href="doc.html" target="_blank">Documentación</a></li>
+                    <li><a href="#intromodal" data-toggle="modal">Acerca de</a></li>
+                    <li><a href="https://github.com/hhba/towlandia" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+            <div class="span2">
+                <h5 class="title">Desarrollo</h5>
+                <ul class="bottom-links">
+                    <li><a href="http://twitter.com/andy_tow" target="_blank">Andy Tow</a></li>
+                    <li><a href="http://twitter.com/belbosays" target="_blank">Gonzalo Bellver</a></li>
+                    <li><a href="http://twitter.com/luchotuitea" target="_blank">Luciano Amor</a></li>
+                    <li><a href="http://twitter.com/martinszy" target="_blank">Martín Szyszlican</a></li>
+                </ul>
+            </div>
+            <div class="span3">
+                <h5 class="title">Colaboradores</h5>
+                <ul class="bottom-links">
+                    <li><a href="https://twitter.com/Tessconlimon" target="_blank">Teresa Alberto</a></li>
+                    <li><a href="https://twitter.com/mduarte34" target="_blank">Mariela Duarte</a></li>
+                    <li><a href="https://twitter.com/YasGarcia" target="_blank">Yamila García</a></li>
+                    <li><a href="https://twitter.com/soniajalfin" target="_blank">Sonia Jalfin</a></li>
+                    <li><a href="https://twitter.com/amelrame" target="_blank">Amalín Ramos</a></li>
+                    <li><a href="https://twitter.com/olisohr" target="_blank">Olivia Sohr</a></li>
+                    <li><a href="#">Agustín Telado</a></li>
+                    <li><a href="#">Alfredo Ramírez</a></li>
+                    <li><a href="https://twitter.com/tkalfigo" target="_blank">Thalis Kalfigkopoulos</a></li>
+                </ul>
+            </div>
+            <div class="span2">
+                <a href="http://hhba.info/" target="_blank"><img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" width="140" alt="HacksHackers Buenos Aires"></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal hide fade" id="intromodal">
+    <div class="modal-header">
+        <h3>Década Votada</h3>
+    </div>
+    <div class="modal-body">
+        <table id="referencetable">
+            <tr>
+                <td class="quadrant0">Afirmativos</td>
+                <td class="quadrant1">Negativos</td>
+            </tr>
+            <tr>
+                <td class="quadrant2">Abstenciones</td>
+                <td class="quadrant3">Ausentes</td>
+            </tr>
+        </table>
+        <p>Esta aplicación muestra las más de 2.800 votaciones nominales de las Cámara de Diputados y Senadores de la Nación Argentina entre 2003 y 2013 de acuerdo a las actas oficiales (<a href="http://www.hcdn.gov.ar/secadmin/ds_electronicos/actas_votacion-portada.html" target="_blank">diputados</a> y <a href="http://www.senado.gov.ar" target="_blank">senadores</a>).</p>
+		<p>Utilice los selectores de Año, Fecha y Asunto para elegir la votación.</p>
+		<p>En los cuadrantes se ubicará cada legislador coloreado por bloque político, según si su voto fue <span class="quadrant0">Afirmativo</span> o <span class="quadrant1">Negativo</span>, si optó por la <span class="quadrant2">Abstención</span> o si estuvo <span class="quadrant3">Ausente</span>.</p>
+		<p>El panel de la derecha mostrará el resultado, base y tipo de mayoría requerida, asistencia y números de cada votación, incluyendo el voto del presidente cuando lo hubo.</p>
+		<p>Utilice las casillas de verificación de bloques y legisladores para resaltarlos y observar mejor sus trayectorias entre votaciones.</p>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-info btn-large" data-dismiss="modal">Diputados</a>
+        <a href="index-s.html" class="btn btn-danger btn-large">Senadores</a>
+    </div>
+</div>
+
+<script src="assets/js/d3.v3.min.js"></script>
+<script src="assets/js/d3tooltip.js"></script>
+<script src="assets/js/angular.min.js"></script>
+<script src="assets/flat-ui/js/jquery-1.8.3.min.js"></script>
+<script src="assets/flat-ui/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="assets/flat-ui/js/jquery.ui.touch-punch.min.js"></script>
+<script src="assets/flat-ui/js/bootstrap.min.js"></script>
+<script src="assets/flat-ui/js/bootstrap-select.js"></script>
+<script src="assets/flat-ui/js/bootstrap-switch.js"></script>
+<script src="assets/flat-ui/js/flatui-checkbox.js"></script>
+<script src="assets/flat-ui/js/flatui-radio.js"></script>
+<script src="assets/flat-ui/js/jquery.tagsinput.js"></script>
+<script src="assets/flat-ui/js/jquery.placeholder.js"></script>
+<script src="assets/flat-ui/js/jquery.stacktable.js"></script>
+<script src="assets/js/FTClient.js"></script>
+<script src="assets/js/app-d.js"></script>
+<script src="assets/js/votaciones-d.js"></script>
+<script src="assets/jquerysvg/js/jquery.svg.min.js"></script>
+<script src="assets/jquerysvg/js/jquery.svgdom.min.js"></script>
+<script src="assets/js/index.js"></script>
+<script>
+    // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    // ga('create', 'UA-43672173-1', 'decadavotada.com.ar');
+    // ga('send', 'pageview');
+</script>
+</body>
+</html>
