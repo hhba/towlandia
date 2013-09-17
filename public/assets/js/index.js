@@ -16,7 +16,13 @@ $(document).ready(function() {
         keyboard: false,
         show: false
     });
-    $('.btn').tooltip({
+    $('.btn:not(".btn-permalink")').tooltip({
+        placement: 'bottom'
+    });
+    $('.btn-permalink').tooltip({
+        placement: 'top'
+    });
+    $('.btn-permalink').popover({
         placement: 'bottom'
     });
 

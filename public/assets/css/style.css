@@ -278,9 +278,27 @@ p.archivo {
     margin: 0 0 30px;
 }
 .btn.btn-short {
-    padding: 6px;
+    padding: 2px 6px;
+    margin: 0 0 0 4px;
+}
+.btn.btn-permalink {
+    padding: 2px 21px;
     margin: 4px 0 0 4px;
 }
 .btn.disabled {
   cursor: not-allowed;
+}
+.popover-title,
+.popover-content {
+    padding: 5px;
+}
+.popover-title {
+    text-align: center;
+    font-weight: normal;
+    border-bottom: 1px solid #aaa;
+    background-color: #F5D313;
+    color: #000;
+}
+.popover-content {
+    border: 1px solid #ccc;
 }
