@@ -161,6 +161,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             tail: "WHERE asuntoId = '" + file.id + "' GROUP BY bloqueId ORDER BY COUNT() DESC"
         }, function(rows) {
             var blockOrder = rows.map(function(row) { return row[0] });
+            var blockMembers = rows.map(function(row) { return row[1] });
             ftClient.query({
                 fields: ['*'],
                 table: '1gUTqf8A-nuvBGygRnVDcSftngYZ-z9OvxBs59M0'
@@ -171,7 +172,8 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
                             id: row[0],
                             name: row[1],
                             color: row[2] ? row[2] : $scope.viz.color(row[0]),
-                            order: blockOrder.indexOf(row[0])
+                            order: blockOrder.indexOf(row[0]),
+                            members: blockMembers[blockOrder.indexOf(row[0])]
                         }
                     })
                     .filter(function(block) {
