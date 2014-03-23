@@ -2,7 +2,7 @@
 
 [`www.decadavotada.com.ar`](http://www.decadavotada.com.ar/)
 
-Esta aplicación muestra las más de 1.200 votaciones nominales de la Cámara de Diputados de la Nación entre 2003 y 2013 de acuerdo a las actas oficiales.
+Esta aplicación muestra las más de 3.000 votaciones nominales de las Cámara de Diputados (2001-2013) y Senadores de la Nación Argentina (2004-2012) de acuerdo a las actas oficiales (diputados y senadores).
 
 Comenzó a desarrollarse en el Hackatón sobre D3.js organizado por Hack/Hackers Buenos Aires, en abril de 2013.
 
