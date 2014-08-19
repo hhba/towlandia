@@ -145,9 +145,10 @@
                         <li data-ng-repeat="congressman in cmen">
                             <div>
                                 <input type="checkbox" class="chk-diputado" value="{{ congressman.id }}"/>
-                                <p>{{ congressman.name }}</p>
+					<div class="key" style="background-color: {{ congressmenBlock }}"></div>
+                                <p class="voto{{ congressman.vote }}">{{ congressman.name }}</p>
                             </div>
-    					</li>
+    			</li>
                     </ul>
                     <button class="chk-diputado-ninguno btn-link">Ninguno</button>
                 </div>
