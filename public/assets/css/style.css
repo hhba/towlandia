@@ -162,6 +162,18 @@ h1 small.senadores {
 .quadrant3 {
     fill: #999;
 }
+.voto0 {
+    color: #468847;
+}
+.voto1 {
+    color: #B94A48;
+}
+.voto2 {
+    color: #9D9D00;
+}
+.voto3 {
+    color: #999;
+}
 .block-list {
     max-height: 240px;
     overflow-y: auto;
