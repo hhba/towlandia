@@ -156,7 +156,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             $scope.vote = vote;
 
             var permalink = makePermalink();
-            $scope.permalink = '<small><a href="' + permalink + '">' + permalink + '</a></small>';
+            $scope.permalink = permalink;
 
             $scope.$apply();
 
@@ -414,7 +414,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         if(indexHash !== -1) {
             url = url.substring(0, indexHash);
         }
-        return url + '?' + $scope.years.indexOf($scope.selection.year) + '.' + $scope.dates.indexOf($scope.selection.date) + '.' + $scope.files.indexOf($scope.selection.file)
+        return '?' + $scope.years.indexOf($scope.selection.year) + '.' + $scope.dates.indexOf($scope.selection.date) + '.' + $scope.files.indexOf($scope.selection.file)
     }
 
 }])

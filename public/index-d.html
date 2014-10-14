@@ -57,12 +57,15 @@
             </div>
         </div>
         <div class="span1" data-ng-cloak>
-            <button class="btn btn-success pull-right" title="play" data-ng-show="vizShown && !playing" data-ng-click="play()" data-ng-class="{disabled: lastFile}">
-                <i class="icon-play"></i>
+            <button class="btn btn-success btn-short pull-right" title="siguiente" data-ng-show="vizShown" data-ng-click="next()" data-ng-class="{disabled: lastFile}">
+                <i class="icon-chevron-right"></i>
             </button>
-            <button class="btn btn-success pull-right" title="pause" data-ng-show="vizShown && playing" data-ng-click="pause()">
-                <i class="icon-pause"></i>
+            <button class="btn btn-success btn-short pull-right" title="anterior" data-ng-show="vizShown" data-ng-click="prev()" data-ng-class="{disabled: firstFile}">
+                <i class="icon-chevron-left"></i>
             </button>
+            <a href="#iframe" data-toggle="modal" title="embeber la votación actual" class="btn btn-warning btn-short pull-center">
+			<i class="icon-map-marker"></i>
+			</a>
         </div>
     </div>
 	<div class="row row-selects">
@@ -166,6 +169,7 @@
                     <li class="lead"><a href="index-s.html">Senado de la Nación</a></li>
                     <li><a href="doc.html" target="_blank">Documentación</a></li>
                     <li><a href="#intromodal" data-toggle="modal">Acerca de</a></li>
+					<li><a href="#iframe" data-toggle="modal">Embeber votación</a></li>
                 </ul>
             </div>
             <div class="span2">
@@ -196,6 +200,12 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal hide fade" id="iframe">
+    <div class="modal-header">
+	<p>Copie y pegue el siguiente código HTML en su página web para embeber esta votación:</p>
+	<pre><code>&lt;iframe src="http://decadavotada.andytow.com/iframe-d.html{{ permalink }}" width="700" height="800" frameborder="0" scrolling="no"&gt;&lt;iframe&gt;</code></pre>
+	</div>
 </div>
 <div class="modal hide fade" id="intromodal">
     <div class="modal-header">

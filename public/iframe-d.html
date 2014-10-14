@@ -8,17 +8,18 @@
     <link href="assets/css/style.css" rel="stylesheet"/>
 </head>
 <body data-ng-controller="SelectionController">
+<table width="600"><tr><td>
 <div class="container">
     <div class="row">
-        <div class="span8">
-            <h1>Década Votada <small class="senadores">[senadores]</small></h1>
+        <div class="span6">
+            <h3>Década Votada <sup class="diputados"><small>[diputados]</small></sup></h3>
         </div>
-        <div class="span4">
-            <!-- <p class="archivo">Seleccione votación por año y fecha<br/>o navegue el <a href="../disciplina-archive/archive.html" target="_blank">archivo</a>.</p> -->
-        </div>
+		<div class="span2">
+		{{ selection.date | date:'dd/MM/yyyy' }}
+		</div>
     </div>
-    <div class="row row-selects">
-        <div class="span11">
+    <div class="row row-selects" style="display:none">
+        <div class="span5">
             <div class="btn-group" data-ng-cloak>
                 <i class="dropdown-arrow dropdown-arrow-inverse"></i>
                 <button class="btn btn-info" data-ng-class="{ disabled: !years }"><strong>Año</strong><span data-ng-show="selection.year">: {{ selection.year }}</span> </button>
@@ -57,39 +58,25 @@
             </div>
         </div>
         <div class="span1" data-ng-cloak>
-            <button class="btn btn-success btn-short pull-right" title="siguiente" data-ng-show="vizShown" data-ng-click="next()" data-ng-class="{disabled: lastFile}">
-                <i class="icon-chevron-right"></i>
+            <button class="btn btn-success pull-right" title="play" data-ng-show="vizShown && !playing" data-ng-click="play()" data-ng-class="{disabled: lastFile}">
+                <i class="icon-play"></i>
             </button>
-            <button class="btn btn-success btn-short pull-right" title="anterior" data-ng-show="vizShown" data-ng-click="prev()" data-ng-class="{disabled: firstFile}">
-                <i class="icon-chevron-left"></i>
+            <button class="btn btn-success pull-right" title="pause" data-ng-show="vizShown && playing" data-ng-click="pause()">
+                <i class="icon-pause"></i>
             </button>
-            <a href="#iframe" data-toggle="modal" title="embeber la votación actual" class="btn btn-warning btn-short pull-center">
-			<i class="icon-map-marker"></i>
-			</a>
         </div>
     </div>
 	<div class="row row-selects">
-		 <div class="span3"><strong>{{ vote.sesion }}</strong></div>
-		 <div class="span9">{{ selection.file.titulo }}</div>
+		 <div class="span2"><strong>{{ vote.sesion }}</strong></div>
+		 <div class="span6">{{ selection.file.titulo }}</div>
     </div>
     <div class="row mbl">
-        <div class="span9">
+        <div class="span5">
             <div id="cuadrantes">
             </div>
-            <div class="row row-selects">
-                <div class="span9"><strong>Observaciones: </strong><small>{{ vote.auditoria }}</small></div>
-            </div>
-        </div>
-        <div class="span3">
-            <div class="results" data-ng-show="vizShown" data-ng-cloak>
-                <ul class="unstyled ul-resultados">
-                    <li><strong>Resultado: </strong> <span class="label label-large" data-ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
-                    <li><strong>Presidente: </strong><span class="label label-large" data-ng-class="{'label-success': vote.votopresidente == '0', 'label-important': vote.votopresidente == '1'}">{{ vote.presidente }}</span></li>
-                    <li><strong>Base: </strong> {{ vote.base }}</li>
-                    <li><strong>Mayoría: </strong> {{ vote.mayoria }}</li>
-                </ul>
-
-                <ul class="nav nav-list nav-list-vivid">
+			<div class="row">
+				<div class="span2">
+		        <ul class="nav nav-list nav-list-vivid">
                     <li>
                         <div class="resultItem">
                             Presentes
@@ -104,7 +91,15 @@
                             <span class="nav-counter nav-counter-num">{{ vote.ausentes }}</span>
                         </div>
                     </li>
-                    <li class="divider"></li>
+					<li>
+					&nbsp;
+					</li>
+					<li class="divider"></li>
+				</ul>
+				</div>
+				<div class="span3">
+				<ul class="nav nav-list nav-list-vivid">
+                    
                     <li class="nav-header">Votación</li>
                     <li>
                         <div class="resultItem">
@@ -128,10 +123,21 @@
                         </div>
                     </li>
                 </ul>
+				</div>
+			</div>
+        </div>
+        <div class="span3">
+            <div class="results" data-ng-show="vizShown" data-ng-cloak>
+                <ul class="unstyled ul-resultados">
+                    <li><strong>Resultado: </strong> <span class="label label-large" data-ng-class="{'label-success': vote.resultado == 'AFIRMATIVO', 'label-important': vote.resultado == 'NEGATIVO'}">{{ vote.resultado }}</span></li>
+                    <li><strong>Presidente: </strong><span class="label label-large" data-ng-class="{'label-success': vote.votopresidente == '0', 'label-important': vote.votopresidente == '1'}">{{ vote.presidente }}</span></li>
+                    <li><strong>Base: </strong> {{ vote.base }}</li>
+                    <li><strong>Mayoría: </strong> {{ vote.mayoria }}</li>
+                </ul>
             </div>
-            <ul class="nav nav-tabs hide">
+			<ul class="nav nav-tabs hide">
                 <li class="active"><a href="#tab-bloques" data-toggle="tab" class="tab-btn">Bloques</a></li>
-                <li><a href="#tab-diputados" data-toggle="tab" class="tab-btn">Senadores</a></li>
+                <li><a href="#tab-diputados" data-toggle="tab" class="tab-btn">Diputados</a></li>
             </ul>
             <div class="tab-content">
                 <div class="bloques tab-pane active" id="tab-bloques" data-ng-show="blocks">
@@ -157,87 +163,13 @@
     			</li>
                     </ul>
                     <button class="chk-diputado-ninguno btn-link">Ninguno</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                </div>	
+            
+			</div>
+		</div>
 </div>
-<div class="bottom-menu">
-    <div class="container">
-        <div class="row">
-            <div class="span3 brand">Década Votada</div>
-            <div class="span2">
-                <h5 class="title">Secciones</h5>
-                <ul class="bottom-links">
-                    <li class="lead"><a href="index-d.html">Cámara de Diputados de la Nación</a></li>
-                    <li><a href="doc.html" target="_blank">Documentación</a></li>
-                    <li><a href="#intromodal" data-toggle="modal">Acerca de</a></li>
-                </ul>
-            </div>
-            <div class="span2">
-                <h5 class="title">Desarrollo</h5>
-                <ul class="bottom-links">
-                    <li><a href="http://twitter.com/andy_tow" target="_blank">Andy Tow</a></li>
-                    <li><a href="http://twitter.com/belbosays" target="_blank">Gonzalo Bellver</a></li>
-                    <li><a href="http://twitter.com/luchotuitea" target="_blank">Luciano Amor</a></li>
-                    <li><a href="http://twitter.com/martinszy" target="_blank">Martín Szyszlican</a></li>
-                </ul>
-            </div>
-            <div class="span3">
-                <h5 class="title">Colaboradores</h5>
-                <ul class="bottom-links">
-                    <li><a href="https://twitter.com/Tessconlimon" target="_blank">Teresa Alberto</a></li>
-                    <li><a href="https://twitter.com/mduarte34" target="_blank">Mariela Duarte</a></li>
-                    <li><a href="https://twitter.com/YasGarcia" target="_blank">Yamila García</a></li>
-                    <li><a href="https://twitter.com/soniajalfin" target="_blank">Sonia Jalfin</a></li>
-                    <li><a href="https://twitter.com/amelrame" target="_blank">Amalín Ramos</a></li>
-                    <li><a href="https://twitter.com/olisohr" target="_blank">Olivia Sohr</a></li>
-                    <li><a href="#">Agustín Telado</a></li>
-                    <li><a href="#">Alfredo Ramírez</a></li>
-                    <li><a href="https://twitter.com/tkalfigo" target="_blank">Thalis Kalfigkopoulos</a></li>
-                </ul>
-            </div>
-            <div class="span2">
-                <a href="http://hhba.info/" target="_blank"><img src="http://photos4.meetupstatic.com/photos/event/6/8/b/b/global_22346811.jpeg" width="140" alt="HacksHackers Buenos Aires"></a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal hide fade" id="iframe">
-    <div class="modal-header">
-	<p>Copie y pegue el siguiente código HTML en su página web para embeber esta votación:</p>
-	<pre><code>&lt;iframe src="http://decadavotada.andytow.com/iframe-s.html{{ permalink }}" width="700" height="800" frameborder="0" scrolling="no"&gt;&lt;iframe&gt;</code></pre>
-	</div>
-</div>
-<div class="modal hide fade" id="intromodal">
-    <div class="modal-header">
-        <h3>Década Votada</h3>
-    </div>
-    <div class="modal-body">
-        <table id="referencetable">
-            <tr>
-                <td class="quadrant0">Afirmativos</td>
-                <td class="quadrant1">Negativos</td>
-            </tr>
-            <tr>
-                <td class="quadrant2">Abstenciones</td>
-                <td class="quadrant3">Ausentes</td>
-            </tr>
-        </table>
-        <p>Esta aplicación muestra las más de 2.800 votaciones nominales de las Cámara de Diputados y Senadores de la Nación Argentina entre 2003 y 2013 de acuerdo a las actas oficiales (<a href="http://www.hcdn.gov.ar/secadmin/ds_electronicos/actas_votacion-portada.html" target="_blank">diputados</a> y <a href="http://www.senado.gov.ar" target="_blank">senadores</a>).</p>
-        <p>Utilice los selectores de Año, Fecha y Asunto para elegir la votación.</p>
-        <p>En los cuadrantes se ubicará cada legislador coloreado por bloque político, según si su voto fue <span class="quadrant0">Afirmativo</span> o <span class="quadrant1">Negativo</span>, si optó por la <span class="quadrant2">Abstención</span> o si estuvo <span class="quadrant3">Ausente</span>.</p>
-        <p>El panel de la derecha mostrará el resultado, base y tipo de mayoría requerida, asistencia y números de cada votación, incluyendo el voto del presidente cuando lo hubo.</p>
-        <p>Utilice las casillas de verificación de bloques y legisladores para resaltarlos y observar mejor sus trayectorias entre votaciones.</p>
-    </div>
-    <div class="modal-footer">
-        <a href="index-d.html" class="btn btn-info btn-large">Diputados</a>
-        <a class="btn btn-danger btn-large" data-dismiss="modal">Senadores</a>
-    </div>
-</div>
-<div>
-    <a href="https://github.com/hhba/towlandia" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: -1;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-</div>
+</td></tr></table>
+
 
 <script src="assets/js/d3.v3.min.js"></script>
 <script src="assets/js/d3tooltip.js"></script>
@@ -254,8 +186,8 @@
 <script src="assets/flat-ui/js/jquery.placeholder.js"></script>
 <script src="assets/flat-ui/js/jquery.stacktable.js"></script>
 <script src="assets/js/FTClient.js"></script>
-<script src="assets/js/app-s.js"></script>
-<script src="assets/js/votaciones-s.js"></script>
+<script src="assets/js/app-d.js"></script>
+<script src="assets/js/iframe-d.js"></script>
 <script src="assets/jquerysvg/js/jquery.svg.min.js"></script>
 <script src="assets/jquerysvg/js/jquery.svgdom.min.js"></script>
 <script src="assets/js/index.js"></script>
