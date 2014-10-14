@@ -415,7 +415,7 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
         if(indexHash !== -1) {
             url = url.substring(0, indexHash);
         }
-        return url + 'iframe-d.html' + $scope.years.indexOf($scope.selection.year) + '.' + $scope.dates.indexOf($scope.selection.date) + '.' + $scope.files.indexOf($scope.selection.file)
+        return url + 'iframe-d.html?' + $scope.years.indexOf($scope.selection.year) + '.' + $scope.dates.indexOf($scope.selection.date) + '.' + $scope.files.indexOf($scope.selection.file)
     }
 
 }])
