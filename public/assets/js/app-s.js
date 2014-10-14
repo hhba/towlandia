@@ -409,12 +409,13 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
     }
 
     function makePermalink() {
-        var url = window.location.href.replace('#', ''),
+        var url = window.location.href.replace('index-s.html', '')
+		var url = url.replace('#', ''),
             indexHash = url.indexOf('?');
         if(indexHash !== -1) {
             url = url.substring(0, indexHash);
         }
-        return '?' + $scope.years.indexOf($scope.selection.year) + '.' + $scope.dates.indexOf($scope.selection.date) + '.' + $scope.files.indexOf($scope.selection.file)
+        return url + 'iframe-s.html?' + '?' + $scope.years.indexOf($scope.selection.year) + '.' + $scope.dates.indexOf($scope.selection.date) + '.' + $scope.files.indexOf($scope.selection.file)
     }
 
 }])
