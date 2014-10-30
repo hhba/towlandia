@@ -171,10 +171,75 @@ arcs.append("svg:path")
 	<tr>
 		<td style="text-align: center;">Promedio</td>
 		<td style="text-align: right;"><?echo $avgvotos_bloquef;?></td>
-		<td style="text-align: right;"><?echo $avgdisciplinasf;?></td>	
+		<td style="text-align: right;"><?echo $avgdisciplinasf;?>
+		</td>	
 	</tr>
 	</table>
-	
+        <div id="viz"></div>
+        <script type="text/javascript">
+            
+            var w = 960,
+            h = 120
+
+            // create canvas
+            var svg = d3.select("#viz").append("svg:svg")
+            .attr("class", "chart")
+            .attr("width", w)
+            .attr("height", h )
+            .append("svg:g")
+            .attr("transform", "translate(20,70)");
+
+            x = d3.scale.ordinal().rangeRoundBands([0, w-100])
+            y = d3.scale.linear().range([0, h-50])
+            z = d3.scale.ordinal().range(["#1f77b4", "#ff7f0e", "white"])
+	    // 4 columns: ID,c1,c2,c3
+            var matrix = [ <?php
+	$j=0;
+	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE nombre = '$leg' GROUP BY ano ORDER BY ano ASC");
+	while ($row = mysql_fetch_array($resultheatstats)) {
+	$aniostat = $row["ano"];
+	$indicehstat = $row["indice"] * 100;
+	$indicefihstat = number_format($indicehstat, 0);
+	$nindicefihstat = 100 - $indicefihstat;
+
+	if ($nindicefihstat == 100) { $nindicefihstat = 0; }
+?>
+                [ <?echo $j;?>, <?echo $indicefihstat;?>, <?echo $nindicefihstat;?>, 0 ],
+<?php
+	$j++;
+	}
+?>
+            ];
+            var remapped =["c1","c2","c3"].map(function(dat,i){
+                return matrix.map(function(d,ii){
+                    return {x: ii, y: d[i+1] };
+                })
+            });
+
+            var stacked = d3.layout.stack()(remapped)
+
+
+            x.domain(stacked[0].map(function(d) { return d.x; }));
+            y.domain([0, d3.max(stacked[stacked.length - 1], function(d) { return d.y0 + d.y; })]);
+
+
+            var valgroup = svg.selectAll("g.valgroup")
+            .data(stacked)
+            .enter().append("svg:g")
+            .attr("class", "valgroup")
+            .style("fill", function(d, i) { return z(i); })
+            .style("stroke", function(d, i) { return d3.rgb(z(i)).darker(); });
+
+            // Add a rect for each date.
+            var rect = valgroup.selectAll("rect")
+            .data(function(d){return d;})
+            .enter().append("svg:rect")
+            .attr("x", function(d) { return x(d.x); })
+            .attr("y", function(d) { return -y(d.y0) - y(d.y); })
+            .attr("height", function(d) { return y(d.y); })
+            .attr("width", 40);
+
+        </script>
 	</div>
 </div>
 </body>
