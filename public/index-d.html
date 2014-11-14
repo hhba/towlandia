@@ -63,8 +63,11 @@
             <button class="btn btn-success btn-short pull-right" title="anterior" data-ng-show="vizShown" data-ng-click="prev()" data-ng-class="{disabled: firstFile}">
                 <i class="icon-chevron-left"></i>
             </button>
-            <a href="#iframe" data-toggle="modal" title="embeber la votación actual" class="btn btn-warning btn-short pull-center">
+            <a href="#iframe" data-toggle="modal" title="embeber la votación actual" class="btn btn-warning btn-short pull-right">
 			<i class="icon-map-marker"></i>
+			</a>
+			<a href="https://twitter.com/intent/tweet?text=Votacion%20nominal%3A&amp;tw_p=tweetbutton&amp;via=andy_tow;url={{ permalink }}" target="_blank" data-toggle="modal" title="tuitear la votación actual" class="btn btn-info btn-short pull-right">
+			<i class="icon-globe"></i>
 			</a>
         </div>
     </div>
@@ -207,7 +210,7 @@
 <div class="modal hide fade" id="iframe">
     <div class="modal-header">
 	<p>Copie y pegue el siguiente código HTML en su página web para embeber esta votación:</p>
-	<pre><code>&lt;iframe src="{{ permalink }}" width="700" height="800" frameborder="0" scrolling="no"&gt;&lt;iframe&gt;</code></pre>
+	<pre><code>&lt;iframe src="{{ permaiframe }}" width="700" height="800" frameborder="0" scrolling="no"&gt;&lt;iframe&gt;</code></pre>
 	</div>
 </div>
 <div class="modal hide fade" id="intromodal">

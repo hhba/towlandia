@@ -478,8 +478,7 @@
             .data(stacked)
             .enter().append("svg:g")
             .attr("class", "valgroup")
-            .style("fill", function(d, i) { return z(i); })
-            .style("stroke", function(d, i) { return d3.rgb(z(i)).darker(); });
+            .style("fill", function(d, i) { return z(i); });
 
             // Add a rect for each date.
             var rect = valgroup.selectAll("rect")

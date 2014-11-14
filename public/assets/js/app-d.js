@@ -158,6 +158,9 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
             var permalink = makePermalink();
             $scope.permalink = permalink;
 
+			var permaiframe = makePermaiframe();
+            $scope.permaiframe = permaiframe;
+			
             $scope.$apply();
 
         });
@@ -409,13 +412,23 @@ controllers.controller('SelectionController', ['$scope', '$filter', 'Selection',
     }
 
     function makePermalink() {
-        var url = window.location.href.replace('index-d.html', '')
-		var url = url.replace('#', ''),
+        var url = window.location.href.replace('#', ''),
             indexHash = url.indexOf('?');
         if(indexHash !== -1) {
             url = url.substring(0, indexHash);
         }
-        return url + 'iframe-d.html?' + $scope.years.indexOf($scope.selection.year) + '.' + $scope.dates.indexOf($scope.selection.date) + '.' + $scope.files.indexOf($scope.selection.file)
+        return url + "?" + $scope.years.indexOf($scope.selection.year) + '.' + $scope.dates.indexOf($scope.selection.date) + '.' + $scope.files.indexOf($scope.selection.file)
     }
 
+    function makePermaiframe() {
+	    var url2 = window.location.href.replace('index-d.html', '')
+		var url2 = url2.replace('#', ''),
+            indexHash2 = url2.indexOf('?');
+        if(indexHash2 !== -1) {
+            url2 = url2.substring(0, indexHash2);
+        }
+        return url2 + 'iframe-d.html?' + $scope.years.indexOf($scope.selection.year) + '.' + $scope.dates.indexOf($scope.selection.date) + '.' + $scope.files.indexOf($scope.selection.file)
+    }
+	
+	
 }])
