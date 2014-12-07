@@ -52,7 +52,7 @@
 	$order = qsrequest("order");
 
 	$i=0;
-	$resultperiodos = mysql_query("SELECT ano FROM disciplina WHERE disciplinas > 0 GROUP BY ano ORDER BY ano DESC");
+	$resultperiodos = mysql_query("SELECT ano FROM disciplina WHERE votos_bloque > 0 GROUP BY ano ORDER BY ano DESC");
 	while ($row = mysql_fetch_array($resultperiodos)) {
 	$ano = $row["ano"];
 ?>
@@ -125,282 +125,282 @@
 	$ii=0;
 
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}	
 //order=name
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='name') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='name') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='name') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='name') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='name') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='name') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='name') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='name') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre ASC");
 	}
 //order=namedesc
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='namedesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='namedesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='namedesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='namedesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='namedesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='namedesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='namedesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='namedesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY nombre DESC");
 	}	
 	
 //order=tasaasc
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='tasaasc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='tasaasc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='tasaasc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='tasaasc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='tasaasc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='tasaasc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='tasaasc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='tasaasc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) ASC, SUM(disciplinas) ASC, nombre ASC");
 	}
 //order=tasadesc
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='tasa') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='tasa') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='tasa') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='tasa') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='tasa') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='tasa') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='tasa') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='tasa') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY (SUM(disciplinas) / SUM(votos_bloque)) DESC, SUM(disciplinas) DESC, nombre ASC");
 	}
 //order=district
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='district') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='district') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='district') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='district') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='district') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='district') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='district') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='district') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito ASC, nombre ASC");
 	}
 //order=distritodesc
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='districtdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='districtdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='districtdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='districtdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='districtdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='districtdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='districtdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='districtdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY distrito DESC, nombre ASC");
 	}
 
 
 //order=votacionesasc
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='votos') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, SUM(disciplinas) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, SUM(disciplinas) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='votos') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, SUM(disciplinas) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, SUM(disciplinas) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='votos') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='votos') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='votos') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='votos') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='votos') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='votos') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, nombre ASC");
 	}
 //order=votacionesdesc
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='votosdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='votosdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='votosdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='votosdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='votosdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='votosdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='votosdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='votosdesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) DESC, SUM(disciplinas) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 
 //order=disciplin
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='disciplin') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, SUM(disciplinas) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, SUM(disciplinas) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='disciplin') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, SUM(disciplinas) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(votos_bloque) ASC, SUM(disciplinas) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='disciplin') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='disciplin') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='disciplin') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='disciplin') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='disciplin') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='disciplin') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) ASC, SUM(votos_bloque) ASC, (SUM(disciplinas) / SUM(votos_bloque)) ASC, nombre ASC");
 	}
 //order=disciplindesc
 	if ($year !== '' and $district=='' and $bloc=='' and $order=='disciplindesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc=='' and $order=='disciplindesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc=='' and $order=='disciplindesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='' and $order=='disciplindesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year == '' and $district=='' and $bloc!=='' and $order=='disciplindesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='' and $order=='disciplindesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='' and $order=='disciplindesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='' and $order=='disciplindesc') {
-	$resultdisciplina = mysql_query("SELECT nombre, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
+	$resultdisciplina = mysql_query("SELECT nombre, diputadoId, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY nombre, distrito, color ORDER BY SUM(disciplinas) DESC, SUM(votos_bloque) DESC, (SUM(disciplinas) / SUM(votos_bloque)) DESC, nombre ASC");
 	}
 	
 	while ($row = mysql_fetch_array($resultdisciplina)) {
@@ -415,13 +415,15 @@
 	$indicef = number_format($indice, 1, ',', ' ');
 	$indicefi = number_format($indice, 0);
 	$noindicef = 100 - $indicefi;
+	$diputadoId = $row["diputadoId"];
+	$iin = $ii + 1;
 ?>
 	<tr>
-		<td width="30%" colspan="2"><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $color;?>&order=<?echo $order;?>"><div class="some-box" style="background-color:#<?echo $color;?>;"></div>&nbsp;&nbsp;<small><a class="fancybox fancybox.iframe" href="legislator-s.php?leg=<?echo $nombre;?>" target="_blank"><?echo $nombre;?></small></td>
-		<td width="20%" style="text-align: center;"><small><a href="?year=<?echo $year;?>&district=<?echo $distrito;?>&bloc=<?echo $bloc;?>&order=<?echo $order;?>"><?echo $distrito;?></small></td>
+		<td width="30%" colspan="2"><sup><?echo $iin;?> - </sup><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $color;?>&order=<?echo $order;?>"><div class="some-box" style="background-color:#<?echo $color;?>;"></div>&nbsp;&nbsp;<small><a class="fancybox fancybox.iframe" href="legislator-s.php?leg=<?echo $diputadoId;?>" target="_blank"><?echo $nombre;?></small></td>
+		<td width="18%" style="text-align: center;"><small><a href="?year=<?echo $year;?>&district=<?echo $distrito;?>&bloc=<?echo $bloc;?>&order=<?echo $order;?>"><?echo $distrito;?></small></td>
 		<td width="15%" style="text-align: right;"><small><?echo $votos_bloque;?></small></td>
 		<td width="15%" style="text-align: right;"><small><?echo $disciplinas;?></small></td>
-		<td width="20%" style="text-align: right;"><table class="borderless" width="100%"><tr><td><div align="center"><div id="chart<?echo $ii;?>"></div></div></td><td style="text-align: right;"><small><?echo $indicef;?>%</small></td></tr></table><?php
+		<td width="22%" style="text-align: right;"><table class="borderless" width="100%"><tr><td><div align="center"><div id="chart<?echo $ii;?>"></div></div></td><td style="text-align: right;"><small><?echo $indicef;?>%</small></td></tr></table><?php
 	if ($year == '') {
 	?>
 <div align="center">
@@ -438,7 +440,7 @@
             .attr("width", w)
             .attr("height", h )
             .append("svg:g")
-            .attr("transform", "translate(20,20)");
+            .attr("transform", "translate(10,20)");
 
             x = d3.scale.ordinal().rangeRoundBands([0, w-5])
             y = d3.scale.linear().range([0, h-5])
@@ -446,7 +448,7 @@
 	    // 4 columns: ID,c1,c2,c3
             var matrix = [ <?php
 	$j=0;
-	$resultheat = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE nombre = '$nombre' AND distrito = '$distrito' GROUP BY ano ORDER BY ano ASC");
+	$resultheat = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE diputadoId = $diputadoId GROUP BY ano ORDER BY ano ASC");
 	while ($row = mysql_fetch_array($resultheat)) {
 	$aniostat = $row["ano"];
 	$indicehstat = $row["indice"] * 100;
@@ -531,28 +533,28 @@ arcs.append("svg:path")
 <?php
 $iii=0;
 	if ($year !== '' and $district=='' and $bloc=='') {
-	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE ano = $year AND disciplinas > 0");
+	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE ano = $year AND votos_bloque > 0");
 	}
 	if ($year == '' and $district=='' and $bloc=='') {
-	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE disciplinas > 0");
+	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE votos_bloque > 0");
 	}
 	if ($year == '' and $district!=='' and $bloc=='') {
-	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE distrito = '$district' AND disciplinas > 0");
+	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0");
 	}
 	if ($year !== '' and $district!=='' and $bloc=='') {
-	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE ano = $year AND distrito = '$district' AND disciplinas > 0");
+	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE ano = $year AND distrito = '$district' AND votos_bloque > 0");
 	}
 	if ($year == '' and $district=='' and $bloc!=='') {
-	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE color = '$bloc' AND disciplinas > 0");
+	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0");
 	}
 	if ($year == '' and $district!=='' and $bloc!=='') {
-	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0");
+	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0");
 	}
 	if ($year !== '' and $district=='' and $bloc!=='') {
-	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE ano=$year AND color = '$bloc' AND disciplinas > 0");
+	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE ano=$year AND color = '$bloc' AND votos_bloque > 0");
 	}
 	if ($year !== '' and $district!=='' and $bloc!=='') {
-	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND disciplinas > 0");
+	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE ano = $year AND distrito = '$district' AND color = '$bloc' AND votos_bloque > 0");
 	}	
 	while ($row = mysql_fetch_array($resultstats)) {
 	$nombres = $row["nombres"];
@@ -614,19 +616,19 @@ $iii=0;
             var matrix = [ <?php
 	$jj=0;
 	if ($district=='' and $bloc=='') {
-	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE disciplinas > 0 GROUP BY ano ORDER BY ano ASC");
+	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE votos_bloque > 0 GROUP BY ano ORDER BY ano ASC");
 	}
 
 	if ($district!=='' and $bloc=='') {
-	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND disciplinas > 0 GROUP BY ano ORDER BY ano ASC");
+	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND votos_bloque > 0 GROUP BY ano ORDER BY ano ASC");
 	}
 
 	if ($district=='' and $bloc!=='') {
-	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND disciplinas > 0 GROUP BY ano ORDER BY ano ASC");
+	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE color = '$bloc' AND votos_bloque > 0 GROUP BY ano ORDER BY ano ASC");
 	}
 	
 	if ($district!=='' and $bloc!=='') {
-	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND disciplinas > 0 GROUP BY ano ORDER BY ano ASC");
+	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE distrito = '$district' AND color = '$bloc' AND votos_bloque > 0 GROUP BY ano ORDER BY ano ASC");
 	}	
 	while ($row = mysql_fetch_array($resultheatstats)) {
 	$aniostats = $row["ano"];

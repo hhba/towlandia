@@ -43,18 +43,18 @@
 	<th><center><small>Bloque</small></center></th>
 	<th><center><small>Votaciones</small></center></th>
 	<th><center><small>Coincidencias</small></center></th>
-	<th colspan="2"><center><small>Tasa de disciplina</small></center></th>
+	<th colspan="2"><center><small>Tasa de oficialismo</small></center></th>
 	</tr>
 
 
 <?php
 
 	$i=0;
-	$resultleg = mysql_query("SELECT ano, bloque, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE diputadoId = $leg AND votos_bloque > 0 GROUP BY ano, bloque, distrito, color ORDER BY ano ASC");
+	$resultleg = mysql_query("SELECT ano, bloque, SUM(oficialismos) AS disciplines, SUM(votos_oficialistas) AS votos_bloques, distrito, color, (SUM(oficialismos) / SUM(votos_oficialistas)) AS indice FROM disciplina WHERE diputadoId = $leg AND votos_oficialistas > 0 GROUP BY ano, bloque, distrito, color ORDER BY ano ASC");
 	while ($row = mysql_fetch_array($resultleg)) {
 	$ano = $row["ano"];
-	$disciplina = $row["disciplines"];
-	$disciplinas = number_format($disciplina, 0, ',', '.');
+	$oficialismo = $row["disciplines"];
+	$oficialismos = number_format($oficialismo, 0, ',', '.');
 	$distrito = $row["distrito"];
 	$bloque = $row["bloque"];
 	$votos_bloques = $row["votos_bloques"];
@@ -69,7 +69,7 @@
 		<td style="text-align: center;"><small><?echo $ano;?></small></td>
 		<td style="text-align: center;"><div class="some-box" style="background-color:#<?echo $color;?>;"></div>&nbsp;<small><?echo $bloque;?></small></font></td>
 		<td style="text-align: right;"><small><?echo $votos_bloque;?></small></td>
-		<td style="text-align: right;"><small><?echo $disciplinas;?></small></td>
+		<td style="text-align: right;"><small><?echo $oficialismos;?></small></td>
 		<td style="text-align: center;"><div id="chart<?echo $i;?>"></div></td>
 		<td style="text-align: right;"><small><?echo $indicef;?>%</small></td>
 <script>
@@ -109,16 +109,16 @@ arcs.append("svg:path")
 	</table>
 <?php
 	$ii=0;
-	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE diputadoId = $leg AND votos_bloque > 0");
+	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(oficialismos) AS disciplinesstat, AVG(oficialismos) AS disciplineavg, SUM(votos_oficialistas) AS votos_bloquesstat, AVG(votos_oficialistas) AS votos_bloqueavg, (SUM(oficialismos) / SUM(votos_oficialistas)) AS indicestat, (AVG(oficialismos) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE diputadoId = $leg AND votos_oficialistas > 0");
 	while ($row = mysql_fetch_array($resultstats)) {
 	$nombres = $row["nombres"];
 	$nombresf = number_format($nombres, 0, ',', '.');
-	$statdisciplina = $row["disciplinesstat"];
-	$statdisciplinas = number_format($statdisciplina, 0, ',', '.');
+	$statoficialismo = $row["disciplinesstat"];
+	$statoficialismos = number_format($statoficialismo, 0, ',', '.');
 	$statvotos_bloques = $row["votos_bloquesstat"];
 	$statvotos_bloque = number_format($statvotos_bloques, 0, ',', '.');
-	$avgdisciplinas = $row["disciplineavg"];
-	$avgdisciplinasf = number_format($avgdisciplinas, 0);
+	$avgoficialismos = $row["disciplineavg"];
+	$avgoficialismosf = number_format($avgoficialismos, 0);
 	$avgvotos_bloque = $row["votos_bloqueavg"];
 	$avgvotos_bloquef = number_format($avgvotos_bloque, 0);
 	$indicestat = $row["indicestat"] * 100;
@@ -141,7 +141,7 @@ arcs.append("svg:path")
 	<tr>
 		<td width="52%" style="text-align: center;">Suma</td>
 		<td width="16%" style="text-align: right;"><?echo $statvotos_bloque;?></td>
-		<td width="16%" style="text-align: right;"><?echo $statdisciplinas;?></td>
+		<td width="16%" style="text-align: right;"><?echo $statoficialismos;?></td>
 		<td width="4%" style="text-align: center;" rowspan="2"><div id="chart_stat"></div></td>
 		<td width="12%" style="text-align: center;" rowspan="2"><strong><?echo $indicestatf;?>%</strong></td>
 <script>
@@ -178,7 +178,7 @@ arcs.append("svg:path")
 	<tr>
 		<td style="text-align: center;">Promedio</td>
 		<td style="text-align: right;"><?echo $avgvotos_bloquef;?></td>
-		<td style="text-align: right;"><?echo $avgdisciplinasf;?>
+		<td style="text-align: right;"><?echo $avgoficialismosf;?>
 		</td>	
 	</tr>
 	</table>
@@ -202,7 +202,7 @@ arcs.append("svg:path")
 	    // 4 columns: ID,c1,c2,c3
             var matrix = [ <?php
 	$j=0;
-	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE diputadoId= $leg GROUP BY ano ORDER BY ano ASC");
+	$resultheatstats = mysql_query("SELECT ano, (SUM(oficialismos) / SUM(votos_oficialistas)) AS indice FROM disciplina WHERE diputadoId = $leg GROUP BY ano ORDER BY ano ASC");
 	while ($row = mysql_fetch_array($resultheatstats)) {
 	$aniostat = $row["ano"];
 	$indicehstat = $row["indice"] * 100;

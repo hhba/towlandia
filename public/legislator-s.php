@@ -26,7 +26,14 @@
 <div class="container">
 	<div class="row">
 	        <div class="span12">
-            <h3><?echo $leg;?></h3>
+	<?
+	$resultnombre = mysql_query("SELECT nombre FROM disciplina WHERE diputadoId = $leg GROUP BY nombre");
+	while ($row = mysql_fetch_array($resultnombre)) {
+	$nombre = $row["nombre"];
+	?>
+            <h3><?echo $nombre;?></h3>
+	<?}
+	?>
 			</div>
 	</div>
 	<div class="row">
@@ -43,7 +50,7 @@
 <?php
 
 	$i=0;
-	$resultleg = mysql_query("SELECT ano, bloque, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE nombre = '$leg' AND disciplinas > 0 GROUP BY ano, bloque, distrito, color ORDER BY ano ASC");
+	$resultleg = mysql_query("SELECT ano, bloque, SUM(disciplinas) AS disciplines, SUM(votos_bloque) AS votos_bloques, distrito, color, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE diputadoId = $leg AND votos_bloque > 0 GROUP BY ano, bloque, distrito, color ORDER BY ano ASC");
 	while ($row = mysql_fetch_array($resultleg)) {
 	$ano = $row["ano"];
 	$disciplina = $row["disciplines"];
@@ -102,7 +109,7 @@ arcs.append("svg:path")
 	</table>
 <?php
 	$ii=0;
-	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE nombre = '$leg' AND disciplinas > 0");
+	$resultstats = mysql_query("SELECT COUNT(nombre) AS nombres, SUM(disciplinas) AS disciplinesstat, AVG(disciplinas) AS disciplineavg, SUM(votos_bloque) AS votos_bloquesstat, AVG(votos_bloque) AS votos_bloqueavg, (SUM(disciplinas) / SUM(votos_bloque)) AS indicestat, (AVG(disciplinas) / AVG(votos_bloque)) AS indicesavg FROM disciplina WHERE diputadoId = $leg AND votos_bloque > 0");
 	while ($row = mysql_fetch_array($resultstats)) {
 	$nombres = $row["nombres"];
 	$nombresf = number_format($nombres, 0, ',', '.');
@@ -178,7 +185,7 @@ arcs.append("svg:path")
         <div id="viz"></div>
         <script type="text/javascript">
             
-            var w = 960,
+            var w = 800,
             h = 120
 
             // create canvas
@@ -195,7 +202,7 @@ arcs.append("svg:path")
 	    // 4 columns: ID,c1,c2,c3
             var matrix = [ <?php
 	$j=0;
-	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE nombre = '$leg' GROUP BY ano ORDER BY ano ASC");
+	$resultheatstats = mysql_query("SELECT ano, (SUM(disciplinas) / SUM(votos_bloque)) AS indice FROM disciplina WHERE diputadoId= $leg GROUP BY ano ORDER BY ano ASC");
 	while ($row = mysql_fetch_array($resultheatstats)) {
 	$aniostat = $row["ano"];
 	$indicehstat = $row["indice"] * 100;
