@@ -52,7 +52,7 @@
 	$order = qsrequest("order");
 
 	$i=0;
-	$resultperiodos = mysql_query("SELECT ano FROM disciplina WHERE votos_bloque > 0 GROUP BY ano ORDER BY ano DESC");
+	$resultperiodos = mysql_query("SELECT ano FROM disciplina WHERE votos_bloque > 0 GROUP BY ano ORDER BY ano ASC");
 	while ($row = mysql_fetch_array($resultperiodos)) {
 	$ano = $row["ano"];
 ?>
