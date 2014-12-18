@@ -447,14 +447,15 @@
 	    // 4 columns: ID,c1,c2,c3
             var matrix = [ <?php
 	$j=0;
-	$resultheat = mysql_query("SELECT ano, (SUM(oficialismos) / SUM(votos_oficialistas)) AS indice FROM disciplina WHERE diputadoId = $diputadoId GROUP BY ano ORDER BY ano ASC");
+	$resultheat = mysql_query("SELECT ano, (SUM(oficialismos) / SUM(votos_oficialistas)) AS indice, votos_oficialistas FROM disciplina WHERE diputadoId = $diputadoId GROUP BY ano ORDER BY ano ASC");
 	while ($row = mysql_fetch_array($resultheat)) {
+	$votos_oficialistas = $row["votos_oficialistas"];
 	$aniostat = $row["ano"];
 	$indicehstat = $row["indice"] * 100;
 	$indicefihstat = number_format($indicehstat, 0);
 	$nindicefihstat = 100 - $indicefihstat;
 
-	if ($nindicefihstat == 100) { $nindicefihstat = 0; }
+	if ($nindicefihstat == 100 and $votos_oficialistas == 0) { $nindicefihstat = 0; }
 ?>
                 [ <?echo $j;?>, <?echo $indicefihstat;?>, <?echo $nindicefihstat;?>, 0 ],
 <?php
