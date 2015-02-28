@@ -36,12 +36,15 @@
     </div>
     <div class="row">
 	<center>
+	<a class="fancybox fancybox.iframe" href="parlalines-s.php?district=<?php echo $district;?>&bloc=<?php echo $bloc;?>" target="_blank"><button type="button" class="btn btn-btn btn-default"><strong>Gr&aacute;fico</strong></button></a>
 	<a href="?year=&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=<?echo $order;?>"><button type="button" class="btn btn-<?php
 	if ($year == '') {
 	echo "btn btn-primary";
        } else {
 	echo "btn btn-info";   
-	   }?>"><strong>Todos</strong></button></a>
+	   }?>"><strong>Todos</strong></button></a></center>
+	   <br>
+	   <center>
 <?php
 	require('qs_connection-s.php');
 	require('qs_functions.php');
@@ -101,21 +104,21 @@
 	}
 ?>
 	</center></small></th>
-	<th width="14%"><small><center><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=votos<?php
+	<th width="14%"><center><small><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=votos<?php
 	if ($order=='votos') {
 	echo "desc";
 	}?>
-	" title="Ordenar" data-toogle="tooltip">Votaciones</small></center></th>
+	" title="Ordenar" data-toogle="tooltip">Votaciones</a></small></center></th>
 	<th width="16%"><small><center><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=disciplin<?php
 	if ($order=='disciplin') {
 	echo "desc";
 	}?>
-	" title="Ordenar">Coincidencias</small></center></th>
-	<th width="22%" colspan="2"><small><center><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=tasa<?php
+	" title="Ordenar">Coincidencias</a></small></center></th>
+	<th width="22%" colspan="2"><center><small><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=tasa<?php
 	if ($order=='tasa') {
 	echo "asc";
 	}?>
-	" title="Ordenar">Tasa de conformidad</a></center></small></th>
+	" title="Ordenar">Tasa de conformidad</a></small></center></th>
 	</tr>
 	</table>
 	<table class="table table-striped" style="overflow: auto; height:402px; width:960px; display:block">
@@ -418,8 +421,8 @@
 	$diputadoId = $row["diputadoId"];
 ?>
 	<tr>
-		<td width="30%" colspan="2"><sup><?echo $iin;?> - </sup><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $color;?>&order=<?echo $order;?>"><div class="some-box" style="background-color:#<?echo $color;?>;"></div>&nbsp;&nbsp;<small><a class="fancybox fancybox.iframe" href="oficialator-s.php?leg=<?echo $diputadoId;?>" target="_blank"><?echo $nombre;?></small></td>
-		<td width="20%" style="text-align: center;"><small><a href="?year=<?echo $year;?>&district=<?echo $distrito;?>&bloc=<?echo $bloc;?>&order=<?echo $order;?>"><?echo $distrito;?></small></td>
+		<td width="30%" colspan="2"><sup><?echo $iin;?> - </sup><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $color;?>&order=<?echo $order;?>"><div class="some-box" style="background-color:#<?echo $color;?>;"></div>&nbsp;&nbsp;<small><a class="fancybox fancybox.iframe" href="oficialator-s.php?leg=<?echo $diputadoId;?>" target="_blank"><?echo $nombre;?></a></small></td>
+		<td width="20%" style="text-align: center;"><small><a href="?year=<?echo $year;?>&district=<?echo $distrito;?>&bloc=<?echo $bloc;?>&order=<?echo $order;?>"><?echo $distrito;?></a></small></td>
 		<td width="15%" style="text-align: right;"><small><?echo $votos_bloque;?></small></td>
 		<td width="15%" style="text-align: right;"><small><?echo $oficialismos;?></small></td>
 		<td width="20%" style="text-align: right;"><table class="borderless" width="100%"><tr><td><div align="center"><div id="chart<?echo $ii;?>"></div></div></td><td style="text-align: right;"><small><?echo $indicef;?>%</small></td></tr></table><?php

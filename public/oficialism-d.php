@@ -36,12 +36,15 @@
     </div>
     <div class="row">
 	<center>
+	<a class="fancybox fancybox.iframe" href="parlalines-d.php?district=<?php echo $district;?>&bloc=<?php echo $bloc;?>" target="_blank"><button type="button" class="btn btn-btn btn-default"><strong>Gr&aacute;fico</strong></button></a>
 	<a href="?year=&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=<?echo $order;?>"><button type="button" class="btn btn-<?php
 	if ($year == '') {
 	echo "btn btn-primary";
        } else {
 	echo "btn btn-info";   
-	   }?>"><strong>Todos</strong></button></a>
+	   }?>"><strong>Todos</strong></button></a></center>
+	   <br>
+	   <center>
 <?php
 	require('qs_connection-d.php');
 	require('qs_functions.php');
