@@ -433,7 +433,7 @@
 </div>		
         <script type="text/javascript">
             
-            var w = 200,
+            var w = 220,
             h = 20
 
             // create canvas
@@ -492,7 +492,7 @@
             .attr("x", function(d) { return x(d.x); })
             .attr("y", function(d) { return -y(d.y0) - y(d.y); })
             .attr("height", function(d) { return y(d.y); })
-            .attr("width", 10);
+            .attr("width", 9);
 
         </script>
 <?php
