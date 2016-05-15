@@ -104,21 +104,21 @@
 	}
 ?>
 	</center></small></th>
-	<th width="14%"><small><center><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=votos<?php
+	<th width="14%"><center><small><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=votos<?php
 	if ($order=='votos') {
 	echo "desc";
 	}?>
-	" title="Ordenar" data-toogle="tooltip">Votaciones</small></center></th>
+	" title="Ordenar" data-toogle="tooltip">Votaciones</a></small></center></th>
 	<th width="16%"><small><center><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=disciplin<?php
 	if ($order=='disciplin') {
 	echo "desc";
 	}?>
-	" title="Ordenar">Coincidencias</small></center></th>
-	<th width="22%" colspan="2"><small><center><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=tasa<?php
+	" title="Ordenar">Coincidencias</a></small></center></th>
+	<th width="22%" colspan="2"><center><small><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $bloc;?>&order=tasa<?php
 	if ($order=='tasa') {
 	echo "asc";
 	}?>
-	" title="Ordenar">Tasa de conformidad</a></center></small></th>
+	" title="Ordenar">Tasa de conformidad</a></small></center></th>
 	</tr>
 	</table>
 	<table class="table table-striped" style="overflow: auto; height:402px; width:960px; display:block">
@@ -421,11 +421,11 @@
 	$diputadoId = $row["diputadoId"];
 ?>
 	<tr>
-		<td width="30%" colspan="2"><sup><?echo $iin;?> - </sup><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $color;?>&order=<?echo $order;?>"><div class="some-box" style="background-color:#<?echo $color;?>;"></div>&nbsp;&nbsp;<small><a class="fancybox fancybox.iframe" href="oficialator-d.php?leg=<?echo $diputadoId;?>" target="_blank"><?echo $nombre;?></small></td>
-		<td width="20%" style="text-align: center;"><small><a href="?year=<?echo $year;?>&district=<?echo $distrito;?>&bloc=<?echo $bloc;?>&order=<?echo $order;?>"><?echo $distrito;?></small></td>
+		<td width="30%" colspan="2"><sup><?echo $iin;?> - </sup><a href="?year=<?echo $year;?>&district=<?echo $district;?>&bloc=<?echo $color;?>&order=<?echo $order;?>"><div class="some-box" style="background-color:#<?echo $color;?>;"></div>&nbsp;&nbsp;<small><a class="fancybox fancybox.iframe" href="oficialator-d.php?leg=<?echo $diputadoId;?>" target="_blank"><?echo $nombre;?></a></small></td>
+		<td width="20%" style="text-align: center;"><small><a href="?year=<?echo $year;?>&district=<?echo $distrito;?>&bloc=<?echo $bloc;?>&order=<?echo $order;?>"><?echo $distrito;?></a></small></td>
 		<td width="15%" style="text-align: right;"><small><?echo $votos_bloque;?></small></td>
 		<td width="15%" style="text-align: right;"><small><?echo $oficialismos;?></small></td>
-		<td width="20%" style="text-align: right;"><table class="borderless" width="100%"><tr><td><div align="center"><div id="chart<?echo $ii;?>"></div></div></td><td style="text-align: right;"><small><?echo $indicef;?>%</small></td></tr></table><?php
+		<td width="20%" style="text-align: right;"><table class="borderless" width="100%"><tr><td><div align="center"><div id="vot<?echo $ii;?>"></div></td><td><div id="chart<?echo $ii;?>"></div></div></td><td style="text-align: right;"><small><?echo $indicef;?>%</small></td></tr></table><?php
 	if ($year == '') {
 	?>
 <div align="center">
@@ -433,7 +433,7 @@
 </div>		
         <script type="text/javascript">
             
-            var w = 220,
+            var w = 200,
             h = 20
 
             // create canvas
@@ -442,7 +442,7 @@
             .attr("width", w)
             .attr("height", h )
             .append("svg:g")
-            .attr("transform", "translate(10,20)");
+            .attr("transform", "translate(-10,20)");
 
             x = d3.scale.ordinal().rangeRoundBands([0, w-5])
             y = d3.scale.linear().range([0, h-5])
@@ -492,7 +492,7 @@
             .attr("x", function(d) { return x(d.x); })
             .attr("y", function(d) { return -y(d.y0) - y(d.y); })
             .attr("height", function(d) { return y(d.y); })
-            .attr("width", 9);
+            .attr("width", 10);
 
         </script>
 <?php
@@ -527,6 +527,75 @@ arcs.append("svg:path")
 // add the text
 		
 </script>
+
+        <script type="text/javascript">
+            
+            var w = 60,
+            h = 20
+
+            // create canvas
+            var svg = d3.select("#vot<?echo $ii;?>").append("svg:svg")
+            .attr("class", "chart")
+            .attr("width", w)
+            .attr("height", h )
+            .append("svg:g")
+            .attr("transform", "rotate(90, 0, 0), translate(0, 0)");
+
+            x = d3.scale.ordinal().rangeRoundBands([0, h-5])
+            y = d3.scale.linear().range([0, w-5])
+            z = d3.scale.ordinal().range(["#468847", "#B94A48", "#9D9D00", "#999"])
+	    // 5 columns: ID,c1,c2,c3,c4
+            var matrix = [ <?php
+	if ($year == '') {
+	$resultvot = mysql_query("SELECT (SUM(afirmativo) / SUM(votos_oficialistas)) AS afirmativos, (SUM(negativo) / SUM(votos_oficialistas)) AS negativos, (SUM(abstencion) / SUM(votos_oficialistas)) AS abstenciones FROM disciplina WHERE diputadoId = $diputadoId AND color = '$color'");
+	} else {
+	$resultvot = mysql_query("SELECT (SUM(afirmativo) / SUM(votos_oficialistas)) AS afirmativos, (SUM(negativo) / SUM(votos_oficialistas)) AS negativos, (SUM(abstencion) / SUM(votos_oficialistas)) AS abstenciones FROM disciplina WHERE diputadoId = $diputadoId AND ano = $year AND color = '$color'");
+	}
+	while ($row = mysql_fetch_array($resultvot)) {
+	$afirmativo = $row["afirmativos"] * 100;
+	$negativo = $row["negativos"] * 100;
+	$abstencion = $row["abstenciones"] * 100;
+	$indiceafirmativo = number_format($afirmativo, 0);
+	$indicenegativo = number_format($negativo, 0);
+	$indiceabstencion = number_format($abstencion, 0);
+	$indiceausente = 100 - ($indiceafirmativo + $indicenegativo + $indiceabstencion);
+
+?>
+                [ 0, <?echo $indiceafirmativo;?>, <?echo $indicenegativo;?>, <?echo $indiceabstencion;?>, <?echo $indiceausente;?> ],
+<?php
+
+	}
+?>
+            ];
+            var remapped =["c1","c2","c3","c4"].map(function(dat,i){
+                return matrix.map(function(d,ii){
+                    return {x: ii, y: d[i+1] };
+                })
+            });
+
+            var stacked = d3.layout.stack()(remapped)
+
+
+            x.domain(stacked[0].map(function(d) { return d.x; }));
+            y.domain([0, d3.max(stacked[stacked.length - 1], function(d) { return d.y0 + d.y; })]);
+
+
+            var valgroup = svg.selectAll("g.valgroup")
+            .data(stacked)
+            .enter().append("svg:g")
+            .attr("class", "valgroup")
+            .style("fill", function(d, i) { return z(i); });
+
+            // Add a rect for each date.
+            var rect = valgroup.selectAll("rect")
+            .data(function(d){return d;})
+            .enter().append("svg:rect")
+            .attr("x", function(d) { return x(d.x); })
+            .attr("y", function(d) { return -y(d.y0) - y(d.y); })
+            .attr("height", function(d) { return y(d.y); })
+            .attr("width", 20);
+
+        </script>
 	</tr>
 <?php
 	$ii++;
@@ -593,7 +662,7 @@ $iii=0;
 		<td width="13%" style="text-align: right;"><?echo $statvotos_bloque;?></td>
 		<td width="13%" style="text-align: right;"><?echo $statoficialismos;?></td>
 		<td width="27%" style="text-align: center;" rowspan="2">
-		<table class="borderless" width="100%"><tr><td><div align="center"><div id="chart_stat"></div></div></td><td style="text-align: right;"><strong><?echo $indicestatf;?>%</strong></td></tr></table><?php
+		<table class="borderless" width="100%"><tr><td><div id="votstat"></div></td><td><div align="center"><div id="chart_stat"></div></div></td><td style="text-align: right;"><strong><?echo $indicestatf;?>%</strong></td></tr></table><?php
 	if ($year =='') {
 ?>
 <div align="center">
@@ -709,8 +778,76 @@ arcs.append("svg:path")
 
 // add the text
 		
-</script>		
-		
+</script>
+
+        <script type="text/javascript">
+            
+            var w = 80,
+            h = 40
+
+            // create canvas
+            var svg = d3.select("#votstat").append("svg:svg")
+            .attr("class", "chart")
+            .attr("width", w)
+            .attr("height", h )
+            .append("svg:g")
+            .attr("transform", "rotate(90, 0, 0), translate(0, 0)");
+
+            x = d3.scale.ordinal().rangeRoundBands([0, h-5])
+            y = d3.scale.linear().range([0, w-5])
+            z = d3.scale.ordinal().range(["#468847", "#B94A48", "#9D9D00", "#999"])
+	    // 5 columns: ID,c1,c2,c3,c4
+            var matrix = [ <?php
+	if ($year == '') {
+	$resultvot = mysql_query("SELECT (SUM(afirmativo) / SUM(votos_oficialistas)) AS afirmativos, (SUM(negativo) / SUM(votos_oficialistas)) AS negativos, (SUM(abstencion) / SUM(votos_oficialistas)) AS abstenciones FROM disciplina");
+	} else {
+	$resultvot = mysql_query("SELECT (SUM(afirmativo) / SUM(votos_oficialistas)) AS afirmativos, (SUM(negativo) / SUM(votos_oficialistas)) AS negativos, (SUM(abstencion) / SUM(votos_oficialistas)) AS abstenciones FROM disciplina WHERE ano = $year");
+	}
+	while ($row = mysql_fetch_array($resultvot)) {
+	$afirmativo = $row["afirmativos"] * 100;
+	$negativo = $row["negativos"] * 100;
+	$abstencion = $row["abstenciones"] * 100;
+	$indiceafirmativo = number_format($afirmativo, 0);
+	$indicenegativo = number_format($negativo, 0);
+	$indiceabstencion = number_format($abstencion, 0);
+	$indiceausente = 100 - ($indiceafirmativo + $indicenegativo + $indiceabstencion);
+
+?>
+                [ 0, <?echo $indiceafirmativo;?>, <?echo $indicenegativo;?>, <?echo $indiceabstencion;?>, <?echo $indiceausente;?> ],
+<?php
+
+	}
+?>
+            ];
+            var remapped =["c1","c2","c3","c4"].map(function(dat,i){
+                return matrix.map(function(d,ii){
+                    return {x: ii, y: d[i+1] };
+                })
+            });
+
+            var stacked = d3.layout.stack()(remapped)
+
+
+            x.domain(stacked[0].map(function(d) { return d.x; }));
+            y.domain([0, d3.max(stacked[stacked.length - 1], function(d) { return d.y0 + d.y; })]);
+
+
+            var valgroup = svg.selectAll("g.valgroup")
+            .data(stacked)
+            .enter().append("svg:g")
+            .attr("class", "valgroup")
+            .style("fill", function(d, i) { return z(i); });
+
+            // Add a rect for each date.
+            var rect = valgroup.selectAll("rect")
+            .data(function(d){return d;})
+            .enter().append("svg:rect")
+            .attr("x", function(d) { return x(d.x); })
+            .attr("y", function(d) { return -y(d.y0) - y(d.y); })
+            .attr("height", function(d) { return y(d.y); })
+            .attr("width", 30);
+
+        </script>
 	</tr>
 	<tr>
 		<td style="text-align: center;">Promedio</td>
@@ -723,7 +860,7 @@ arcs.append("svg:path")
 <div class="bottom-menu">
     <div class="container">
         <div class="row">
-            <div class="span3 brand">Oficial&oacute;metro de<br>D&eacute;cada Votada</div>
+            <div class="span3 brand">Oficial&oacute;metro de<br>D&eacute;cada Votada<br><small>de <a href="http://twitter.com/andy_tow" target="_blank">Andy Tow</a></small><br><img src="http://andytow.com/blog/posiciones.png"></div>
             <div class="span2">
                 <h5 class="title">Secciones</h5>
                 <ul class="bottom-links">
